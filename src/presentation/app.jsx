@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
+import { Provider } from 'react-redux'
+import configureStore from '../core/store/configure_store'
+import DevTools from './dev_tools'
+import Router from './router'
+
+const store = configureStore()
 
 class App extends Component {
   render () {
     return (
-      <div>
+      <Provider store={store}>
         <div>
-          <h2>Welcome to Open Fermentor Frontend</h2>
+          <Router />
+          <DevTools />
         </div>
-      </div>
+      </Provider>
     )
   }
 }
