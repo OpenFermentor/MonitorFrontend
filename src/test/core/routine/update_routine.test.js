@@ -6,14 +6,14 @@ import {
   UPDATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_FAILURE,
   UPDATE_ROUTINE_SUCCESS
-} from '../../../core/redux/routines/action_types'
+} from '../../../core/redux/routine/action_types'
 import {
   updateRoutineRequest,
   updateRoutineFailure,
   updateRoutineSuccess
-} from '../../../core/redux/routines/actions'
-import reducer from '../../../core/redux/routines/redux'
-import performUpdateRoutine from '../../../core/redux/routines/sagas/update_routine'
+} from '../../../core/redux/routine/actions'
+import reducer from '../../../core/redux/routine/redux'
+import { performUpdateRoutine } from '../../../core/redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -119,14 +119,14 @@ describe('sagas', () => {
     const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performUpdateRoutine(httpServiceMock, { routine })
     const response = httpServiceMock.updateRoutine(routine)
-    expect(iterator.next().value).toEqual(call(httpServiceMock.updateRoutine, routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'updateRoutine'], routine))
     expect(iterator.next(response).value).toEqual(put(updateRoutineSuccess(routine)))
   })
 
   it('perfom update routine failure', () => {
     const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performUpdateRoutine(httpServiceMock, { routine })
-    expect(iterator.next().value).toEqual(call(httpServiceMock.updateRoutine, routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'updateRoutine'], routine))
     expect(iterator.throw('an error').value).toEqual(put(updateRoutineFailure('an error')))
   })
 })

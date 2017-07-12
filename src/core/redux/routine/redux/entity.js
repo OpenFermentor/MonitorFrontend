@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux'
 import Immutable from 'seamless-immutable'
 import {
-  RESET
-} from '../../base/action_types'
-import {
   FETCH_ROUTINES_SUCCESS,
   CREATE_ROUTINE_SUCCESS,
   UPDATE_ROUTINE_SUCCESS,
@@ -22,7 +19,7 @@ const INITIAL_STATE_BY_ID = Immutable({})
 
 const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
   switch (action.type) {
-    case RESET: return INITIAL_STATE_BY_ID
+    case 'RESET': return INITIAL_STATE_BY_ID
 
     case FETCH_ROUTINES_SUCCESS: return replaceRoutines(state, action)
     case CREATE_ROUTINE_SUCCESS: return addRoutine(state, action)
@@ -35,6 +32,7 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
 
 const replaceRoutines = (state, { routines }) =>
   replaceByIdEntries(state, routines.map(({
+    id,
     title,
     strain,
     medium,
@@ -45,6 +43,7 @@ const replaceRoutines = (state, { routines }) =>
     extimatedTimeSeconds,
     extraNotes
   }) => ({
+    id,
     title,
     strain,
     medium,
@@ -93,7 +92,7 @@ const INITIAL_STATE_ALL_IDS = Immutable([])
 
 const allRoutinesIds = (state = INITIAL_STATE_ALL_IDS, action) => {
   switch (action.type) {
-    case RESET: return INITIAL_STATE_ALL_IDS
+    case 'RESET': return INITIAL_STATE_ALL_IDS
 
     case FETCH_ROUTINES_SUCCESS: return replaceAllEntriesIds(state, action.routines)
     case CREATE_ROUTINE_SUCCESS: return addEntryId(state, action.routine)

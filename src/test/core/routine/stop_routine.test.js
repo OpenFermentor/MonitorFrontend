@@ -6,14 +6,14 @@ import {
   STOP_ROUTINE_REQUEST,
   STOP_ROUTINE_FAILURE,
   STOP_ROUTINE_SUCCESS
-} from '../../../core/redux/routines/action_types'
+} from '../../../core/redux/routine/action_types'
 import {
   stopRunningRoutineRequest,
   stopRunningRoutineFailure,
   stopRunningRoutineSuccess
-} from '../../../core/redux/routines/actions'
-import reducer from '../../../core/redux/routines/redux'
-import performStopRoutine from '../../../core/redux/routines/sagas/stop_routine'
+} from '../../../core/redux/routine/actions'
+import reducer from '../../../core/redux/routine/redux'
+import { performStopRoutine } from '../../../core/redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -84,13 +84,13 @@ describe('sagas', () => {
   it('perfom stop running routine success', () => {
     const iterator = performStopRoutine(httpServiceMock)
     const response = httpServiceMock.stopRunningRoutine()
-    expect(iterator.next().value).toEqual(call(httpServiceMock.stopRunningRoutine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'stopRunningRoutine']))
     expect(iterator.next(response).value).toEqual(put(stopRunningRoutineSuccess()))
   })
 
   it('perfom stop running routine failure', () => {
     const iterator = performStopRoutine(httpServiceMock)
-    expect(iterator.next().value).toEqual(call(httpServiceMock.stopRunningRoutine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'stopRunningRoutine']))
     expect(iterator.throw('an error').value).toEqual(put(stopRunningRoutineFailure('an error')))
   })
 })

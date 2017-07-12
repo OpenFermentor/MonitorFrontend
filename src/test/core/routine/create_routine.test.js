@@ -6,14 +6,14 @@ import {
   CREATE_ROUTINE_REQUEST,
   CREATE_ROUTINE_FAILURE,
   CREATE_ROUTINE_SUCCESS
-} from '../../../core/redux/routines/action_types'
+} from '../../../core/redux/routine/action_types'
 import {
   createRoutineRequest,
   createRoutineFailure,
   createRoutineSuccess
-} from '../../../core/redux/routines/actions'
-import reducer from '../../../core/redux/routines/redux'
-import performCreateRoutine from '../../../core/redux/routines/sagas/create_routine'
+} from '../../../core/redux/routine/actions'
+import reducer from '../../../core/redux/routine/redux'
+import { performCreateRoutine } from '../../../core/redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -117,14 +117,14 @@ describe('sagas', () => {
     const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performCreateRoutine(httpServiceMock, { routine })
     const response = httpServiceMock.createRoutine(routine)
-    expect(iterator.next().value).toEqual(call(httpServiceMock.createRoutine, routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'createRoutine'], routine))
     expect(iterator.next(response).value).toEqual(put(createRoutineSuccess({ id: 1, ...routine })))
   })
 
   it('perfom create routine failure', () => {
     const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performCreateRoutine(httpServiceMock, { routine })
-    expect(iterator.next().value).toEqual(call(httpServiceMock.createRoutine, routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'createRoutine'], routine))
     expect(iterator.throw('an error').value).toEqual(put(createRoutineFailure('an error')))
   })
 })

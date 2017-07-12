@@ -6,14 +6,14 @@ import {
   DESTROY_ROUTINE_REQUEST,
   DESTROY_ROUTINE_FAILURE,
   DESTROY_ROUTINE_SUCCESS
-} from '../../../core/redux/routines/action_types'
+} from '../../../core/redux/routine/action_types'
 import {
   destroyRoutineRequest,
   destroyRoutineFailure,
   destroyRoutineSuccess
-} from '../../../core/redux/routines/actions'
-import reducer from '../../../core/redux/routines/redux'
-import performRemoveRoutine from '../../../core/redux/routines/sagas/remove_routine'
+} from '../../../core/redux/routine/actions'
+import reducer from '../../../core/redux/routine/redux'
+import { performRemoveRoutine } from '../../../core/redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -114,14 +114,14 @@ describe('sagas', () => {
     const routine = { id: 5 }
     const iterator = performRemoveRoutine(httpServiceMock, { routine })
     const response = httpServiceMock.removeRoutine(routine)
-    expect(iterator.next().value).toEqual(call(httpServiceMock.removeRoutine, routine.id))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'removeRoutine'], routine.id))
     expect(iterator.next(response).value).toEqual(put(destroyRoutineSuccess(routine)))
   })
 
   it('perfom destroy routine failure', () => {
     const routine = { id: 5 }
     const iterator = performRemoveRoutine(httpServiceMock, { routine })
-    expect(iterator.next().value).toEqual(call(httpServiceMock.removeRoutine, routine.id))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'removeRoutine'], routine.id))
     expect(iterator.throw('an error').value).toEqual(put(destroyRoutineFailure('an error')))
   })
 })

@@ -6,14 +6,14 @@ import {
   START_ROUTINE_REQUEST,
   START_ROUTINE_FAILURE,
   START_ROUTINE_SUCCESS
-} from '../../../core/redux/routines/action_types'
+} from '../../../core/redux/routine/action_types'
 import {
   startRoutineRequest,
   startRoutineFailure,
   startRoutineSuccess
-} from '../../../core/redux/routines/actions'
-import reducer from '../../../core/redux/routines/redux'
-import performStartRoutine from '../../../core/redux/routines/sagas/start_routine'
+} from '../../../core/redux/routine/actions'
+import reducer from '../../../core/redux/routine/redux'
+import { performStartRoutine } from '../../../core/redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -91,14 +91,14 @@ describe('sagas', () => {
     const routine = { title: 'A', id: 5 }
     const iterator = performStartRoutine(httpServiceMock, { routine })
     const response = httpServiceMock.startRoutine(routine)
-    expect(iterator.next().value).toEqual(call(httpServiceMock.startRoutine, routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'startRoutine'], routine))
     expect(iterator.next(response).value).toEqual(put(startRoutineSuccess(routine)))
   })
 
   it('perfom start routine failure', () => {
     const routine = { title: 'A', id: 5 }
     const iterator = performStartRoutine(httpServiceMock, { routine })
-    expect(iterator.next().value).toEqual(call(httpServiceMock.startRoutine, routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'startRoutine'], routine))
     expect(iterator.throw('an error').value).toEqual(put(startRoutineFailure('an error')))
   })
 })
