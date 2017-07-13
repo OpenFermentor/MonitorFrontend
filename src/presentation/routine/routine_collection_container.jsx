@@ -33,9 +33,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  dispatch({
-    type: 'ROUTINES.START_ROUTINE_SUCCESS', routine: { id: 5 }
-  })
   return {
     requestRoutines: () => dispatch(fetchRoutinesRequest()),
     requestRoutineRemoval: routine => dispatch(destroyRoutineRequest(routine)),
