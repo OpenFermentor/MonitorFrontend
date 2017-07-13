@@ -1,58 +1,79 @@
 import React, { Component } from 'react'
 import { Modal, Button, Message } from 'semantic-ui-react'
-import t from 'tcomb-form'
-
-const Form = t.form.Form
-
-const Routine = t.struct({
-  title: t.String,
-  meidum: t.String,
-  strain: t.Number,
-  targetTemp: t.Number,
-  targetPh: t.Number,
-  targetCo2: t.Number,
-  extimatedTimeSeconds: t.Number,
-  extraNotes: t.String
-})
+import Form from '../common/Form'
+import TextInput from '../common/TextInput'
+import TextArea from '../common/TextArea'
 
 export default class UpsertRoutine extends Component {
   constructor (props) {
     super(props)
+    const { id, title, medium, targetTemp, estimatedTimeSeconds, extraNotes } = this.props.routine || {}
     this.state = {
-      error: null
+      id,
+      title,
+      estimatedTimeSeconds,
+      extraNotes,
+      medium,
+      targetTemp,
+      strain: '-1',
+      targetPh: -1,
+      targetCo2: -1,
+      targetDensity: -1
     }
   }
 
   onSubmit () {
-    this.setState({ error: null })
-    var routineData = this.refs.form.getValue()
-    if (routineData) {
-      this.props.onSubmit({ id: (this.props.routine || {}).id, ...routineData })
-    } else {
-      this.setState({ error: 'Se produjo un error' })
-    }
+    this.props.onSubmit(this.state)
   }
 
   render () {
-    console.log(this.props.routine)
+    console.log(this.props)
     return (
       <Modal open>
         <Modal.Header>{this.props.routine ? 'Editar rutina' : 'Crear Rutina'}</Modal.Header>
         <Modal.Content image>
           <Modal.Description>
-            { this.state.error &&
-              <Message negative>
-                <Message.Header>{this.state.error}</Message.Header>
-              </Message>
+            { this.props.error &&
+              <Message
+                error
+                content={this.props.error.message}
+              />
             }
 
-            <Form
-              ref='form'
-              value={this.props.routine}
-              type={Routine}
-            />
-            <Button onClick={this.props.onCancel}>Cancelar</Button>
-            <Button onClick={() => this.onSubmit()} primary type='submit'>Guardar</Button>
+            <Form onSubmit={this.onSubmit} fetching={this.props.fetching}>
+              <TextInput
+                label='Título'
+                value={this.state.title}
+                onChange={title => this.setState({ title })}
+              />
+
+              <TextInput
+                label='Medio'
+                value={this.state.medium}
+                onChange={medium => this.setState({ medium })}
+              />
+
+              <TextInput
+                label='Temperatura objetivo'
+                value={this.state.targetTemp}
+                onChange={targetTemp => this.setState({ targetTemp })}
+              />
+
+              <TextInput
+                label='Tiempo estimado en segundos'
+                value={this.state.estimatedTimeSeconds}
+                onChange={estimatedTimeSeconds => this.setState({ estimatedTimeSeconds })}
+              />
+
+              <TextArea
+                label='Notas adicionales'
+                value={this.state.extraNotes}
+                onChange={extraNotes => this.setState({ extraNotes })}
+              />
+
+              <Button onClick={this.props.onCancel}>Cancelar</Button>
+              <Button onClick={this.onSubmit.bind(this)} primary type='submit'>Guardar</Button>
+            </Form>
           </Modal.Description>
         </Modal.Content>
       </Modal>

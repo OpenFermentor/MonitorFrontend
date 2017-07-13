@@ -18,7 +18,7 @@ import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
   it('should create an action to request a routine update', () => {
-    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const expectedAction = {
       type: UPDATE_ROUTINE_REQUEST,
       routine
@@ -36,7 +36,7 @@ describe('actions', () => {
   })
 
   it('should create an action for routine update success', () => {
-    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const expectedAction = {
       type: UPDATE_ROUTINE_SUCCESS,
       routine
@@ -89,13 +89,13 @@ describe('action status reducer', () => {
 describe('entity reducer', () => {
   const INITIAL_STATE = Immutable({
     byId: Immutable({
-      4: Immutable({ id: 4, title: '3', strain: 60, medium: 'other medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes', readings: Immutable([5]) })
+      4: Immutable({ id: 4, title: '3', strain: 60, medium: 'other medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes', readings: Immutable([5]) })
     }),
     allIds: Immutable([4])
   })
 
   it('should handle UPDATE_ROUTINE_SUCCESS', () => {
-    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
 
     expect(
       reducer.entity(INITIAL_STATE, {
@@ -116,7 +116,7 @@ describe('entity reducer', () => {
 
 describe('sagas', () => {
   it('perfom update routine success', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performUpdateRoutine(httpServiceMock, { routine })
     const response = httpServiceMock.updateRoutine(routine)
     expect(iterator.next().value).toEqual(call([httpServiceMock, 'updateRoutine'], routine))
@@ -124,7 +124,7 @@ describe('sagas', () => {
   })
 
   it('perfom update routine failure', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performUpdateRoutine(httpServiceMock, { routine })
     expect(iterator.next().value).toEqual(call([httpServiceMock, 'updateRoutine'], routine))
     expect(iterator.throw('an error').value).toEqual(put(updateRoutineFailure('an error')))

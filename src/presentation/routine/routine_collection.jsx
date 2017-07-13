@@ -7,8 +7,6 @@ import {
 import { Link } from 'react-router-dom'
 
 const RoutineCollection = ({ routines, onClickStartRoutine, onClickDeleteRoutine }) => {
-  console.log(routines.length)
-
   if (routines.length === 0) {
     return (
       <Segment textAlign='center' padded='very'>

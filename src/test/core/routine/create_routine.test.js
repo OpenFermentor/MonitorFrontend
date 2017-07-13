@@ -18,7 +18,7 @@ import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
   it('should create an action to request a routine create', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const expectedAction = {
       type: CREATE_ROUTINE_REQUEST,
       ...routine
@@ -36,7 +36,7 @@ describe('actions', () => {
   })
 
   it('should create an action for routine create success', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const expectedAction = {
       type: CREATE_ROUTINE_SUCCESS,
       routine
@@ -93,7 +93,7 @@ describe('entity reducer', () => {
   })
 
   it('should handle CREATE_ROUTINE_SUCCESS', () => {
-    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
 
     expect(
       reducer.entity(INITIAL_STATE, {
@@ -114,17 +114,17 @@ describe('entity reducer', () => {
 
 describe('sagas', () => {
   it('perfom create routine success', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performCreateRoutine(httpServiceMock, { routine })
     const response = httpServiceMock.createRoutine(routine)
-    expect(iterator.next().value).toEqual(call([httpServiceMock, 'createRoutine'], routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'createRoutine'], { routine }))
     expect(iterator.next(response).value).toEqual(put(createRoutineSuccess({ id: 1, ...routine })))
   })
 
   it('perfom create routine failure', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, extimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performCreateRoutine(httpServiceMock, { routine })
-    expect(iterator.next().value).toEqual(call([httpServiceMock, 'createRoutine'], routine))
+    expect(iterator.next().value).toEqual(call([httpServiceMock, 'createRoutine'], { routine }))
     expect(iterator.throw('an error').value).toEqual(put(createRoutineFailure('an error')))
   })
 })

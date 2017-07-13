@@ -4,7 +4,8 @@ import {
   FETCH_ROUTINES_SUCCESS,
   CREATE_ROUTINE_SUCCESS,
   UPDATE_ROUTINE_SUCCESS,
-  DESTROY_ROUTINE_SUCCESS
+  DESTROY_ROUTINE_SUCCESS,
+  ADD_ROUTINE_READING
 } from '../action_types'
 import {
   replaceByIdEntries,
@@ -26,6 +27,8 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case UPDATE_ROUTINE_SUCCESS: return updateRoutine(state, action)
     case DESTROY_ROUTINE_SUCCESS: return removeRoutine(state, action)
 
+    case ADD_ROUTINE_READING: return addRoutineReading(state, action)
+
     default: return state
   }
 }
@@ -40,7 +43,7 @@ const replaceRoutines = (state, { routines }) =>
     targetPh,
     targetCo2,
     targetDensity,
-    extimatedTimeSeconds,
+    estimatedTimeSeconds,
     extraNotes
   }) => ({
     id,
@@ -51,7 +54,7 @@ const replaceRoutines = (state, { routines }) =>
     targetPh,
     targetCo2,
     targetDensity,
-    extimatedTimeSeconds,
+    estimatedTimeSeconds,
     extraNotes,
     readings: Immutable([])
   })))
@@ -66,7 +69,7 @@ const addRoutine = (state, { routine }) =>
     targetPh: routine.targetPh,
     targetCo2: routine.targetCo2,
     targetDensity: routine.targetDensity,
-    extimatedTimeSeconds: routine.extimatedTimeSeconds,
+    estimatedTimeSeconds: routine.estimatedTimeSeconds,
     extraNotes: routine.extraNotes,
     readings: Immutable([])
   })
@@ -81,12 +84,19 @@ const updateRoutine = (state, { routine }) =>
     targetPh: routine.targetPh,
     targetCo2: routine.targetCo2,
     targetDensity: routine.targetDensity,
-    extimatedTimeSeconds: routine.extimatedTimeSeconds,
+    estimatedTimeSeconds: routine.estimatedTimeSeconds,
     extraNotes: routine.extraNotes
   })
 
 const removeRoutine = (state, { routine }) =>
   state.without(routine.id)
+
+const addRoutineReading = (state, { routineId, temp, createdAt }) =>
+  state.merge({
+    [routineId]: state[routineId].merge({
+      readings: state[routineId].readings.concat({ temp, createdAt })
+    })
+  })
 
 const INITIAL_STATE_ALL_IDS = Immutable([])
 

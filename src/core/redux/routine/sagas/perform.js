@@ -23,7 +23,7 @@ export function * performFetchRoutines (httpService) {
   }
 }
 
-export function * performCreateRoutine (httpService, { routine }) {
+export function * performCreateRoutine (httpService, { type, ...routine }) {
   try {
     const response = yield call([httpService, 'createRoutine'], routine)
     yield put(createRoutineSuccess(response.data.data))

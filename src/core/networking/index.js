@@ -1,10 +1,13 @@
 import axios from 'axios'
 import transformCamelToSnakeCase from './transforms/transform_camel_to_snake_case'
 import transformSnakeToCamelCase from './transforms/transform_snake_to_camel_case'
+import normalizeError from './transforms/normalize_error'
 
 class HttpService {
   constructor () {
     this.instance = this.buildInstance()
+    this.addDecamelizeRequestInterceptor()
+    this.addCamelizeResponseInterceptor()
   }
 
   buildInstance () {
@@ -35,20 +38,30 @@ class HttpService {
     })
   }
 
+  // addNormalizeResponseErrorInterceptor () {
+  //   this.instance.interceptors.response.use(response => {
+  //     debugger
+  //     if (response.data) {
+  //       response.data = transformSnakeToCamelCase(response.data)
+  //     }
+  //     return response
+  //   })
+  // }
+
   _get (...args) {
-    return this.instance.get(...args)
+    return this.instance.get(...args).catch(e => { throw normalizeError(e) })
   }
 
   _post (...args) {
-    return this.instance.post(...args)
+    return this.instance.post(...args).catch(e => { throw normalizeError(e) })
   }
 
   _put (...args) {
-    return this.instance.put(...args)
+    return this.instance.put(...args).catch(e => { throw normalizeError(e) })
   }
 
   _delete (...args) {
-    return this.instance.delete(...args)
+    return this.instance.delete(...args).catch(e => { throw normalizeError(e) })
   }
 
   startRoutine ({ id }) {
@@ -64,11 +77,11 @@ class HttpService {
   }
 
   createRoutine (routine) {
-    return this._post('routines', routine)
+    return this._post('routines', { routine })
   }
 
   updateRoutine (routine) {
-    return this._put(`routines/${routine.id}`, routine)
+    return this._put(`routines/${routine.id}`, { routine })
   }
 
   removeRoutine (id) {

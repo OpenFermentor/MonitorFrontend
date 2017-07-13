@@ -21,7 +21,9 @@ import {
 
   DESTROY_ROUTINE_REQUEST,
   DESTROY_ROUTINE_FAILURE,
-  DESTROY_ROUTINE_SUCCESS
+  DESTROY_ROUTINE_SUCCESS,
+
+  ADD_ROUTINE_READING
 } from './action_types'
 
 export const stopRunningRoutineRequest = () => ({ type: STOP_ROUTINE_REQUEST })
@@ -44,7 +46,7 @@ export const createRoutineRequest = ({
   targetPh,
   targetCo2,
   targetDensity,
-  extimatedTimeSeconds,
+  estimatedTimeSeconds,
   extraNotes
 }) => ({
   type: CREATE_ROUTINE_REQUEST,
@@ -55,7 +57,7 @@ export const createRoutineRequest = ({
   targetPh,
   targetCo2,
   targetDensity,
-  extimatedTimeSeconds,
+  estimatedTimeSeconds,
   extraNotes
 })
 export const createRoutineFailure = error => ({ type: CREATE_ROUTINE_FAILURE, error })
@@ -68,3 +70,5 @@ export const updateRoutineSuccess = routine => ({ type: UPDATE_ROUTINE_SUCCESS, 
 export const destroyRoutineRequest = routine => ({ type: DESTROY_ROUTINE_REQUEST, routine })
 export const destroyRoutineFailure = error => ({ type: DESTROY_ROUTINE_FAILURE, error })
 export const destroyRoutineSuccess = routine => ({ type: DESTROY_ROUTINE_SUCCESS, routine })
+
+export const addRoutineReading = ({ routineId, temp, createdAt }) => ({ type: ADD_ROUTINE_READING, routineId, temp, createdAt })
