@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
 import routineReducer from './routine/redux'
+import sensorsReducer from './sensors/redux'
 
 const entities = combineReducers({
-  routine: routineReducer.entity
+  routine: routineReducer.entity,
+  sensors: sensorsReducer.entity
 })
 
 const actionStatus = combineReducers({

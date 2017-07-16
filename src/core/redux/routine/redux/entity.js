@@ -91,12 +91,20 @@ const updateRoutine = (state, { routine }) =>
 const removeRoutine = (state, { routine }) =>
   state.without(routine.id)
 
-const addRoutineReading = (state, { routineId, temp, createdAt }) =>
-  state.merge({
+const addRoutineReading = (state, { routineId, temp, createdAt }) => {
+  let routineReadings = state[routineId].readings
+  if (routineReadings.length > 20) {
+    routineReadings = removeFirstReading(routineReadings)
+  }
+  return state.merge({
     [routineId]: state[routineId].merge({
-      readings: state[routineId].readings.concat({ temp, createdAt })
+      readings: routineReadings.concat({ temp, createdAt })
     })
   })
+}
+
+const removeFirstReading = readings =>
+  readings.slice(1, readings.length - 1)
 
 const INITIAL_STATE_ALL_IDS = Immutable([])
 

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 const RoutineSelection = ({ routines, onSelectRoutine, onCancel, error }) => {
   return (
     <Modal open>
-      <Modal.Header>Experimentos</Modal.Header>
+      <Modal.Header>Comenzar experimento</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
 
@@ -44,7 +44,7 @@ const RoutineSelection = ({ routines, onSelectRoutine, onCancel, error }) => {
               </List>
             </div>
           }
-          <Button floated='right' onClick={onCancel}>Cancelar</Button>
+          <Button onClick={onCancel}>Cancelar</Button>
 
         </Modal.Description>
       </Modal.Content>

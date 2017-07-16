@@ -1,8 +1,4 @@
 import Immutable from 'seamless-immutable'
-import {
-  STARTUP,
-  RESET
-} from '../redux/base/action_types'
 
 const INITIAL_STATE = Immutable({
   fetching: null,
@@ -12,7 +8,7 @@ const INITIAL_STATE = Immutable({
 const buildActionStatusReducer = ({ namespace, prefix, pluralPrefix, index, get, update, create, remove, extraActions }) => (state = INITIAL_STATE, action) => {
   const baseActionTypes = buildBaseActionTypes({ namespace, prefix, pluralPrefix, index, get, update, create, remove, extraActions })
 
-  if (action.type === STARTUP || action.type === RESET) {
+  if (action.type === 'STARTUP' || action.type === 'RESET') {
     return INITIAL_STATE
   }
 

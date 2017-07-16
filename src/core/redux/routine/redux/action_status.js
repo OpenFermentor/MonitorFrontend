@@ -5,9 +5,6 @@ import {
   START_ROUTINE_SUCCESS,
   STOP_ROUTINE_SUCCESS
 } from '../action_types'
-import {
-  RESET
-} from '../../base/action_types'
 
 const requestReducer = buildActionStatusReducer({
   namespace: 'ROUTINES.',
@@ -26,7 +23,7 @@ const INITIAL_STATE = Immutable({
 
 const appStateReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case RESET: return state.merge(INITIAL_STATE)
+    case 'RESET': return state.merge(INITIAL_STATE)
 
     case START_ROUTINE_SUCCESS: return setRunningRoutine(state, action)
     case STOP_ROUTINE_SUCCESS: return clearRunningRoutine(state, action)

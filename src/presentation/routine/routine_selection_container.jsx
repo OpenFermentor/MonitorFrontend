@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoutineCollection from './routine_collection'
+import RoutineSelection from './routine_selection'
 
 import {
   selectAllRoutines,
@@ -18,9 +18,11 @@ class RoutineSelectionContainer extends Component {
 
   render () {
     return (
-      <RoutineCollection
+      <RoutineSelection
         routines={this.props.routines}
-        onSelectRoutine={routine => this.props.history.push(`routines/details/${routine.id}`)}
+        onSelectRoutine={this.props.startRoutineRequest}
+        onClickDeleteRoutine={this.props.requestRoutineRemoval}
+        onClickStartRoutine={this.props.startRoutineRequest}
         onCancel={this.props.history.goBack}
       />
     )

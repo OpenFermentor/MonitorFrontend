@@ -4,6 +4,7 @@ import moment from 'moment'
 
 const selectRoutineEntityRedux = state => state.entities.routine
 const selectRoutineActionStatus = state => state.actionStatus.routine
+const selectEntityRoutine = (state, props) => state.entities.routine.byId[props.id]
 
 export const selectRoutineFetchingStatus = createSelector(
   [selectRoutineActionStatus],
@@ -31,7 +32,12 @@ export const selectAllRoutines = createSelector(
   }
 )
 
-export const selectTemperatureTimeline = createSelector(
+export const selectRoutine = createSelector(
+  [selectEntityRoutine],
+  routine => routine
+)
+
+export const selectRunningRoutineTemperatureTimeline = createSelector(
   [selectRoutineEntityRedux, selectRoutineActionStatus],
   (routine, actionStatus) => {
     const { readings } = routine.byId[actionStatus.runningRoutine]

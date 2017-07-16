@@ -40,6 +40,22 @@ class SocketService {
   receiveAlertEvent (callback) {
     this.routineChannel.on('stop', callback)
   }
+
+  joinSensorTopic ({ onSuccess, onFailure, onTimeout }) {
+    this.sensorsChannel = this.socket.channel('sensors')
+    this.sensorsChannel.join()
+      .receive('ok', onSuccess)
+      .receive('error', onFailure)
+      .receive('timeout', onTimeout)
+  }
+
+  leaveSensorTopic () {
+    this.routineChannel.leave()
+  }
+
+  receiveStatusEvents (callback) {
+    this.sensorsChannel.on('status', callback)
+  }
 }
 
 export default new SocketService()

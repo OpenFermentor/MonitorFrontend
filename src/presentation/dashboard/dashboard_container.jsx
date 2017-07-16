@@ -1,59 +1,52 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoutineCollection from '../routine/routine_collection_container'
-import RunningRoutine from '../running_routine/running_routine'
-import {
-  Container,
-  Segment,
-  Divider,
-  Message
-} from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 import {
   selectRunningRoutine,
-  selectRoutineFetchingStatus
+  selectRunningRoutineLastValue,
+  selectRunningRoutineTemperatureTimeline
 } from '../../core/redux/routine/selector'
+import {
+  selectSensorsLastValue,
+  selectSensorsTemperatureTimeline
+} from '../../core/redux/sensors/selector'
+import {
+  stopRunningRoutineRequest
+} from '../../core/redux/routine/actions'
+
+import DashboardComponent from './dashboard_component'
 
 class DashboardContainer extends Component {
   render () {
-    console.log(this.props)
-    if (!this.props.runningRoutine) {
-      return (
-        <Container text>
-          <div>
-            <h1>Seleccionar rutina</h1>
-            <Link to={{ pathname: '/routines/create' }}>Crear rutina</Link>
-            <Divider clearing />
-          </div>
-          {
-            this.props.error &&
-            <Message
-              error
-              header={this.props.error.message}
-            />
-          }
-
-          <Segment raised fetching={this.props.fetching}>
-            <RoutineCollection />
-          </Segment>
-
-        </Container>
-      )
-    }
-
     return (
-      <RunningRoutine />
+      <DashboardComponent
+        routine={this.props.routine}
+        lastValue={this.props.lastValue}
+        temperatureTimeline={this.props.temperatureTimeline}
+        onPressSelectRoutine={() => this.props.history.push('/routines/select')}
+        onRoutineStop={this.props.requestRoutineStop}
+      />
     )
   }
 }
 
 const mapStateToProps = state => {
-  const { fetching, error } = selectRoutineFetchingStatus(state)
-  return {
-    fetching,
-    error,
-    runningRoutine: selectRunningRoutine(state)
+  const routine = selectRunningRoutine(state)
+  if (routine) {
+    return {
+      routine,
+      lastValue: selectRunningRoutineLastValue(state),
+      temperatureTimeline: selectRunningRoutineTemperatureTimeline(state)
+    }
+  } else {
+    return {
+      lastValue: selectSensorsLastValue(state),
+      temperatureTimeline: selectSensorsTemperatureTimeline(state)
+    }
   }
 }
 
-export default connect(mapStateToProps)(DashboardContainer)
+const mapDispatchToProps = dispatch => ({
+  requestRoutineStop: () => dispatch(stopRunningRoutineRequest())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer)

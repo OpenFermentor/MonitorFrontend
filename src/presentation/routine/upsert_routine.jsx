@@ -27,7 +27,6 @@ export default class UpsertRoutine extends Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       <Modal open>
         <Modal.Header>{this.props.routine ? 'Editar rutina' : 'Crear Rutina'}</Modal.Header>
@@ -40,7 +39,7 @@ export default class UpsertRoutine extends Component {
               />
             }
 
-            <Form onSubmit={this.onSubmit} fetching={this.props.fetching}>
+            <Form fetching={this.props.fetching}>
               <TextInput
                 label='Título'
                 value={this.state.title}
@@ -71,8 +70,8 @@ export default class UpsertRoutine extends Component {
                 onChange={extraNotes => this.setState({ extraNotes })}
               />
 
-              <Button onClick={this.props.onCancel}>Cancelar</Button>
-              <Button onClick={this.onSubmit.bind(this)} primary type='submit'>Guardar</Button>
+              <Button floated='right' onClick={this.onSubmit.bind(this)} primary type='submit'>Guardar</Button>
+              <Button floated='right' onClick={this.props.onCancel}>Cancelar</Button>
             </Form>
           </Modal.Description>
         </Modal.Content>

@@ -10,37 +10,33 @@ const attributeData = {
 
 const Card = ({ attribute, value }) => {
   const containerStyle = {
-    padding: 15,
+    padding: 30,
     backgroundColor: 'white',
-    border: '1px solid #979797'
+    border: '1px solid #ccc',
+    borderRadius: 8
   }
   const valueStyle = {
-    fontSize: 60,
-    textAlign: 'center'
+    fontSize: 70,
+    textAlign: 'center',
+    marginTop: 50,
+    marginBottom: 10
   }
   const noValueStyle = {
     fontSize: 40,
     opacity: 0.5,
     textAlign: 'center'
   }
-
-  const labelStyle = {
-    height: 10,
-    backgroundColor: attributeData[attribute].labelColor
-  }
   return (
     <div style={containerStyle}>
       <h2>{attributeData[attribute].name}</h2>
 
       { value &&
-        <h1 style={valueStyle}>{value}{attributeData[attribute].unit}</h1>
+        <h6 style={valueStyle}>{value}{attributeData[attribute].unit}</h6>
       }
 
       { !value &&
         <h1 style={noValueStyle}>No hay datos</h1>
       }
-
-      <div style={labelStyle} />
 
     </div>
   )
