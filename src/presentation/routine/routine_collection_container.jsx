@@ -20,7 +20,7 @@ class RoutineSelectionContainer extends Component {
     return (
       <RoutineCollection
         routines={this.props.routines}
-        onSelectRoutine={routine => this.props.history.push(`routines/details/${routine.id}`)}
+        onSelectRoutine={routine => this.props.history.push(`/routines/details/${routine.id}`)}
         onCancel={this.props.history.goBack}
       />
     )

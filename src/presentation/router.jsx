@@ -24,7 +24,7 @@ export default class Router extends Component {
             <Route path='/routines/select' component={RoutineSelection} />
             <Route path='/routines/create' component={CreateRoutine} />
             <Route path='/routines/edit' component={UpdateRoutine} />
-            <Route path='/routines' component={RoutineCollection} />
+            <Route path='/routines/all' component={RoutineCollection} />
             <Route path='/routines/details/:id' component={RoutineDetails} />
           </Grid.Column>
         </Grid>

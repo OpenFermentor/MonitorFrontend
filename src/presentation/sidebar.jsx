@@ -28,7 +28,7 @@ class Sidebar extends Component {
     return (
       <Menu fluid vertical tabular>
         <Menu.Item name='En curso' active onClick={() => this.props.history.push('/')} />
-        <Menu.Item name='Experimentos' onClick={() => this.props.history.push('/routines')} />
+        <Menu.Item name='Experimentos' onClick={() => this.props.history.push('/routines/all')} />
       </Menu>
     )
   }
