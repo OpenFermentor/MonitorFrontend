@@ -87,6 +87,10 @@ class HttpService {
   removeRoutine (id) {
     return this._delete(`routines/${id}`)
   }
+
+  getRoutineReadings (routine) {
+    return this._get(`routines/${routine.id}/readings`)
+  }
 }
 
 export default new HttpService()

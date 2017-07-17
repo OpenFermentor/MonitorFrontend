@@ -33,6 +33,14 @@ class HttpServiceMock {
   removeRoutine (routine) {
     return {}
   }
+
+  getRoutineReadings (routine) {
+    return {
+      data: {
+        data: [{ temp: 10 }, { temp: 11 }]
+      }
+    }
+  }
 }
 
 export default new HttpServiceMock()

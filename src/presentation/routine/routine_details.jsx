@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Modal, Button, Divider, Message } from 'semantic-ui-react'
+import { Modal, Button, Divider, Message, Loader, Table } from 'semantic-ui-react'
+import moment from 'moment'
 
-export default class UpsertRoutine extends Component {
+export default class RoutineDetails extends Component {
   render () {
     return (
       <Modal open>
@@ -25,6 +26,41 @@ export default class UpsertRoutine extends Component {
               <Message visible>
                 El experimento nunca se realizó
               </Message>
+            }
+
+            { this.props.error &&
+              <Message
+                error
+                content={this.props.error.message}
+              />
+            }
+
+            {
+              this.props.fetching &&
+              <Loader />
+            }
+
+            { this.props.routine.readings.length > 0 &&
+              <div>
+                <Button floated='right' onClick={this.props.onExportToCsv}>Exportar a CSV</Button>
+                <Table celled>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>Temperatura</Table.HeaderCell>
+                      <Table.HeaderCell>Fecha</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    { this.props.routine.readings.map((reading, index) => (
+                      <Table.Row key={index}>
+                        <Table.Cell>{ reading.temp }</Table.Cell>
+                        <Table.Cell>{ moment(reading.createdAt).format('HH:mm DD/MM/YYYY')}</Table.Cell>
+                      </Table.Row>
+                   ))}
+                  </Table.Body>
+                </Table>
+              </div>
+
             }
 
           </Modal.Description>

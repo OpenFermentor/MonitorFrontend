@@ -5,7 +5,8 @@ import {
   CREATE_ROUTINE_SUCCESS,
   UPDATE_ROUTINE_SUCCESS,
   DESTROY_ROUTINE_SUCCESS,
-  ADD_ROUTINE_READING
+  ADD_ROUTINE_READING,
+  FETCH_ROUTINE_READINGS_SUCCESS
 } from '../action_types'
 import {
   replaceByIdEntries,
@@ -26,6 +27,7 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case CREATE_ROUTINE_SUCCESS: return addRoutine(state, action)
     case UPDATE_ROUTINE_SUCCESS: return updateRoutine(state, action)
     case DESTROY_ROUTINE_SUCCESS: return removeRoutine(state, action)
+    case FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
 
     case ADD_ROUTINE_READING: return addRoutineReading(state, action)
 
@@ -102,6 +104,12 @@ const addRoutineReading = (state, { routineId, temp, createdAt }) => {
     })
   })
 }
+
+const replaceRoutineReadings = (state, { routine, readings }) =>
+  updateByIdEntry(state, {
+    id: routine.id,
+    readings: Immutable(readings.map(({ temp, createdAt }) => ({ temp, createdAt })))
+  })
 
 const removeFirstReading = readings =>
   readings.slice(1, readings.length - 1)
