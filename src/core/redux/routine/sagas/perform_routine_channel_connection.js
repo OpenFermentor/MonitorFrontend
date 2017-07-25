@@ -1,3 +1,5 @@
+/* eslint camelcase:0 */
+
 import { call, take, put, fork } from 'redux-saga/effects'
 import { eventChannel, END } from 'redux-saga'
 import {
@@ -30,8 +32,8 @@ const joinRoutineChannel = socket => eventChannel(emmiter => {
 function * receiveUpdateEvents (socketService) {
   const eventUpdate = yield call(receiveUpdateEventsChannel, socketService)
   while (true) {
-    let { id, temp, createdAt = moment().format() } = yield take(eventUpdate)
-    yield put(addRoutineReading({ routineId: id, temp, createdAt }))
+    let { routine_id, id, temp, inserted_at = moment().format() } = yield take(eventUpdate)
+    yield put(addRoutineReading({ routineId: routine_id, id, temp, insertedAt: inserted_at }))
   }
 }
 

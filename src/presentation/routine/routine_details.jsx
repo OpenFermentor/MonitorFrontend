@@ -54,7 +54,7 @@ export default class RoutineDetails extends Component {
                     { this.props.routine.readings.map((reading, index) => (
                       <Table.Row key={index}>
                         <Table.Cell>{ reading.temp }</Table.Cell>
-                        <Table.Cell>{ moment(reading.createdAt).format('HH:mm DD/MM/YYYY')}</Table.Cell>
+                        <Table.Cell>{ moment(reading.insertedAt).format('HH:mm DD/MM/YYYY')}</Table.Cell>
                       </Table.Row>
                    ))}
                   </Table.Body>

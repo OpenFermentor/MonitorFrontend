@@ -75,7 +75,7 @@ export const destroyRoutineRequest = routine => ({ type: DESTROY_ROUTINE_REQUEST
 export const destroyRoutineFailure = error => ({ type: DESTROY_ROUTINE_FAILURE, error })
 export const destroyRoutineSuccess = routine => ({ type: DESTROY_ROUTINE_SUCCESS, routine })
 
-export const addRoutineReading = ({ routineId, temp, createdAt }) => ({ type: ADD_ROUTINE_READING, routineId, temp, createdAt })
+export const addRoutineReading = ({ routineId, temp, insertedAt }) => ({ type: ADD_ROUTINE_READING, routineId, temp, insertedAt })
 
 export const fetchRoutineReadingsRequest = routine => ({ type: FETCH_ROUTINE_READINGS_REQUEST, routine })
 export const fetchRoutineReadingsFailure = error => ({ type: FETCH_ROUTINE_READINGS_FAILURE, error })

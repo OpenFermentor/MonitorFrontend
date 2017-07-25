@@ -8,8 +8,8 @@ const INITIAL_STATE = Immutable({
 const buildActionStatusReducer = ({ namespace, prefix, pluralPrefix, index, get, update, create, remove, extraActions }) => (state = INITIAL_STATE, action) => {
   const baseActionTypes = buildBaseActionTypes({ namespace, prefix, pluralPrefix, index, get, update, create, remove, extraActions })
 
-  if (action.type === 'STARTUP' || action.type === 'RESET') {
-    return INITIAL_STATE
+  if (action.type === 'BOOTED' || action.type === 'RESET') {
+    return state.merge({ fetching: null, error: null })
   }
 
   if (baseActionTypes.map(action => `${action}_REQUEST`).includes(action.type)) {

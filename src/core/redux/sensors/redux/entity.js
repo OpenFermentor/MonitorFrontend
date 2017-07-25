@@ -21,13 +21,13 @@ const reducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-const addReading = (state, { temp, createdAt }) => {
+const addReading = (state, { temp, insertedAt }) => {
   let readings = state.readings
   if (readings.length > 20) {
     readings = removeFirstReading(readings)
   }
   return state.merge({
-    readings: readings.concat({ temp, createdAt })
+    readings: readings.concat({ temp, insertedAt })
   })
 }
 

@@ -13,7 +13,7 @@ import reducer from '../../../core/redux/routine/redux'
 
 describe('actions', () => {
   it('should create an action to add a routine reading', () => {
-    const routineReading = { routineId: 1, temp: 20, createdAt: 'today' }
+    const routineReading = { routineId: 1, temp: 20, insertedAt: 'today' }
     const expectedAction = {
       type: ADD_ROUTINE_READING,
       ...routineReading
@@ -26,14 +26,14 @@ describe('entity reducer', () => {
   const INITIAL_STATE = Immutable({
     byId: Immutable({
       4: {
-        readings: Immutable([{ temp: 18, createdAt: 'a minute ago' }, { temp: 20, createdAt: 'an hour ago' }])
+        readings: Immutable([{ temp: 18, insertedAt: 'a minute ago' }, { temp: 20, insertedAt: 'an hour ago' }])
       }
     }),
     allIds: Immutable([4])
   })
 
   it('should handle ADD_ROUTINE_READING', () => {
-    const routineReading = { routineId: 4, temp: 25, createdAt: 'now' }
+    const routineReading = { routineId: 4, temp: 25, insertedAt: 'now' }
 
     expect(
       reducer.entity(INITIAL_STATE, {
@@ -43,7 +43,7 @@ describe('entity reducer', () => {
     ).toEqual({
       byId: {
         4: {
-          readings: [{ temp: 18, createdAt: 'a minute ago' }, { temp: 20, createdAt: 'an hour ago' }, { temp: 25, createdAt: 'now' }]
+          readings: [{ temp: 18, insertedAt: 'a minute ago' }, { temp: 20, insertedAt: 'an hour ago' }, { temp: 25, insertedAt: 'now' }]
         }
       },
       allIds: [4]

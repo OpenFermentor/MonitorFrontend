@@ -50,7 +50,7 @@ class SocketService {
   }
 
   leaveSensorTopic () {
-    this.routineChannel.leave()
+    this.sensorsChannel.leave()
   }
 
   receiveStatusEvents (callback) {
