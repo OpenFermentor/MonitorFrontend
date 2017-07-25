@@ -30,8 +30,8 @@ const joinSensorChannel = socket => eventChannel(emmiter => {
 function * receiveSensorEvents (socketService) {
   const eventSensor = yield call(receiveStatusEventsChannel, socketService)
   while (true) {
-    let { temp, createdAt = moment().format() } = yield take(eventSensor)
-    yield put(addReading({ temp, createdAt }))
+    let { temp, insertedAt = moment().format() } = yield take(eventSensor)
+    yield put(addReading({ temp, insertedAt }))
   }
 }
 

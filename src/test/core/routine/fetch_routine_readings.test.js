@@ -98,7 +98,7 @@ describe('entity reducer', () => {
 
   it('should handle FETCH_ROUTINE_READINGS_SUCCESS', () => {
     const routine = { id: 4 }
-    const readings = [{ temp: 10, createdAt: 'today' }]
+    const readings = [{ temp: 10, insertedAt: 'today' }]
 
     expect(
       reducer.entity(INITIAL_STATE, {
@@ -110,7 +110,7 @@ describe('entity reducer', () => {
       byId: {
         4: {
           id: 4,
-          readings: [{ temp: 10, createdAt: 'today' }]
+          readings: [{ temp: 10, insertedAt: 'today' }]
         }
       },
       allIds: [4]

@@ -23,7 +23,7 @@ import {
 import performRoutineChannelConnection from './perform_routine_channel_connection'
 
 export default [
-  performRoutineChannelConnection(socketService),
+  takeEvery('BOOTED', performRoutineChannelConnection, socketService),
   takeEvery(STOP_ROUTINE_REQUEST, performStopRoutine, httpService),
   takeEvery(START_ROUTINE_REQUEST, performStartRoutine, httpService),
   takeEvery(FETCH_ROUTINES_REQUEST, performFetchRoutines, httpService),

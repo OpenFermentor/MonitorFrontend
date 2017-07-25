@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import Immutable from 'seamless-immutable'
 import _ from 'lodash'
 import moment from 'moment'
 
@@ -39,11 +40,12 @@ export const selectRoutine = createSelector(
 
 export const selectRunningRoutineTemperatureTimeline = createSelector(
   [selectRoutineEntityRedux, selectRoutineActionStatus],
-  (routine, actionStatus) => {
-    const { readings } = routine.byId[actionStatus.runningRoutine]
+  (routineEntity, actionStatus) => {
+    const routine = routineEntity.byId[actionStatus.runningRoutine]
+    const readings = Immutable.isImmutable(routine.readings) ? routine.readings.asMutable() : routine.readings
     return {
-      labels: readings.map(({ createdAt }) => moment(createdAt).format('HH:mm')).asMutable(),
-      data: readings.map(({ temp }) => temp).asMutable()
+      labels: readings.map(({ insertedAt }) => moment(insertedAt).format('HH:mm')),
+      data: readings.map(({ temp }) => temp)
     }
   }
 )

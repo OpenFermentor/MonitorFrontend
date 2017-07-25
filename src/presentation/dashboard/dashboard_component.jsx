@@ -22,7 +22,7 @@ export default class DashboardContainer extends Component {
         <div style={{ marginBottom: 20 }}>
           { this.props.routine &&
             <div>
-              <h1>Experimento en curso</h1>
+              <h1>{this.props.routine.title}</h1>
               <Modal
                 trigger={<Button primary style={{ marginTop: -65 }} floated='right' >Finalizar</Button>}
                 header='¿Estás seguro que quieres finalizar el experimento?'

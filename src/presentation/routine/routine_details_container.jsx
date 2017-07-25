@@ -20,8 +20,8 @@ class RoutineDetailsContainer extends Component {
   }
 
   exportReadingsToCsv () {
-    const readingsData = this.props.routine.readings.map(({ temp, createdAt = '' }) => ({ temp, createdAt }))
-    const fields = ['temp', 'createdAt']
+    const readingsData = this.props.routine.readings.map(({ temp, insertedAt = '' }) => ({ temp, insertedAt }))
+    const fields = ['temp', 'insertedAt']
     const csvReadings = JsonToCsv({ data: readingsData, fields: fields })
     const blob = new Blob([csvReadings], {type: 'text/plain;charset=utf-8'})
     FileSaver.saveAs(blob, `${this.props.routine.title}.csv`)

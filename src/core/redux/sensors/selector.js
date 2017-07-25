@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import Immutable from 'seamless-immutable'
 import _ from 'lodash'
 import moment from 'moment'
 
@@ -7,6 +8,7 @@ const selectSensorsEntityRedux = state => state.entities.sensors
 export const selectSensorsLastValue = createSelector(
   [selectSensorsEntityRedux],
   (sensors) => {
+    console.log(sensors)
     return _.last(sensors.readings) || {}
   }
 )
@@ -14,9 +16,10 @@ export const selectSensorsLastValue = createSelector(
 export const selectSensorsTemperatureTimeline = createSelector(
   [selectSensorsEntityRedux],
   (sensors) => {
+    const sensorReadings = Immutable.isImmutable(sensors.readings) ? sensors.readings.asMutable() : sensors.readings
     return {
-      labels: sensors.readings.map(({ createdAt }) => moment(createdAt).format('HH:mm')).asMutable(),
-      data: sensors.readings.map(({ temp }) => temp).asMutable()
+      labels: sensorReadings.map(({ insertedAt }) => moment(insertedAt).format('HH:mm')),
+      data: sensorReadings.map(({ temp }) => temp)
     }
   }
 )

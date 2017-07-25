@@ -36,7 +36,7 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
 }
 
 const replaceRoutines = (state, { routines }) =>
-  replaceByIdEntries(state, routines.map(({
+  replaceByIdEntries(state, routines.reverse().map(({
     id,
     title,
     strain,
@@ -93,14 +93,15 @@ const updateRoutine = (state, { routine }) =>
 const removeRoutine = (state, { routine }) =>
   state.without(routine.id)
 
-const addRoutineReading = (state, { routineId, temp, createdAt }) => {
+const addRoutineReading = (state, { routineId, temp, insertedAt }) => {
+  // debugger
   let routineReadings = state[routineId].readings
   if (routineReadings.length > 20) {
     routineReadings = removeFirstReading(routineReadings)
   }
   return state.merge({
     [routineId]: state[routineId].merge({
-      readings: routineReadings.concat({ temp, createdAt })
+      readings: routineReadings.concat({ temp, insertedAt })
     })
   })
 }
@@ -108,7 +109,7 @@ const addRoutineReading = (state, { routineId, temp, createdAt }) => {
 const replaceRoutineReadings = (state, { routine, readings }) =>
   updateByIdEntry(state, {
     id: routine.id,
-    readings: Immutable(readings.map(({ temp, createdAt }) => ({ temp, createdAt })))
+    readings: Immutable(readings.map(({ temp, insertedAt }) => ({ temp, insertedAt })))
   })
 
 const removeFirstReading = readings =>

@@ -16,13 +16,16 @@ class RoutineSelectionContainer extends Component {
     this.props.requestRoutines()
   }
 
+  onSelectRoutine (routine) {
+    this.props.startRoutineRequest(routine)
+    this.props.history.goBack()
+  }
+
   render () {
     return (
       <RoutineSelection
         routines={this.props.routines}
-        onSelectRoutine={this.props.startRoutineRequest}
-        onClickDeleteRoutine={this.props.requestRoutineRemoval}
-        onClickStartRoutine={this.props.startRoutineRequest}
+        onSelectRoutine={this.onSelectRoutine.bind(this)}
         onCancel={this.props.history.goBack}
       />
     )

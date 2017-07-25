@@ -40,7 +40,7 @@ class CreateRoutineContainer extends Component {
         fetching={this.props.fetching}
         error={this.props.error}
         onCancel={this.props.history.goBack}
-        onSubmit={this.onSubmit}
+        onSubmit={this.onSubmit.bind(this)}
       />
     )
   }
