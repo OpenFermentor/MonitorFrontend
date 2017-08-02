@@ -14,7 +14,7 @@ const requestReducer = buildActionStatusReducer({
   create: true,
   update: true,
   remove: true,
-  extraActions: ['ROUTINES.START_ROUTINE', 'ROUTINES.STOP_ROUTINE', 'ROUTINES.FETCH_ROUTINE_READINGS']
+  extraActions: ['ROUTINES.START_ROUTINE', 'ROUTINES.STOP_ROUTINE']
 })
 
 const INITIAL_STATE = Immutable({

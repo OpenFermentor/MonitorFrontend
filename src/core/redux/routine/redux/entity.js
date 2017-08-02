@@ -4,10 +4,9 @@ import {
   FETCH_ROUTINES_SUCCESS,
   CREATE_ROUTINE_SUCCESS,
   UPDATE_ROUTINE_SUCCESS,
-  DESTROY_ROUTINE_SUCCESS,
-  ADD_ROUTINE_READING,
-  FETCH_ROUTINE_READINGS_SUCCESS
+  DESTROY_ROUTINE_SUCCESS
 } from '../action_types'
+import * as readingActionTypes from '../../reading/action_types'
 import {
   replaceByIdEntries,
   addByIdEntry,
@@ -27,9 +26,9 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case CREATE_ROUTINE_SUCCESS: return addRoutine(state, action)
     case UPDATE_ROUTINE_SUCCESS: return updateRoutine(state, action)
     case DESTROY_ROUTINE_SUCCESS: return removeRoutine(state, action)
-    case FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
+    case readingActionTypes.FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
 
-    case ADD_ROUTINE_READING: return addRoutineReading(state, action)
+    case readingActionTypes.ADD_READING: return addRoutineReading(state, action)
 
     default: return state
   }
@@ -93,27 +92,18 @@ const updateRoutine = (state, { routine }) =>
 const removeRoutine = (state, { routine }) =>
   state.without(routine.id)
 
-const addRoutineReading = (state, { routineId, temp, insertedAt }) => {
-  // debugger
-  let routineReadings = state[routineId].readings
-  if (routineReadings.length > 20) {
-    routineReadings = removeFirstReading(routineReadings)
-  }
-  return state.merge({
-    [routineId]: state[routineId].merge({
-      readings: routineReadings.concat({ temp, insertedAt })
+const addRoutineReading = (state, { reading }) =>
+  state.merge({
+    [reading.routineId]: state[reading.routineId].merge({
+      readings: addEntryId(state[reading.routineId].readings, reading)
     })
   })
-}
 
 const replaceRoutineReadings = (state, { routine, readings }) =>
   updateByIdEntry(state, {
     id: routine.id,
-    readings: Immutable(readings.map(({ temp, insertedAt }) => ({ temp, insertedAt })))
+    readings: replaceAllEntriesIds(state[routine.id].readings, readings)
   })
-
-const removeFirstReading = readings =>
-  readings.slice(1, readings.length - 1)
 
 const INITIAL_STATE_ALL_IDS = Immutable([])
 
