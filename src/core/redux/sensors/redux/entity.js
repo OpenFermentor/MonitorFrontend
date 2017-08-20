@@ -6,6 +6,8 @@ import {
   START_ROUTINE_SUCCESS
 } from '../../routine/action_types'
 
+const SENSOR_READINGS_TO_STORE = 60
+
 const INITIAL_STATE = Immutable({
   readings: Immutable([])
 })
@@ -23,7 +25,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 const addReading = (state, { temp, insertedAt }) => {
   let readings = state.readings
-  if (readings.length > 20) {
+  if (readings.length > SENSOR_READINGS_TO_STORE) {
     readings = removeFirstReading(readings)
   }
   return state.merge({

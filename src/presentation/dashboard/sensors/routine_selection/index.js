@@ -1,32 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoutineSelection from './routine_selection'
+
+import RoutineSelectionPresenter from './presenter'
 
 import {
   selectAllRoutines,
   selectRoutineFetchingStatus
-} from '../../core/redux/routine/selector'
+} from '../../../../core/redux/routine/selector'
 import {
   fetchRoutinesRequest,
   startRoutineRequest
-} from '../../core/redux/routine/actions'
+} from '../../../../core/redux/routine/actions'
 
-class RoutineSelectionContainer extends Component {
+class RoutineSelection extends Component {
   componentWillMount () {
     this.props.requestRoutines()
   }
 
   onSelectRoutine (routine) {
     this.props.startRoutineRequest(routine)
-    this.props.history.goBack()
   }
 
   render () {
     return (
-      <RoutineSelection
+      <RoutineSelectionPresenter
         routines={this.props.routines}
         onSelectRoutine={this.onSelectRoutine.bind(this)}
-        onCancel={this.props.history.goBack}
       />
     )
   }
@@ -48,4 +47,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoutineSelectionContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineSelection)

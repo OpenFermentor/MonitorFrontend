@@ -40,7 +40,6 @@ class HttpService {
 
   // addNormalizeResponseErrorInterceptor () {
   //   this.instance.interceptors.response.use(response => {
-  //     debugger
   //     if (response.data) {
   //       response.data = transformSnakeToCamelCase(response.data)
   //     }

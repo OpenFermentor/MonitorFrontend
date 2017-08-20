@@ -1,0 +1,17 @@
+.navigationChart {
+  position: fixed;
+  width: 100%;
+  background: white;
+  border: 1px solid #eee;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.navigationChart .content {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}

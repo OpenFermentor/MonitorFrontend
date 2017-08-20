@@ -1,0 +1,33 @@
+.toolbar {
+  position: fixed;
+  width: 100%;
+  background: #F27C21;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.toolbar .content {
+  height: 50px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbar .leftContent {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar .content * {
+  color: white !important;
+}
+
+.toolbar .content h3 {
+  margin-top: 5px;
+  margin-left: 15px;
+}

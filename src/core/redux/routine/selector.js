@@ -1,51 +1,57 @@
 import { createSelector } from 'reselect'
-import Immutable from 'seamless-immutable'
 import _ from 'lodash'
 import moment from 'moment'
 
-const selectRoutineEntityRedux = state => state.entities.routine
-const selectRoutineActionStatus = state => state.actionStatus.routine
-const selectEntityRoutine = (state, props) => state.entities.routine.byId[props.id]
+const entity = state => state.entities.routine
+const actionStatus = state => state.actionStatus.routine
 
 export const selectRoutineFetchingStatus = createSelector(
-  [selectRoutineActionStatus],
+  [actionStatus],
   ({ fetching, error }) => ({ fetching, error })
 )
 
-export const selectRunningRoutine = createSelector(
-  [selectRoutineEntityRedux, selectRoutineActionStatus],
+export const selectIsRunningRoutine = createSelector(
+  [actionStatus],
+  ({ runningRoutine }) => !!runningRoutine
+)
+
+export const selectRunningRoutineTitle = createSelector(
+  [entity, actionStatus],
   (routine, actionStatus) => {
-    return routine.byId[actionStatus.runningRoutine]
+    return routine.byId[actionStatus.runningRoutine].title
   }
 )
 
+export const selectRunningRoutineReadings = createSelector(
+  [entity, actionStatus],
+  (routine, actionStatus) => {
+    return routine.byId[actionStatus.runningRoutine].readings
+  }
+)
+
+export const selectDataRange = createSelector(
+  [actionStatus],
+  ({ dataRangeStart, dataRangeEnd }) => ({
+    dataRangeStart: dataRangeStart && moment(dataRangeStart),
+    dataRangeEnd: dataRangeEnd && moment(dataRangeEnd)
+  })
+)
+
 export const selectRunningRoutineLastValue = createSelector(
-  [selectRoutineEntityRedux, selectRoutineActionStatus],
+  [entity, actionStatus],
   (routine, actionStatus) => {
     return _.last(routine.byId[actionStatus.runningRoutine].readings) || {}
   }
 )
 
 export const selectAllRoutines = createSelector(
-  [selectRoutineEntityRedux],
+  [entity],
   routine => {
     return routine.allIds.map(id => routine.byId[id])
   }
 )
 
-export const selectRoutine = createSelector(
-  [selectEntityRoutine],
-  routine => routine
-)
-
-export const selectRunningRoutineTemperatureTimeline = createSelector(
-  [selectRoutineEntityRedux, selectRoutineActionStatus],
-  (routineEntity, actionStatus) => {
-    const routine = routineEntity.byId[actionStatus.runningRoutine]
-    const readings = Immutable.isImmutable(routine.readings) ? routine.readings.asMutable() : routine.readings
-    return {
-      labels: readings.map(({ insertedAt }) => moment(insertedAt).format('HH:mm')),
-      data: readings.map(({ temp }) => temp)
-    }
-  }
+export const selectSelectedRoutine = createSelector(
+  [entity, actionStatus],
+  ({ byId }, { selectedRoutine }) => byId[selectedRoutine]
 )

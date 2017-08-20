@@ -1,0 +1,22 @@
+.dragabbleHandlerAnchor {
+  top: 35px;
+  position: absolute;
+}
+
+.dragabbleHandlerAnchor .handler {
+  width: 24px;
+  height: 24px;
+  background: #F27C21;
+  border-radius: 12px;
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+.lockedAnchor {
+  background: #F27C21;
+  height: 90px;
+  width: 5px;
+  margin-top: -35px;
+  margin-left: 7px;
+  border-radius: 0 10px 10px 0;
+}

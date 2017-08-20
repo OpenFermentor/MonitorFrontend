@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoutineCollection from './routine_collection'
+
+import RoutinesPresenter from './presenter'
 
 import {
   selectAllRoutines,
@@ -8,19 +9,24 @@ import {
 } from '../../core/redux/routine/selector'
 import {
   fetchRoutinesRequest,
-  startRoutineRequest
+  setSelectedRoutine
 } from '../../core/redux/routine/actions'
 
-class RoutineSelectionContainer extends Component {
+class Routines extends Component {
   componentWillMount () {
     this.props.requestRoutines()
   }
 
+  onSelectRoutine (routine) {
+    this.props.setSelectedRoutine(routine)
+    this.props.history.push(`/routines/detail`)
+  }
+
   render () {
     return (
-      <RoutineCollection
+      <RoutinesPresenter
         routines={this.props.routines}
-        onSelectRoutine={routine => this.props.history.push(`/routines/details/${routine.id}`)}
+        onSelectRoutine={this.onSelectRoutine.bind(this)}
         onCancel={this.props.history.goBack}
       />
     )
@@ -39,8 +45,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     requestRoutines: () => dispatch(fetchRoutinesRequest()),
-    startRoutineRequest: routine => dispatch(startRoutineRequest(routine))
+    setSelectedRoutine: routine => dispatch(setSelectedRoutine(routine))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoutineSelectionContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(Routines)

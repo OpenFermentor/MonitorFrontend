@@ -21,7 +21,12 @@ import {
 
   DESTROY_ROUTINE_REQUEST,
   DESTROY_ROUTINE_FAILURE,
-  DESTROY_ROUTINE_SUCCESS
+  DESTROY_ROUTINE_SUCCESS,
+
+  SET_SELECTED_ROUTINE,
+  CLEAR_SELECTED_ROUTINE,
+
+  SET_DATA_RANGE
 } from './action_types'
 
 export const stopRunningRoutineRequest = () => ({ type: STOP_ROUTINE_REQUEST })
@@ -68,3 +73,8 @@ export const updateRoutineSuccess = routine => ({ type: UPDATE_ROUTINE_SUCCESS, 
 export const destroyRoutineRequest = routine => ({ type: DESTROY_ROUTINE_REQUEST, routine })
 export const destroyRoutineFailure = error => ({ type: DESTROY_ROUTINE_FAILURE, error })
 export const destroyRoutineSuccess = routine => ({ type: DESTROY_ROUTINE_SUCCESS, routine })
+
+export const setDataRange = (start, end) => ({ type: SET_DATA_RANGE, start, end })
+
+export const setSelectedRoutine = routine => ({ type: SET_SELECTED_ROUTINE, routine })
+export const clearSelectedRoutine = routine => ({ type: CLEAR_SELECTED_ROUTINE })

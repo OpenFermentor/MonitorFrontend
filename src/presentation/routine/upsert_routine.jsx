@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Modal, Button, Message } from 'semantic-ui-react'
-import Form from '../common/Form'
-import TextInput from '../common/TextInput'
-import TextArea from '../common/TextArea'
+import Form from '../common/form'
+import TextInput from '../common/text_input'
+import TextArea from '../common/text_area'
 
 export default class UpsertRoutine extends Component {
   constructor (props) {

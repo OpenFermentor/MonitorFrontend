@@ -33,7 +33,7 @@ function * receiveUpdateEvents (socketService) {
   const eventUpdate = yield call(receiveUpdateEventsChannel, socketService)
   while (true) {
     let { routine_id, id, temp, inserted_at = moment().format() } = yield take(eventUpdate)
-    yield put(addReading({ reading: { routineId: routine_id, id, temp, insertedAt: inserted_at } }))
+    yield put(addReading({ routineId: routine_id, id, temp, insertedAt: inserted_at }))
   }
 }
 

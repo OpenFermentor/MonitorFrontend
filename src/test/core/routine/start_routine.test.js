@@ -81,7 +81,9 @@ describe('action status reducer', () => {
     ).toEqual({
       runningRoutine: 6,
       fetching: false,
-      error: null
+      error: null,
+      dataRangeStart: null,
+      dataRangeEnd: null
     })
   })
 })
