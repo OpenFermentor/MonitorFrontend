@@ -1,0 +1,10 @@
+.sensorChart .header {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.sensorChart .header h2 {
+  margin: 0;
+}

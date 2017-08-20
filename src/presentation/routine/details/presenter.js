@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
-import { Modal, Button, Divider, Message, Loader, Table } from 'semantic-ui-react'
-import moment from 'moment'
+import { Modal, Button, Divider, Message, Loader } from 'semantic-ui-react'
+
+import SensorChart from './sensor_chart'
+import NavigationChart from './navigation_chart'
 
 export default class RoutineDetails extends Component {
   render () {
+    if (!this.props.routine) {
+      return
+    }
     return (
       <Modal open>
         <Modal.Header>Experimento {this.props.routine.title}</Modal.Header>
@@ -22,11 +27,21 @@ export default class RoutineDetails extends Component {
 
             <h3>Lecturas</h3>
 
-            { this.props.routine.readings.length === 0 &&
-              <Message visible>
-                El experimento nunca se realizó
-              </Message>
-            }
+            <SensorChart
+              title='Temperatura'
+              valueUnit='ºC'
+              data={this.props.temperatureTimeline}
+            />
+            <SensorChart
+              title='pH'
+              data={{ labels: this.props.temperatureTimeline.labels }}
+            />
+            <SensorChart
+              title='Agitación'
+              data={{ labels: this.props.temperatureTimeline.labels }}
+            />
+
+            <NavigationChart />
 
             { this.props.error &&
               <Message
@@ -43,28 +58,13 @@ export default class RoutineDetails extends Component {
             { this.props.routine.readings.length > 0 &&
               <div>
                 <Button floated='right' onClick={this.props.onExportToCsv}>Exportar a CSV</Button>
-                <Table celled>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Temperatura</Table.HeaderCell>
-                      <Table.HeaderCell>Fecha</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    { this.props.routine.readings.map((reading, index) => (
-                      <Table.Row key={index}>
-                        <Table.Cell>{ reading.temp }</Table.Cell>
-                        <Table.Cell>{ moment(reading.insertedAt).format('HH:mm DD/MM/YYYY')}</Table.Cell>
-                      </Table.Row>
-                   ))}
-                  </Table.Body>
-                </Table>
               </div>
 
             }
 
+            <Button floated='right' onClick={this.props.onCancel}>Cancelar</Button>
+
           </Modal.Description>
-          <Button floated='right' onClick={this.props.onCancel}>Cancelar</Button>
 
         </Modal.Content>
       </Modal>

@@ -8,10 +8,10 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const RoutineSelection = ({ routines, onSelectRoutine, onCancel, error }) => {
+const RoutinesPresenter = ({ routines, onSelectRoutine, onCancel, error }) => {
   return (
     <Modal open>
-      <Modal.Header>Comenzar experimento</Modal.Header>
+      <Modal.Header>Experimentos</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
 
@@ -44,7 +44,7 @@ const RoutineSelection = ({ routines, onSelectRoutine, onCancel, error }) => {
               </List>
             </div>
           }
-          <Button onClick={onCancel}>Cancelar</Button>
+          <Button floated='right' onClick={onCancel}>Cancelar</Button>
 
         </Modal.Description>
       </Modal.Content>
@@ -52,4 +52,4 @@ const RoutineSelection = ({ routines, onSelectRoutine, onCancel, error }) => {
   )
 }
 
-export default RoutineSelection
+export default RoutinesPresenter

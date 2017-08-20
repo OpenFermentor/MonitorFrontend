@@ -8,7 +8,6 @@ const selectSensorsEntityRedux = state => state.entities.sensors
 export const selectSensorsLastValue = createSelector(
   [selectSensorsEntityRedux],
   (sensors) => {
-    console.log(sensors)
     return _.last(sensors.readings) || {}
   }
 )
@@ -19,7 +18,7 @@ export const selectSensorsTemperatureTimeline = createSelector(
     const sensorReadings = Immutable.isImmutable(sensors.readings) ? sensors.readings.asMutable() : sensors.readings
     return {
       labels: sensorReadings.map(({ insertedAt }) => moment(insertedAt).format('HH:mm')),
-      data: sensorReadings.map(({ temp }) => temp)
+      values: sensorReadings.map(({ temp }) => temp)
     }
   }
 )

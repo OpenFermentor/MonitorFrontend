@@ -16,9 +16,13 @@ export default createTransform(
           }
         }))
       }
-      return convertToJs(inboundState)
     }
-    return inboundState
+    return {
+      ...inboundState,
+      boot: {
+        booted: false
+      }
+    }
   },
   (outboundState, key) => {
     if (key === 'actionStatus') {

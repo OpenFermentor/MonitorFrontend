@@ -1,0 +1,10 @@
+.draggableHandlerContainer {
+  height: 90px;
+}
+
+.draggableHandlerDraggableSurface {
+  height: 90px;
+  background: rgba(223, 137, 51, 0.3);
+  border: 1px solid #F27C21;
+  border-radius: 5px;
+}

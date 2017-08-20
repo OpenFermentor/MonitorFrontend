@@ -11,9 +11,7 @@ import {
   startRoutineFailure,
   startRoutineSuccess,
   stopRunningRoutineFailure,
-  stopRunningRoutineSuccess,
-  fetchRoutineReadingsFailure,
-  fetchRoutineReadingsSuccess
+  stopRunningRoutineSuccess
 } from '../actions'
 
 export function * performFetchRoutines (httpService) {
@@ -67,14 +65,5 @@ export function * performStopRoutine (httpService) {
     yield put(stopRunningRoutineSuccess())
   } catch (error) {
     yield put(stopRunningRoutineFailure(error))
-  }
-}
-
-export function * performFetchRoutineReadings (httpService, { routine }) {
-  try {
-    const response = yield call([httpService, 'getRoutineReadings'], routine)
-    yield put(fetchRoutineReadingsSuccess(routine, response.data.data))
-  } catch (error) {
-    yield put(fetchRoutineReadingsFailure(error))
   }
 }

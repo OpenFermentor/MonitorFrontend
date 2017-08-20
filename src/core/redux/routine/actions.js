@@ -23,11 +23,10 @@ import {
   DESTROY_ROUTINE_FAILURE,
   DESTROY_ROUTINE_SUCCESS,
 
-  ADD_ROUTINE_READING,
+  SET_SELECTED_ROUTINE,
+  CLEAR_SELECTED_ROUTINE,
 
-  FETCH_ROUTINE_READINGS_REQUEST,
-  FETCH_ROUTINE_READINGS_FAILURE,
-  FETCH_ROUTINE_READINGS_SUCCESS
+  SET_DATA_RANGE
 } from './action_types'
 
 export const stopRunningRoutineRequest = () => ({ type: STOP_ROUTINE_REQUEST })
@@ -75,8 +74,7 @@ export const destroyRoutineRequest = routine => ({ type: DESTROY_ROUTINE_REQUEST
 export const destroyRoutineFailure = error => ({ type: DESTROY_ROUTINE_FAILURE, error })
 export const destroyRoutineSuccess = routine => ({ type: DESTROY_ROUTINE_SUCCESS, routine })
 
-export const addRoutineReading = ({ routineId, temp, insertedAt }) => ({ type: ADD_ROUTINE_READING, routineId, temp, insertedAt })
+export const setDataRange = (start, end) => ({ type: SET_DATA_RANGE, start, end })
 
-export const fetchRoutineReadingsRequest = routine => ({ type: FETCH_ROUTINE_READINGS_REQUEST, routine })
-export const fetchRoutineReadingsFailure = error => ({ type: FETCH_ROUTINE_READINGS_FAILURE, error })
-export const fetchRoutineReadingsSuccess = (routine, readings) => ({ type: FETCH_ROUTINE_READINGS_SUCCESS, routine, readings })
+export const setSelectedRoutine = routine => ({ type: SET_SELECTED_ROUTINE, routine })
+export const clearSelectedRoutine = routine => ({ type: CLEAR_SELECTED_ROUTINE })

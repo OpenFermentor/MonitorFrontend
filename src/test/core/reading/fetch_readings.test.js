@@ -6,14 +6,15 @@ import {
   FETCH_ROUTINE_READINGS_REQUEST,
   FETCH_ROUTINE_READINGS_FAILURE,
   FETCH_ROUTINE_READINGS_SUCCESS
-} from '../../../core/redux/routine/action_types'
+} from '../../../core/redux/reading/action_types'
 import {
   fetchRoutineReadingsRequest,
   fetchRoutineReadingsFailure,
   fetchRoutineReadingsSuccess
-} from '../../../core/redux/routine/actions'
-import reducer from '../../../core/redux/routine/redux'
-import { performFetchRoutineReadings } from '../../../core/redux/routine/sagas/perform'
+} from '../../../core/redux/reading/actions'
+import reducer from '../../../core/redux/reading/redux'
+import routineReducer from '../../../core/redux/routine/redux'
+import { performFetchRoutineReadings } from '../../../core/redux/reading/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -91,14 +92,15 @@ describe('action status reducer', () => {
 describe('entity reducer', () => {
   const INITIAL_STATE = Immutable({
     byId: Immutable({
-      4: Immutable({ id: 4, readings: Immutable(['old reading']) })
+      1: { id: 1, routineId: 1 },
+      2: { id: 2, routineId: 2 }
     }),
-    allIds: Immutable([4])
+    allIds: Immutable([1, 2])
   })
 
   it('should handle FETCH_ROUTINE_READINGS_SUCCESS', () => {
-    const routine = { id: 4 }
-    const readings = [{ temp: 10, insertedAt: 'today' }]
+    const routine = { id: 1 }
+    const readings = [{ id: 3, routineId: 1, temp: 10, insertedAt: 'today' }]
 
     expect(
       reducer.entity(INITIAL_STATE, {
@@ -108,9 +110,37 @@ describe('entity reducer', () => {
       })
     ).toEqual({
       byId: {
+        2: { id: 2, routineId: 2 },
+        3: { id: 3, routineId: 1, temp: 10, insertedAt: 'today' }
+      },
+      allIds: Immutable([2, 3])
+    })
+  })
+})
+
+describe('routine entity reducer', () => {
+  const INITIAL_STATE = Immutable({
+    byId: Immutable({
+      4: Immutable({ id: 4, readings: Immutable([5]) })
+    }),
+    allIds: Immutable([4])
+  })
+
+  it('should handle FETCH_ROUTINE_READINGS_SUCCESS', () => {
+    const routine = { id: 4 }
+    const readings = [{ id: 6, temp: 10, insertedAt: 'today' }]
+
+    expect(
+      routineReducer.entity(INITIAL_STATE, {
+        type: FETCH_ROUTINE_READINGS_SUCCESS,
+        routine,
+        readings
+      })
+    ).toEqual({
+      byId: {
         4: {
           id: 4,
-          readings: [{ temp: 10, insertedAt: 'today' }]
+          readings: [6]
         }
       },
       allIds: [4]

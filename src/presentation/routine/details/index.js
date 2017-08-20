@@ -1,22 +1,34 @@
 /* global Blob */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoutineDetails from './routine_details'
 import JsonToCsv from 'json2csv'
 import FileSaver from 'file-saver'
 
-import {
-  selectRoutine,
-  selectRoutineFetchingStatus
-} from '../../core/redux/routine/selector'
-import {
-  fetchRoutineReadingsRequest,
-  destroyRoutineRequest
-} from '../../core/redux/routine/actions'
+import RoutineDetailsPresenter from './presenter'
 
-class RoutineDetailsContainer extends Component {
+import {
+  selectSelectedRoutine,
+  selectRoutineFetchingStatus
+} from '../../../core/redux/routine/selector'
+import {
+  selectSelectedRoutineTemperatureTimeline
+} from '../../../core/redux/reading/selector'
+import {
+  destroyRoutineRequest,
+  clearSelectedRoutine
+} from '../../../core/redux/routine/actions'
+import {
+  fetchRoutineReadingsRequest
+} from '../../../core/redux/reading/actions'
+
+class RoutineDetails extends Component {
   componentWillMount () {
     this.props.requestRoutineReadings(this.props.routine)
+  }
+
+  onCancel () {
+    this.props.clearSelectedRoutine()
+    this.props.history.goBack()
   }
 
   exportReadingsToCsv () {
@@ -29,11 +41,14 @@ class RoutineDetailsContainer extends Component {
 
   render () {
     return (
-      <RoutineDetails
+      <RoutineDetailsPresenter
         fetching={this.props.fetching}
         error={this.props.error}
         routine={this.props.routine}
-        onCancel={this.props.history.goBack}
+        temperatureTimeline={this.props.temperatureTimeline}
+        navigationTimeline={this.props.navigationTimeline}
+
+        onCancel={this.onCancel.bind(this)}
         onDelete={() => { this.props.history.goBack(); this.props.requestDestroy(this.props.routine) }}
         onUpdate={() => this.props.history.push({ pathname: '/routines/edit', state: { routine: this.props.routine } })}
         onExportToCsv={this.exportReadingsToCsv.bind(this)}
@@ -45,7 +60,8 @@ class RoutineDetailsContainer extends Component {
 const mapStateToProps = (state, props) => {
   const { fetching, error } = selectRoutineFetchingStatus(state)
   return {
-    routine: selectRoutine(state, props.match.params),
+    routine: selectSelectedRoutine(state),
+    temperatureTimeline: selectSelectedRoutineTemperatureTimeline(state),
     fetching,
     error
   }
@@ -53,9 +69,10 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    clearSelectedRoutine: () => dispatch(clearSelectedRoutine()),
     requestRoutineReadings: routine => dispatch(fetchRoutineReadingsRequest(routine)),
     requestDestroy: routine => dispatch(destroyRoutineRequest(routine))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoutineDetailsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineDetails)
