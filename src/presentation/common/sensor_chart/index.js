@@ -1,9 +1,16 @@
 import React from 'react'
 import './styles.css'
-import Card from '../card'
+import Card from '../../common/card'
 import LineChart from '../../common/chart/line'
 
-const SensorChart = ({ title, valueUnit, currentValue, data }) => {
+const VALUE_COLORS = {
+  temp: '#F27C21',
+  ph: '#9D5BDB',
+  co2: '#6DE6AC',
+  density: '#50AEF5'
+}
+
+const SensorChart = ({ title, valueUnit, value, currentValue, data }) => {
   return (
     <Card>
       <div className='sensorChart'>
@@ -19,7 +26,7 @@ const SensorChart = ({ title, valueUnit, currentValue, data }) => {
           <LineChart
             height={60}
             labels={data.labels}
-            datasets={[{ data: data.values, stroke: '#F27C21' }]}
+            datasets={[{ data: data[value], stroke: VALUE_COLORS[value] }]}
           />
         }
       </div>

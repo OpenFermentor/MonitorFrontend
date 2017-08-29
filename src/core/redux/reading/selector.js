@@ -21,13 +21,23 @@ export const selectRunningRoutineReadings = createSelector(
   (readings, { byId }) => readings.map(id => byId[id])
 )
 
+export const selectSelectedRoutineReadings = createSelector(
+  [routineSelector.selectSelectedRoutine, entity],
+  (routine, { byId }) => {
+    if (!routine) {
+      return []
+    }
+    return routine.readings.map(id => byId[id])
+  }
+)
+
 export const selectRunningRoutineCurrentValue = createSelector(
   [selectRunningRoutineReadings, entity],
   (readings, { byId }) =>
     byId[_.last(readings)]
 )
 
-export const selectRunningRoutineTemperatureTimeline = createSelector(
+export const selectRunningRoutineTimeline = createSelector(
   [routineSelector.selectDataRange, selectRunningRoutineReadings],
   ({ dataRangeStart, dataRangeEnd }, readings) => {
     const dataRangeReadings = readings.filter(({ insertedAt }) => {
@@ -41,13 +51,10 @@ export const selectRunningRoutineTemperatureTimeline = createSelector(
   }
 )
 
-export const selectSelectedRoutineTemperatureTimeline = createSelector(
-  [routineSelector.selectDataRange, routineSelector.selectSelectedRoutine],
-  ({ dataRangeStart, dataRangeEnd }, selectedRoutine) => {
-    if (!selectedRoutine) {
-      return getTimeline([])
-    }
-    const dataRangeReadings = selectedRoutine.readings.filter(({ insertedAt }) => {
+export const selectSelectedRoutineTimeline = createSelector(
+  [routineSelector.selectDataRange, selectSelectedRoutineReadings],
+  ({ dataRangeStart, dataRangeEnd }, readings) => {
+    const dataRangeReadings = readings.filter(({ insertedAt }) => {
       const readingDate = moment(insertedAt)
       if (!dataRangeStart) {
         return true
@@ -67,13 +74,8 @@ export const selectRunningRoutineNavigationTimeline = createSelector(
 )
 
 export const selectSelectedRoutineNavigationTimeline = createSelector(
-  [routineSelector.selectSelectedRoutine],
-  (selectedRoutine) => {
-    if (!selectedRoutine) {
-      return getTimeline([])
-    }
-    return getTimeline(selectedRoutine.readings)
-  }
+  [selectSelectedRoutineReadings],
+  readings => getTimeline(readings)
 )
 
 const getTimeline = readings => {
@@ -82,7 +84,10 @@ const getTimeline = readings => {
   return {
     insertedAt: readings.map(({ insertedAt }) => insertedAt),
     labels: mutableReadings.map(({ insertedAt }) => insertedAt),
-    values: mutableReadings.map(({ temp }) => temp)
+    temp: mutableReadings.map(({ temp }) => temp),
+    co2: mutableReadings.map(({ co2 }) => co2),
+    density: mutableReadings.map(({ density }) => density),
+    ph: mutableReadings.map(({ ph }) => ph)
   }
 }
 
@@ -98,15 +103,32 @@ const normalizeReadingsDateRange = (readings) => {
 const groupReadingsByDateFormat = (readings, dateFormat) => {
   const readingsGroupedByDate = readings.reduce((readingsGroup, reading) => {
     const dateGroup = dateFormat(reading.insertedAt)
-    const { readingsAmount = 0, totalTemp = 0, routineId = reading.routineId } = readingsGroup[dateGroup] || {}
-    readingsGroup[dateGroup] = { readingsAmount: readingsAmount + 1, totalTemp: totalTemp + reading.temp, routineId }
+    const {
+      readingsAmount = 0,
+      totalTemp = 0,
+      totalPH = 0,
+      totalCO2 = 0,
+      totalDensity = 0,
+      routineId = reading.routineId
+    } = readingsGroup[dateGroup] || {}
+    readingsGroup[dateGroup] = {
+      routineId,
+      readingsAmount: readingsAmount + 1,
+      totalTemp: totalTemp + reading.temp,
+      totalPH: totalPH + reading.ph,
+      totalCO2: totalCO2 + reading.co2,
+      totalDensity: totalDensity + reading.density
+    }
     return readingsGroup
   }, {})
 
-  return Object.entries(readingsGroupedByDate).map(([date, { readingsAmount, totalTemp, routineId }], index) => ({
+  return Object.entries(readingsGroupedByDate).map(([date, { readingsAmount, totalTemp, totalPH, totalCO2, totalDensity, routineId }], index) => ({
     routineId,
     id: index,
     temp: totalTemp / readingsAmount,
+    ph: totalPH / readingsAmount,
+    co2: totalCO2 / readingsAmount,
+    density: totalDensity / readingsAmount,
     insertedAt: date
   }))
 }

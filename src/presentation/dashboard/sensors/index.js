@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 
 import {
   selectSensorsLastValue,
-  selectSensorsTemperatureTimeline
+  selectSensorsTimeline
 } from '../../../core/redux/sensors/selector'
 import {
   stopRunningRoutineRequest
@@ -27,7 +27,7 @@ class SensorsDashboard extends Component {
 
 const mapStateToProps = state => ({
   lastValue: selectSensorsLastValue(state),
-  temperatureTimeline: selectSensorsTemperatureTimeline(state)
+  temperatureTimeline: selectSensorsTimeline(state)
 })
 
 const mapDispatchToProps = dispatch => ({

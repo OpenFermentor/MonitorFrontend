@@ -27,8 +27,11 @@ const addReading = (state, { reading }) =>
   addByIdEntry(state, {
     id: reading.id,
     routineId: reading.routineId,
-    temp: reading.temp,
-    insertedAt: reading.insertedAt
+    insertedAt: reading.insertedAt,
+    temp: reading.temp || 0,
+    ph: reading.ph || 0,
+    density: reading.density || 0,
+    co2: reading.co2 || 0
   })
 
 const INITIAL_STATE_ALL_IDS = Immutable([])
@@ -59,8 +62,11 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
     byId: addByIdEntries(state.byId.without(({routineId}) => routineId === routine.id), readings.map(reading => ({
       id: reading.id,
       routineId: reading.routineId,
+      insertedAt: reading.insertedAt,
       temp: reading.temp,
-      insertedAt: reading.insertedAt
+      ph: reading.ph,
+      co2: reading.co2,
+      density: reading.density
     }))),
     allIds: addEntriesIds(state.allIds.filter(id => state.byId[id].routineId !== routine.id), readings)
   })

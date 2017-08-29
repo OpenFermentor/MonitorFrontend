@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.css'
 
-const DashboardCard = ({ children }) => {
+const Card = ({ children }) => {
   return (
     <div className='card'>
       { children }
@@ -9,4 +9,4 @@ const DashboardCard = ({ children }) => {
   )
 }
 
-export default DashboardCard
+export default Card

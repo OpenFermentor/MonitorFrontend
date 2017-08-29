@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import _ from 'lodash'
+import TimelineNavigationChart from '../../common/timeline_navigation_chart'
 
 import {
   selectRunningRoutineNavigationTimeline
-} from '../../../../core/redux/reading/selector'
+} from '../../../core/redux/reading/selector'
 
 import {
   setDataRange
-} from '../../../../core/redux/routine/actions'
-
-import NavigationChartPresenter from './presenter'
+} from '../../../core/redux/routine/actions'
 
 class NavigationChart extends Component {
   onRangeChange ({ start, end }) {
@@ -40,10 +39,7 @@ class NavigationChart extends Component {
       return null
     }
     return (
-      <NavigationChartPresenter
-        timeline={this.props.timeline}
-        onRangeChange={this.onRangeChange.bind(this)}
-      />
+      <TimelineNavigationChart timeline={this.props.timeline} onRangeChange={this.onRangeChange.bind(this)} />
     )
   }
 }

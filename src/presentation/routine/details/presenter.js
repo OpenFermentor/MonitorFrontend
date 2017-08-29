@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Modal, Button, Divider, Message, Loader } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
+import './styles.css'
 
-import SensorChart from './sensor_chart'
+import SensorChart from '../../common/sensor_chart'
 import NavigationChart from './navigation_chart'
+import Toolbar from '../../common/toolbar'
 
 export default class RoutineDetails extends Component {
   render () {
@@ -10,64 +12,43 @@ export default class RoutineDetails extends Component {
       return
     }
     return (
-      <Modal open>
-        <Modal.Header>Experimento {this.props.routine.title}</Modal.Header>
-        <Modal.Content>
-          <Modal.Description>
 
-            <Button floated='right' onClick={this.props.onDelete}>Eliminar</Button>
-            <Button floated='right' onClick={this.props.onUpdate}>Editar</Button>
+      <div className='routineDetails'>
 
-            <p>Medio: {this.props.routine.medium}</p>
-            <p>Temperatura objetivo: {this.props.routine.targetTemp}</p>
-            <p>Tiempo estimado en segundos: {this.props.routine.estimatedTimeSeconds}</p>
-            <p>Notas adicionales: {this.props.routine.extraNotes}</p>
+        <Toolbar
+          title={this.props.routine.title}
+          rightTitle='Volver'
+          onClickRight={this.props.onCancel}
+        />
 
-            <Divider />
+        <div className='content'>
+          { this.props.routine.readings.length > 0 &&
+            <div>
+              <Button floated='right' onClick={this.props.onExportToCsv}>Exportar a CSV</Button>
+            </div>
+          }
 
-            <h3>Lecturas</h3>
+          <SensorChart
+            title='Temperatura'
+            valueUnit='ºC'
+            data={this.props.timeline}
+            value='temp'
+          />
+          <SensorChart
+            title='pH'
+            value='ph'
+            data={this.props.timeline}
+          />
+          <SensorChart
+            title='Agitación'
+            value='density'
+            data={this.props.timeline}
+          />
 
-            <SensorChart
-              title='Temperatura'
-              valueUnit='ºC'
-              data={this.props.temperatureTimeline}
-            />
-            <SensorChart
-              title='pH'
-              data={{ labels: this.props.temperatureTimeline.labels }}
-            />
-            <SensorChart
-              title='Agitación'
-              data={{ labels: this.props.temperatureTimeline.labels }}
-            />
+          <NavigationChart />
 
-            <NavigationChart />
-
-            { this.props.error &&
-              <Message
-                error
-                content={this.props.error.message}
-              />
-            }
-
-            {
-              this.props.fetching &&
-              <Loader />
-            }
-
-            { this.props.routine.readings.length > 0 &&
-              <div>
-                <Button floated='right' onClick={this.props.onExportToCsv}>Exportar a CSV</Button>
-              </div>
-
-            }
-
-            <Button floated='right' onClick={this.props.onCancel}>Cancelar</Button>
-
-          </Modal.Description>
-
-        </Modal.Content>
-      </Modal>
+        </div>
+      </div>
     )
   }
 }

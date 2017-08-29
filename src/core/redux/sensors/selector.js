@@ -12,7 +12,7 @@ export const selectSensorsLastValue = createSelector(
   }
 )
 
-export const selectSensorsTemperatureTimeline = createSelector(
+export const selectSensorsTimeline = createSelector(
   [selectSensorsEntityRedux],
   (sensors) => {
     const sensorReadings = Immutable.isImmutable(sensors.readings) ? sensors.readings.asMutable() : sensors.readings
