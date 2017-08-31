@@ -11,7 +11,7 @@ import {
   selectRoutineFetchingStatus
 } from '../../../core/redux/routine/selector'
 import {
-  selectSelectedRoutineTemperatureTimeline
+  selectSelectedRoutineTimeline
 } from '../../../core/redux/reading/selector'
 import {
   destroyRoutineRequest,
@@ -45,7 +45,7 @@ class RoutineDetails extends Component {
         fetching={this.props.fetching}
         error={this.props.error}
         routine={this.props.routine}
-        temperatureTimeline={this.props.temperatureTimeline}
+        timeline={this.props.timeline}
         navigationTimeline={this.props.navigationTimeline}
 
         onCancel={this.onCancel.bind(this)}
@@ -61,7 +61,7 @@ const mapStateToProps = (state, props) => {
   const { fetching, error } = selectRoutineFetchingStatus(state)
   return {
     routine: selectSelectedRoutine(state),
-    temperatureTimeline: selectSelectedRoutineTemperatureTimeline(state),
+    timeline: selectSelectedRoutineTimeline(state),
     fetching,
     error
   }

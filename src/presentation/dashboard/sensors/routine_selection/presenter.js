@@ -5,7 +5,7 @@ import {
   Message
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import Card from '../../card'
+import Card from '../../../common/card'
 
 const RoutineSelection = ({ routines, onSelectRoutine, error }) => {
   return (

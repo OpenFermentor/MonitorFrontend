@@ -23,13 +23,13 @@ const reducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-const addReading = (state, { temp, insertedAt }) => {
+const addReading = (state, { insertedAt, temp = 0, ph = 0, density = 0, co2 = 0 }) => {
   let readings = state.readings
   if (readings.length > SENSOR_READINGS_TO_STORE) {
     readings = removeFirstReading(readings)
   }
   return state.merge({
-    readings: readings.concat({ temp, insertedAt })
+    readings: readings.concat({ temp, ph, density, co2, insertedAt })
   })
 }
 

@@ -25,20 +25,28 @@ export default class TimelineNavigationChart extends Component {
 
   render () {
     return (
-      <div className='timelineNavigationChart' ref={ref => { this.container = ref }}>
-        <div className='handler'>
-          <DraggableHandler
-            endPosition={this.state.elementWidth}
-            onRangeChange={this.onRangeChange.bind(this)}
+      <div className='timelineNavigationChart'>
+        <div className='wrapper' ref={ref => { this.container = ref }}>
+          <div className='handler'>
+            <DraggableHandler
+              endPosition={this.state.elementWidth}
+              onRangeChange={this.onRangeChange.bind(this)}
+            />
+          </div>
+          <LineChart
+            height={20}
+            labels={this.props.timeline.labels}
+            showYAxis={false}
+            datasets={[
+              { data: this.props.timeline.temp, stroke: '#F27C21', label: 'Temperatura' },
+              { data: this.props.timeline.co2, stroke: '#6DE6AC', label: 'CO2' },
+              { data: this.props.timeline.ph, stroke: '#9D5BDB', label: 'pH' },
+              { data: this.props.timeline.density, stroke: '#50AEF5', label: 'Agitación' }
+            ]}
           />
         </div>
-        <LineChart
-          height={20}
-          labels={this.props.timeline.labels}
-          showYAxis={false}
-          datasets={[{ data: this.props.timeline.values, stroke: '#F27C21', label: 'Temperature' }]}
-        />
       </div>
+
     )
   }
 }

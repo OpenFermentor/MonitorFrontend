@@ -30,7 +30,7 @@ describe('entity reducer', () => {
   })
 
   it('should handle ADD_READING', () => {
-    const reading = { id: 1, routineId: 4, temp: 25, insertedAt: 'now' }
+    const reading = { id: 1, routineId: 4, temp: 25, ph: 9, density: 100, co2: 40, insertedAt: 'now' }
     expect(
       reducer.entity(INITIAL_STATE, {
         type: ADD_READING,
@@ -55,7 +55,7 @@ describe('routine entity reducer', () => {
   })
 
   it('should handle ADD_READING', () => {
-    const reading = { id: 1, routineId: 4, temp: 25, insertedAt: 'now' }
+    const reading = { id: 1, routineId: 4, temp: 25, ph: 9, density: 100, co2: 40, insertedAt: 'now' }
     expect(
       routineReducer.entity(INITIAL_STATE, {
         type: ADD_READING,

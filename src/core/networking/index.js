@@ -38,15 +38,6 @@ class HttpService {
     })
   }
 
-  // addNormalizeResponseErrorInterceptor () {
-  //   this.instance.interceptors.response.use(response => {
-  //     if (response.data) {
-  //       response.data = transformSnakeToCamelCase(response.data)
-  //     }
-  //     return response
-  //   })
-  // }
-
   _get (...args) {
     return this.instance.get(...args).catch(e => { throw normalizeError(e) })
   }

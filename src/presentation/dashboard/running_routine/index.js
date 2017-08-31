@@ -6,7 +6,7 @@ import {
   selectRunningRoutineTitle
 } from '../../../core/redux/routine/selector'
 import {
-  selectRunningRoutineTemperatureTimeline,
+  selectRunningRoutineTimeline,
   selectRunningRoutineCurrentValue
 } from '../../../core/redux/reading/selector'
 import {
@@ -33,7 +33,7 @@ class RunningRoutineDashboard extends Component {
 const mapStateToProps = state => ({
   routineTitle: selectRunningRoutineTitle(state),
   currentValue: selectRunningRoutineCurrentValue(state),
-  temperatureTimeline: selectRunningRoutineTemperatureTimeline(state)
+  temperatureTimeline: selectRunningRoutineTimeline(state)
 })
 
 const mapDispatchToProps = dispatch => ({
