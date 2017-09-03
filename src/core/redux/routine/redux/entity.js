@@ -13,8 +13,10 @@ import {
   updateByIdEntry,
   replaceAllEntriesIds,
   addEntryId,
+  updateByIdEntries,
   removeEntryId
 } from '../../../library/redux_entity_operations'
+import _ from 'lodash'
 
 const INITIAL_STATE_BY_ID = Immutable({})
 
@@ -29,6 +31,7 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case readingActionTypes.FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
 
     case readingActionTypes.ADD_READING: return addRoutineReading(state, action)
+    case readingActionTypes.MERGE_READINGS: return mergeRoutinesReadings(state, action)
 
     default: return state
   }
@@ -104,6 +107,20 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
     id: routine.id,
     readings: replaceAllEntriesIds(state[routine.id].readings, readings)
   })
+
+const mergeRoutinesReadings = (state, { readings }) => {
+  const readingsByRoutine = Object.entries(_.groupBy(readings, 'routineId'))
+  return updateByIdEntries(state, readingsByRoutine.map(([routineIdKey, readings]) => {
+    const readingsIds = _.flatten(readings.map(({ readingsIds }) => readingsIds))
+    const routineId = parseInt(routineIdKey)
+    return {
+      id: routineId,
+      readings: state[routineId].readings
+        .filter(readingId => !readingsIds.includes(readingId))
+        .concat(readings.map(({ readingsIds }) => readingsIds.toString()))
+    }
+  }))
+}
 
 const INITIAL_STATE_ALL_IDS = Immutable([])
 

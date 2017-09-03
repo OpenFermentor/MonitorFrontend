@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import HttpService from '../../../core/networking'
 import './styles.css'
 
 import SensorChart from '../../common/sensor_chart'
@@ -19,14 +19,12 @@ export default class RoutineDetails extends Component {
           title={this.props.routine.title}
           rightTitle='Volver'
           onClickRight={this.props.onCancel}
+
+          secondRightTitle='Exportar a CSV'
+          secondRightDownloadUrl={HttpService.routineToCsvUrl(this.props.routine)}
         />
 
         <div className='content'>
-          { this.props.routine.readings.length > 0 &&
-            <div>
-              <Button floated='right' onClick={this.props.onExportToCsv}>Exportar a CSV</Button>
-            </div>
-          }
 
           <SensorChart
             title='Temperatura'

@@ -14,6 +14,10 @@ import {
 
 class NavigationChart extends Component {
   onRangeChange ({ start, end }) {
+    console.log(end)
+    if (end === 1) {
+      return this.props.setDataRange(this.convertRangeValueToTimelineDate(start))
+    }
     this.props.setDataRange(
       this.convertRangeValueToTimelineDate(start),
       this.convertRangeValueToTimelineDate(end)
@@ -35,7 +39,7 @@ class NavigationChart extends Component {
   }
 
   render () {
-    if (this.props.timeline.labels.length === 0) {
+    if (this.props.timeline.labels.length <= 2) {
       return null
     }
     return (

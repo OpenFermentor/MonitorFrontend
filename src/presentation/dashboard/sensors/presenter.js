@@ -16,12 +16,16 @@ export default class SensorsDashboardPresenter extends Component {
         />
 
         <div className='cardRow'>
+          <RoutineSelection />
+        </div>
+
+        <div className='cardRow'>
           <SensorChart
             title='Temperatura'
             value='temp'
             valueUnit='ºC'
             currentValue={this.props.lastValue.temp}
-            data={this.props.temperatureTimeline}
+            data={this.props.timeline}
           />
         </div>
         <div className='cardRow'>
@@ -29,20 +33,18 @@ export default class SensorsDashboardPresenter extends Component {
             title='pH'
             value='ph'
             valueUnit=''
-            currentValue={0}
-            data={{ labels: this.props.temperatureTimeline.labels }}
+            currentValue={this.props.lastValue.ph}
+            data={this.props.timeline}
           />
+        </div>
+        <div className='cardRow'>
           <SensorChart
             title='Agitación'
             value='density'
             valueUnit=''
-            currentValue={0}
-            data={{ labels: this.props.temperatureTimeline.labels }}
+            currentValue={this.props.lastValue.density}
+            data={this.props.timeline}
           />
-        </div>
-
-        <div className='cardRow'>
-          <RoutineSelection />
         </div>
 
       </div>

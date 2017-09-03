@@ -17,8 +17,12 @@ export const selectSensorsTimeline = createSelector(
   (sensors) => {
     const sensorReadings = Immutable.isImmutable(sensors.readings) ? sensors.readings.asMutable() : sensors.readings
     return {
-      labels: sensorReadings.map(({ insertedAt }) => moment(insertedAt).format('HH:mm')),
-      values: sensorReadings.map(({ temp }) => temp)
+      insertedAt: sensorReadings.map(({ insertedAt }) => insertedAt),
+      labels: sensorReadings.map(({ insertedAt }) => moment(insertedAt).format('HH:mm:ss')),
+      temp: sensorReadings.map(({ temp }) => temp),
+      co2: sensorReadings.map(({ co2 }) => co2),
+      density: sensorReadings.map(({ density }) => density),
+      ph: sensorReadings.map(({ ph }) => ph)
     }
   }
 )

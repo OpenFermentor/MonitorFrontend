@@ -22,7 +22,7 @@ export default class SensorsDashboardPresenter extends Component {
             value='temp'
             valueUnit='ºC'
             currentValue={this.props.currentValue.temp}
-            data={this.props.temperatureTimeline}
+            data={this.props.timeline}
           />
         </div>
         <div className='cardRow'>
@@ -31,14 +31,16 @@ export default class SensorsDashboardPresenter extends Component {
             value='ph'
             valueUnit=''
             currentValue={0}
-            data={{ labels: this.props.temperatureTimeline.labels, values: this.props.temperatureTimeline.labels.map(l => 0) }}
+            data={this.props.timeline}
           />
+        </div>
+        <div className='cardRow'>
           <SensorChart
             title='Agitación'
             value='density'
             valueUnit='rpm'
             currentValue={0}
-            data={{ labels: this.props.temperatureTimeline.labels, values: this.props.temperatureTimeline.labels.map(l => 0) }}
+            data={this.props.timeline}
           />
         </div>
 

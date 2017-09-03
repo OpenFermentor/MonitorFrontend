@@ -21,7 +21,7 @@ class RunningRoutineDashboard extends Component {
       <RunningRoutineDashboardPresenter
         routineTitle={this.props.routineTitle}
         currentValue={this.props.currentValue || {}}
-        temperatureTimeline={this.props.temperatureTimeline}
+        timeline={this.props.timeline}
         onPressSelectRoutine={() => this.props.history.push('/routines/select')}
         onRoutineStop={this.props.requestRoutineStop}
         onNavigateToExperiments={() => this.props.history.push('/routines/select')}
@@ -33,7 +33,7 @@ class RunningRoutineDashboard extends Component {
 const mapStateToProps = state => ({
   routineTitle: selectRunningRoutineTitle(state),
   currentValue: selectRunningRoutineCurrentValue(state),
-  temperatureTimeline: selectRunningRoutineTimeline(state)
+  timeline: selectRunningRoutineTimeline(state)
 })
 
 const mapDispatchToProps = dispatch => ({
