@@ -54,6 +54,10 @@ class HttpService {
     return this.instance.delete(...args).catch(e => { throw normalizeError(e) })
   }
 
+  routineToCsvUrl (routine) {
+    return `${process.env.REACT_APP_BASE_API_URL}/routines/${routine.id}/to_csv`
+  }
+
   startRoutine ({ id }) {
     return this._post('routines/start', { id })
   }

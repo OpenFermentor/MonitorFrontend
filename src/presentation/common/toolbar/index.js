@@ -23,9 +23,17 @@ export default class Toolbar extends Component {
             <IconButton name='settings' color='white' onClick={this.props.onClickRight} />
           }
 
-          { this.props.rightTitle && this.props.onClickRight &&
-            <Button inverted onClick={this.props.onClickRight}>{this.props.rightTitle}</Button>
-          }
+          <div>
+            { this.props.rightTitle && this.props.onClickRight &&
+              <Button inverted onClick={this.props.onClickRight}>{this.props.rightTitle}</Button>
+            }
+            { this.props.secondRightTitle && this.props.secondRightDownloadUrl &&
+              <a href={this.props.secondRightDownloadUrl} target='_blank'>
+                <Button inverted>{this.props.secondRightTitle}</Button>
+              </a>
+            }
+          </div>
+
         </div>
       </div>
     )

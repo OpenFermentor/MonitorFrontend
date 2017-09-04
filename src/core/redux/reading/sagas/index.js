@@ -5,9 +5,11 @@ import {
   FETCH_ROUTINE_READINGS_REQUEST
 } from '../action_types'
 import {
-  performFetchRoutineReadings
+  performFetchRoutineReadings,
+  performMergeOldReadings
 } from './perform'
 
 export default [
-  takeEvery(FETCH_ROUTINE_READINGS_REQUEST, performFetchRoutineReadings, httpService)
+  takeEvery(FETCH_ROUTINE_READINGS_REQUEST, performFetchRoutineReadings, httpService),
+  takeEvery('BOOTED', performMergeOldReadings)
 ]

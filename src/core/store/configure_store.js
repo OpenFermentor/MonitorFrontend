@@ -27,7 +27,9 @@ const configureStore = () => {
   persistStore(store)
 
   sagaMiddleware.run(rootSaga)
-  persistStore(store, persistConfig, () => store.dispatch({ type: 'BOOTED' }))
+  persistStore(store, persistConfig, () => {
+    store.dispatch({ type: 'BOOTED' })
+  })
 
   return store
 }

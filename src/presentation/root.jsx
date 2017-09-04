@@ -9,6 +9,7 @@ import {
 
 class RootContainer extends Component {
   render () {
+    console.log(this.props.booted)
     if (!this.props.booted) {
       return null
     }

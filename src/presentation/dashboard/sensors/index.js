@@ -17,7 +17,7 @@ class SensorsDashboard extends Component {
     return (
       <SensorsDashboardPresenter
         lastValue={this.props.lastValue}
-        temperatureTimeline={this.props.temperatureTimeline}
+        timeline={this.props.timeline}
         onRoutineStop={this.props.requestRoutineStop}
         onNavigateToExperiments={() => this.props.history.push('/routines')}
       />
@@ -27,7 +27,7 @@ class SensorsDashboard extends Component {
 
 const mapStateToProps = state => ({
   lastValue: selectSensorsLastValue(state),
-  temperatureTimeline: selectSensorsTimeline(state)
+  timeline: selectSensorsTimeline(state)
 })
 
 const mapDispatchToProps = dispatch => ({
