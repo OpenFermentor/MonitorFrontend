@@ -10,7 +10,7 @@ import Card from '../../../common/card'
 const RoutineSelection = ({ routines, onSelectRoutine, error }) => {
   return (
     <Card>
-      <h3>Experimentos disponibles</h3>
+      <h2>Comenzar experimento</h2>
       { error &&
         <Message
           error

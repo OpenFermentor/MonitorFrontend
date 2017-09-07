@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import SensorChart from '../../common/sensor_chart'
 import Toolbar from '../../common/toolbar'
+import Alerts from '../alerts'
 import RoutineSelection from './routine_selection'
 
 export default class SensorsDashboardPresenter extends Component {
@@ -14,6 +15,8 @@ export default class SensorsDashboardPresenter extends Component {
           rightTitle='Experimentos'
           onClickRight={this.props.onNavigateToExperiments}
         />
+
+        <Alerts />
 
         <div className='cardRow'>
           <RoutineSelection />

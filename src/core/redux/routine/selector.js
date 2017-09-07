@@ -16,17 +16,17 @@ export const selectIsRunningRoutine = createSelector(
 )
 
 export const selectRunningRoutineTitle = createSelector(
-  [entity, actionStatus],
-  (routine, actionStatus) => {
-    return routine.byId[actionStatus.runningRoutine].title
-  }
+  entity,
+  actionStatus,
+  (routine, actionStatus) =>
+    routine.byId[actionStatus.runningRoutine].title
 )
 
 export const selectRunningRoutineReadings = createSelector(
-  [entity, actionStatus],
-  (routine, actionStatus) => {
-    return routine.byId[actionStatus.runningRoutine].readings
-  }
+  entity,
+  actionStatus,
+  (routine, actionStatus) =>
+    routine.byId[actionStatus.runningRoutine].readings
 )
 
 export const selectDataRange = createSelector(
