@@ -25,11 +25,11 @@ export default class Toolbar extends Component {
 
           <div>
             { this.props.rightTitle && this.props.onClickRight &&
-              <Button inverted onClick={this.props.onClickRight}>{this.props.rightTitle}</Button>
+              <Button basic inverted onClick={this.props.onClickRight}>{this.props.rightTitle}</Button>
             }
             { this.props.secondRightTitle && this.props.secondRightDownloadUrl &&
               <a href={this.props.secondRightDownloadUrl} target='_blank'>
-                <Button inverted>{this.props.secondRightTitle}</Button>
+                <Button basic inverted>{this.props.secondRightTitle}</Button>
               </a>
             }
           </div>

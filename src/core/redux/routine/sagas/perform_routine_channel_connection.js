@@ -2,10 +2,13 @@
 
 import { call, take, put, fork } from 'redux-saga/effects'
 import { eventChannel, END } from 'redux-saga'
+import moment from 'moment'
 import {
   addReading
 } from '../../reading/actions'
-import moment from 'moment'
+import {
+  addAlert
+} from '../../alert/actions.js'
 
 export default function * performRoutineChannelConnection (socketService) {
   socketService.connect()
@@ -14,6 +17,7 @@ export default function * performRoutineChannelConnection (socketService) {
     while (true) {
       yield take(routineChannel)
       yield fork(receiveUpdateEvents, socketService)
+      yield fork(receiveAlertEvents, socketService)
     }
   } finally {
     console.log('error')
@@ -29,15 +33,28 @@ const joinRoutineChannel = socket => eventChannel(emmiter => {
   return socket.leaveRoutineTopic
 })
 
-function * receiveUpdateEvents (socketService) {
-  const eventUpdate = yield call(receiveUpdateEventsChannel, socketService)
+function * receiveAlertEvents (socketService) {
+  const emmitedAlert = yield call(alertEventsEmitter, socketService)
   while (true) {
-    let { routine_id, id, temp, inserted_at = moment().format() } = yield take(eventUpdate)
+    let { message, errors } = yield take(emmitedAlert)
+    yield put(addAlert({ message, errors }))
+  }
+}
+
+const alertEventsEmitter = socketService => eventChannel(emmiter => {
+  socketService.receiveAlertEvent(alert => emmiter(alert))
+  return () => {}
+})
+
+function * receiveUpdateEvents (socketService) {
+  const emmitedUpdate = yield call(updateEventsEmitter, socketService)
+  while (true) {
+    let { routine_id, id, temp, inserted_at = moment().format() } = yield take(emmitedUpdate)
     yield put(addReading({ routineId: routine_id, id, temp, insertedAt: inserted_at }))
   }
 }
 
-const receiveUpdateEventsChannel = socketService => eventChannel(emmiter => {
+const updateEventsEmitter = socketService => eventChannel(emmiter => {
   socketService.receiveUpdateEvent(reading => emmiter(reading))
   return () => {}
 })
