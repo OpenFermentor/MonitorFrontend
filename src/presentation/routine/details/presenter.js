@@ -38,7 +38,7 @@ export default class RoutineDetails extends Component {
             data={this.props.timeline}
           />
           <SensorChart
-            title='Agitación'
+            title='Transmitancia'
             value='density'
             data={this.props.timeline}
           />
