@@ -42,7 +42,7 @@ export default class SensorsDashboardPresenter extends Component {
         </div>
         <div className='cardRow'>
           <SensorChart
-            title='Agitación'
+            title='Transmitancia'
             value='density'
             valueUnit=''
             currentValue={this.props.lastValue.density}
