@@ -1,19 +1,18 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import { call, put } from 'redux-saga/effects'
 import {
   START_ROUTINE_REQUEST,
   START_ROUTINE_FAILURE,
   START_ROUTINE_SUCCESS
-} from '../../../core/redux/routine/action_types'
+} from '../../../redux/routine/action_types'
 import {
   startRoutineRequest,
   startRoutineFailure,
   startRoutineSuccess
-} from '../../../core/redux/routine/actions'
-import reducer from '../../../core/redux/routine/redux'
-import { performStartRoutine } from '../../../core/redux/routine/sagas/perform'
+} from '../../../redux/routine/actions'
+import reducer from '../../../redux/routine/redux'
+import { performStartRoutine } from '../../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -48,7 +47,7 @@ describe('actions', () => {
 describe('action status reducer', () => {
   it('should handle START_ROUTINE_REQUEST', () => {
     expect(
-      reducer.actionStatus(Immutable({ fetching: false, error: 'error', runningRoutine: null }), {
+      reducer.actionStatus({ fetching: false, error: 'error', runningRoutine: null }, {
         type: START_ROUTINE_REQUEST,
         routine: { id: 6 }
       })
@@ -61,7 +60,7 @@ describe('action status reducer', () => {
 
   it('should handle START_ROUTINE_FAILURE', () => {
     expect(
-      reducer.actionStatus(Immutable({ fetching: false, error: 'error', runningRoutine: null }), {
+      reducer.actionStatus({ fetching: false, error: 'error', runningRoutine: null }, {
         type: START_ROUTINE_FAILURE,
         error: 'an error'
       })
@@ -74,7 +73,7 @@ describe('action status reducer', () => {
 
   it('should handle START_ROUTINE_SUCCESS', () => {
     expect(
-      reducer.actionStatus(Immutable({ fetching: false, error: 'error', runningRoutine: null }), {
+      reducer.actionStatus({ fetching: false, error: 'error', runningRoutine: null }, {
         type: START_ROUTINE_SUCCESS,
         routine: { id: 6 }
       })

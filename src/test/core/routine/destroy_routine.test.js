@@ -1,19 +1,18 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import { call, put } from 'redux-saga/effects'
 import {
   DESTROY_ROUTINE_REQUEST,
   DESTROY_ROUTINE_FAILURE,
   DESTROY_ROUTINE_SUCCESS
-} from '../../../core/redux/routine/action_types'
+} from '../../../redux/routine/action_types'
 import {
   destroyRoutineRequest,
   destroyRoutineFailure,
   destroyRoutineSuccess
-} from '../../../core/redux/routine/actions'
-import reducer from '../../../core/redux/routine/redux'
-import { performRemoveRoutine } from '../../../core/redux/routine/sagas/perform'
+} from '../../../redux/routine/actions'
+import reducer from '../../../redux/routine/redux'
+import { performRemoveRoutine } from '../../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -46,7 +45,7 @@ describe('actions', () => {
 })
 
 describe('action status reducer', () => {
-  const DIRTY_STATE = Immutable({ fetching: false, error: 'error', runningRoutine: null })
+  const DIRTY_STATE = { fetching: false, error: 'error', runningRoutine: null }
 
   it('should handle DESTROY_ROUTINE_REQUEST', () => {
     expect(
@@ -87,10 +86,10 @@ describe('action status reducer', () => {
 })
 
 describe('entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({ 4: 'a routine', 5: 'another routine' }),
-    allIds: Immutable([4, 5])
-  })
+  const INITIAL_STATE = {
+    byId: { 4: 'a routine', 5: 'another routine' },
+    allIds: [4, 5]
+  }
 
   it('should handle DESTROY_ROUTINE_SUCCESS', () => {
     const routine = { id: 5 }

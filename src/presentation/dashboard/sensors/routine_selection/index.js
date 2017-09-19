@@ -6,11 +6,11 @@ import RoutineSelectionPresenter from './presenter'
 import {
   selectAllRoutines,
   selectRoutineFetchingStatus
-} from '../../../../core/redux/routine/selector'
+} from '../../../../redux/routine/selector'
 import {
   fetchRoutinesRequest,
   startRoutineRequest
-} from '../../../../core/redux/routine/actions'
+} from '../../../../redux/routine/actions'
 
 class RoutineSelection extends Component {
   componentWillMount () {

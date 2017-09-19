@@ -4,10 +4,10 @@ import UpsertRoutine from './upsert_routine'
 
 import {
   updateRoutineRequest
-} from '../../core/redux/routine/actions'
+} from '../../redux/routine/actions'
 import {
   selectRoutineFetchingStatus
-} from '../../core/redux/routine/selector'
+} from '../../redux/routine/selector'
 
 class UpdateRoutineContainer extends Component {
   constructor (props) {

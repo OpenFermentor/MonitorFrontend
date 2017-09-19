@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HttpService from '../../../core/networking'
+import HttpService from '../../../networking'
 import './styles.css'
 
 import SensorChart from '../../common/sensor_chart'

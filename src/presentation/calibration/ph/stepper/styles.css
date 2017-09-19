@@ -1,0 +1,28 @@
+.stepper {
+  position: fixed;
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #eee;
+  margin-top: 50px;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.stepper .content {
+  height: 50px;
+  width: 88%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stepper .step {
+  width: 100px;
+}
+
+.stepper .step.active .title {
+  color: #F27C21 !important;
+}

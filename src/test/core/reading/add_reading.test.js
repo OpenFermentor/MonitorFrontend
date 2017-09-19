@@ -1,14 +1,13 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import {
   ADD_READING
-} from '../../../core/redux/reading/action_types'
+} from '../../../redux/reading/action_types'
 import {
   addReading
-} from '../../../core/redux/reading/actions'
-import reducer from '../../../core/redux/reading/redux'
-import routineReducer from '../../../core/redux/routine/redux'
+} from '../../../redux/reading/actions'
+import reducer from '../../../redux/reading/redux'
+import routineReducer from '../../../redux/routine/redux'
 
 describe('actions', () => {
   it('should create an action to add a routine reading', () => {
@@ -22,12 +21,12 @@ describe('actions', () => {
 })
 
 describe('entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
+  const INITIAL_STATE = {
+    byId: {
       4: 'old reading'
-    }),
-    allIds: Immutable([4])
-  })
+    },
+    allIds: [4]
+  }
 
   it('should handle ADD_READING', () => {
     const reading = { id: 1, routineId: 4, temp: 25, ph: 9, density: 100, co2: 40, insertedAt: 'now' }
@@ -47,12 +46,12 @@ describe('entity reducer', () => {
 })
 
 describe('routine entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
-      4: { id: 4, readings: Immutable([3]) }
-    }),
-    allIds: Immutable([4])
-  })
+  const INITIAL_STATE = {
+    byId: {
+      4: { id: 4, readings: [3] }
+    },
+    allIds: [4]
+  }
 
   it('should handle ADD_READING', () => {
     const reading = { id: 1, routineId: 4, temp: 25, ph: 9, density: 100, co2: 40, insertedAt: 'now' }
@@ -65,7 +64,7 @@ describe('routine entity reducer', () => {
       byId: {
         4: {
           id: 4,
-          readings: Immutable([3, 1])
+          readings: [3, 1]
         }
       },
       allIds: [4]

@@ -1,19 +1,18 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import { call, put } from 'redux-saga/effects'
 import {
   UPDATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_FAILURE,
   UPDATE_ROUTINE_SUCCESS
-} from '../../../core/redux/routine/action_types'
+} from '../../../redux/routine/action_types'
 import {
   updateRoutineRequest,
   updateRoutineFailure,
   updateRoutineSuccess
-} from '../../../core/redux/routine/actions'
-import reducer from '../../../core/redux/routine/redux'
-import { performUpdateRoutine } from '../../../core/redux/routine/sagas/perform'
+} from '../../../redux/routine/actions'
+import reducer from '../../../redux/routine/redux'
+import { performUpdateRoutine } from '../../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -46,7 +45,7 @@ describe('actions', () => {
 })
 
 describe('action status reducer', () => {
-  const DIRTY_STATE = Immutable({ fetching: false, error: 'error', runningRoutine: null })
+  const DIRTY_STATE = { fetching: false, error: 'error', runningRoutine: null }
 
   it('should handle UPDATE_ROUTINE_REQUEST', () => {
     expect(
@@ -87,12 +86,12 @@ describe('action status reducer', () => {
 })
 
 describe('entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
-      4: Immutable({ id: 4, title: '3', strain: 60, medium: 'other medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes', readings: Immutable([5]) })
-    }),
-    allIds: Immutable([4])
-  })
+  const INITIAL_STATE = {
+    byId: {
+      4: { id: 4, title: '3', strain: 60, medium: 'other medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes', readings: [5] }
+    },
+    allIds: [4]
+  }
 
   it('should handle UPDATE_ROUTINE_SUCCESS', () => {
     const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }

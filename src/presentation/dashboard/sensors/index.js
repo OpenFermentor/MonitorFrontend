@@ -5,10 +5,10 @@ import { withRouter } from 'react-router'
 import {
   selectSensorsLastValue,
   selectSensorsTimeline
-} from '../../../core/redux/sensors/selector'
+} from '../../../redux/sensors/selector'
 import {
   stopRunningRoutineRequest
-} from '../../../core/redux/routine/actions'
+} from '../../../redux/routine/actions'
 
 import SensorsDashboardPresenter from './presenter'
 
@@ -20,6 +20,7 @@ class SensorsDashboard extends Component {
         timeline={this.props.timeline}
         onRoutineStop={this.props.requestRoutineStop}
         onNavigateToExperiments={() => this.props.history.push('/routines')}
+        onNavigateToCalibration={() => this.props.history.push('/calibration/ph')}
       />
     )
   }

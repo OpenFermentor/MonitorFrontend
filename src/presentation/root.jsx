@@ -5,7 +5,7 @@ import Router from './router'
 
 import {
   selectHasBootCompleted
-} from '../core/redux/boot/selector'
+} from '../redux/boot/selector'
 
 class RootContainer extends Component {
   render () {

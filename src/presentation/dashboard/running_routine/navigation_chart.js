@@ -6,11 +6,11 @@ import TimelineNavigationChart from '../../common/timeline_navigation_chart'
 
 import {
   selectRunningRoutineNavigationTimeline
-} from '../../../core/redux/reading/selector'
+} from '../../../redux/reading/selector'
 
 import {
   setDataRange
-} from '../../../core/redux/routine/actions'
+} from '../../../redux/routine/actions'
 
 class NavigationChart extends Component {
   onRangeChange ({ start, end }) {
