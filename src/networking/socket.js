@@ -38,7 +38,7 @@ class SocketService {
   }
 
   receiveAlertEvent (callback) {
-    this.routineChannel.on('stop', callback)
+    this.routineChannel.on('alert', callback)
   }
 
   joinSensorTopic ({ onSuccess, onFailure, onTimeout }) {
@@ -55,6 +55,10 @@ class SocketService {
 
   receiveStatusEvents (callback) {
     this.sensorsChannel.on('status', callback)
+  }
+
+  receiveSensorsErrorEvents (callback) {
+    this.sensorsChannel.on('error', callback)
   }
 }
 

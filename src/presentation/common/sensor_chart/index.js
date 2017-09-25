@@ -16,7 +16,9 @@ const SensorChart = ({ title, valueUnit, value, currentValue, data }) => {
       <div className='sensorChart'>
         <div className='header'>
           <h2>{title}</h2>
-          <h2>{currentValue}{valueUnit}</h2>
+          { currentValue &&
+            <h2>{currentValue}{valueUnit}</h2>
+          }
         </div>
         { data.labels.length === 0 &&
           <p>No hay datos</p>

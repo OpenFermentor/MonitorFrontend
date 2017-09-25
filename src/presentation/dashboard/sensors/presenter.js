@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import SensorChart from '../../common/sensor_chart'
 import Toolbar from '../../common/toolbar'
+import Alerts from '../alerts'
 import RoutineSelection from './routine_selection'
 
 export default class SensorsDashboardPresenter extends Component {
@@ -17,6 +18,8 @@ export default class SensorsDashboardPresenter extends Component {
           secondRightTitle='Calibar ph-metro'
           onClickSecondRight={this.props.onNavigateToCalibration}
         />
+
+        <Alerts />
 
         <div className='cardRow'>
           <RoutineSelection />
@@ -42,7 +45,7 @@ export default class SensorsDashboardPresenter extends Component {
         </div>
         <div className='cardRow'>
           <SensorChart
-            title='Agitación'
+            title='Transmitancia'
             value='density'
             valueUnit=''
             currentValue={this.props.lastValue.density}

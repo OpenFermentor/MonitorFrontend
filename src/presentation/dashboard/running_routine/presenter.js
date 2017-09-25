@@ -3,6 +3,7 @@ import './styles.css'
 
 import SensorChart from '../../common/sensor_chart'
 import NavigationChart from './navigation_chart'
+import Alerts from '../alerts'
 import Toolbar from '../../common/toolbar'
 
 export default class SensorsDashboardPresenter extends Component {
@@ -15,6 +16,8 @@ export default class SensorsDashboardPresenter extends Component {
           rightTitle='Finalizar'
           onClickRight={this.props.onRoutineStop}
         />
+
+        <Alerts />
 
         <div className='cardRow'>
           <SensorChart
@@ -36,9 +39,9 @@ export default class SensorsDashboardPresenter extends Component {
         </div>
         <div className='cardRow'>
           <SensorChart
-            title='Agitación'
+            title='Transmitancia'
             value='density'
-            valueUnit='rpm'
+            valueUnit='NTU'
             currentValue={0}
             data={this.props.timeline}
           />

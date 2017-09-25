@@ -3,6 +3,9 @@ import { eventChannel, END } from 'redux-saga'
 import {
   addReading
 } from '../actions'
+import {
+  addAlert
+} from '../../alert/actions'
 import moment from 'moment'
 
 export default function * performSensorChannelConnection (socketService) {
@@ -12,6 +15,7 @@ export default function * performSensorChannelConnection (socketService) {
     while (true) {
       yield take(routineChannel)
       yield fork(receiveSensorEvents, socketService)
+      yield fork(receiveErrorEvents, socketService)
     }
   } finally {
     console.log('error')
@@ -37,5 +41,18 @@ function * receiveSensorEvents (socketService) {
 
 const receiveStatusEventsChannel = socketService => eventChannel(emmiter => {
   socketService.receiveStatusEvents(reading => emmiter(reading))
+  return () => {}
+})
+
+function * receiveErrorEvents (socketService) {
+  const emmitedError = yield call(errorEventsEmitter, socketService)
+  while (true) {
+    let { message } = yield take(emmitedError)
+    yield put(addAlert({ message }))
+  }
+}
+
+const errorEventsEmitter = socketService => eventChannel(emmiter => {
+  socketService.receiveSensorsErrorEvents(error => emmiter(error))
   return () => {}
 })
