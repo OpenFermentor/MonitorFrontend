@@ -1,19 +1,18 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import { call, put } from 'redux-saga/effects'
 import {
   CREATE_ROUTINE_REQUEST,
   CREATE_ROUTINE_FAILURE,
   CREATE_ROUTINE_SUCCESS
-} from '../../../core/redux/routine/action_types'
+} from '../../../redux/routine/action_types'
 import {
   createRoutineRequest,
   createRoutineFailure,
   createRoutineSuccess
-} from '../../../core/redux/routine/actions'
-import reducer from '../../../core/redux/routine/redux'
-import { performCreateRoutine } from '../../../core/redux/routine/sagas/perform'
+} from '../../../redux/routine/actions'
+import reducer from '../../../redux/routine/redux'
+import { performCreateRoutine } from '../../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -46,7 +45,7 @@ describe('actions', () => {
 })
 
 describe('action status reducer', () => {
-  const DIRTY_STATE = Immutable({ fetching: false, error: 'error', runningRoutine: null })
+  const DIRTY_STATE = { fetching: false, error: 'error', runningRoutine: null }
 
   it('should handle CREATE_ROUTINE_REQUEST', () => {
     expect(
@@ -87,10 +86,10 @@ describe('action status reducer', () => {
 })
 
 describe('entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({}),
-    allIds: Immutable([])
-  })
+  const INITIAL_STATE = {
+    byId: {},
+    allIds: []
+  }
 
   it('should handle CREATE_ROUTINE_SUCCESS', () => {
     const routine = { id: 4, title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }

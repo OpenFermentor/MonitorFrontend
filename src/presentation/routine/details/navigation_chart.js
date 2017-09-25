@@ -5,11 +5,11 @@ import _ from 'lodash'
 
 import {
   selectSelectedRoutineNavigationTimeline
-} from '../../../core/redux/reading/selector'
+} from '../../../redux/reading/selector'
 
 import {
   setDataRange
-} from '../../../core/redux/routine/actions'
+} from '../../../redux/routine/actions'
 
 import TimelineNavigationChart from '../../common/timeline_navigation_chart'
 

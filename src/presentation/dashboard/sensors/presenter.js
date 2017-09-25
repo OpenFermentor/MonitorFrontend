@@ -14,6 +14,9 @@ export default class SensorsDashboardPresenter extends Component {
           title='En espera'
           rightTitle='Experimentos'
           onClickRight={this.props.onNavigateToExperiments}
+
+          secondRightTitle='Calibar ph-metro'
+          onClickSecondRight={this.props.onNavigateToCalibration}
         />
 
         <Alerts />

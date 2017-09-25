@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   selectIsRunningRoutine
-} from '../../core/redux/routine/selector'
+} from '../../redux/routine/selector'
 import SensorsDashboard from './sensors'
 import RunningRoutineDashboard from './running_routine'
 

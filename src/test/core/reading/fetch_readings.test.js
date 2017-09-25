@@ -1,20 +1,19 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import { call, put } from 'redux-saga/effects'
 import {
   FETCH_ROUTINE_READINGS_REQUEST,
   FETCH_ROUTINE_READINGS_FAILURE,
   FETCH_ROUTINE_READINGS_SUCCESS
-} from '../../../core/redux/reading/action_types'
+} from '../../../redux/reading/action_types'
 import {
   fetchRoutineReadingsRequest,
   fetchRoutineReadingsFailure,
   fetchRoutineReadingsSuccess
-} from '../../../core/redux/reading/actions'
-import reducer from '../../../core/redux/reading/redux'
-import routineReducer from '../../../core/redux/routine/redux'
-import { performFetchRoutineReadings } from '../../../core/redux/reading/sagas/perform'
+} from '../../../redux/reading/actions'
+import reducer from '../../../redux/reading/redux'
+import routineReducer from '../../../redux/routine/redux'
+import { performFetchRoutineReadings } from '../../../redux/reading/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {
@@ -49,7 +48,7 @@ describe('actions', () => {
 })
 
 describe('action status reducer', () => {
-  const DIRTY_STATE = Immutable({ fetching: false, error: 'error', runningRoutine: null })
+  const DIRTY_STATE = { fetching: false, error: 'error', runningRoutine: null }
 
   it('should handle FETCH_ROUTINE_READINGS_REQUEST', () => {
     expect(
@@ -90,13 +89,13 @@ describe('action status reducer', () => {
 })
 
 describe('entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
+  const INITIAL_STATE = {
+    byId: {
       1: { id: 1, routineId: 1 },
       2: { id: 2, routineId: 2 }
-    }),
-    allIds: Immutable([1, 2])
-  })
+    },
+    allIds: [1, 2]
+  }
 
   it('should handle FETCH_ROUTINE_READINGS_SUCCESS', () => {
     const routine = { id: 1 }
@@ -113,18 +112,18 @@ describe('entity reducer', () => {
         2: { id: 2, routineId: 2 },
         3: { id: 3, routineId: 1, temp: 10, insertedAt: 'today' }
       },
-      allIds: Immutable([2, 3])
+      allIds: [2, 3]
     })
   })
 })
 
 describe('routine entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
-      4: Immutable({ id: 4, readings: Immutable([5]) })
-    }),
-    allIds: Immutable([4])
-  })
+  const INITIAL_STATE = {
+    byId: {
+      4: { id: 4, readings: [5] }
+    },
+    allIds: [4]
+  }
 
   it('should handle FETCH_ROUTINE_READINGS_SUCCESS', () => {
     const routine = { id: 4 }

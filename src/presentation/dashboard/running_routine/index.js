@@ -4,14 +4,14 @@ import { withRouter } from 'react-router'
 
 import {
   selectRunningRoutineTitle
-} from '../../../core/redux/routine/selector'
+} from '../../../redux/routine/selector'
 import {
   selectRunningRoutineTimeline,
   selectRunningRoutineCurrentValue
-} from '../../../core/redux/reading/selector'
+} from '../../../redux/reading/selector'
 import {
   stopRunningRoutineRequest
-} from '../../../core/redux/routine/actions'
+} from '../../../redux/routine/actions'
 
 import RunningRoutineDashboardPresenter from './presenter'
 

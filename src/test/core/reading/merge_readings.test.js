@@ -1,14 +1,13 @@
 /* eslint-env jest */
 
-import Immutable from 'seamless-immutable'
 import {
   MERGE_READINGS
-} from '../../../core/redux/reading/action_types'
+} from '../../../redux/reading/action_types'
 import {
   mergeReadings
-} from '../../../core/redux/reading/actions'
-import reducer from '../../../core/redux/reading/redux'
-import routineReducer from '../../../core/redux/routine/redux'
+} from '../../../redux/reading/actions'
+import reducer from '../../../redux/reading/redux'
+import routineReducer from '../../../redux/routine/redux'
 
 import readings from './readings'
 
@@ -24,17 +23,17 @@ describe('actions', () => {
 })
 
 describe('entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
+  const INITIAL_STATE = {
+    byId: {
       0: readings[0],
       1: readings[1],
       2: readings[2],
       3: readings[3],
       4: readings[4],
       5: 'a reading'
-    }),
-    allIds: Immutable([1, 2, 3, 4, 5])
-  })
+    },
+    allIds: [1, 2, 3, 4, 5]
+  }
 
   it('should handle MERGE_READINGS', () => {
     const readings = [
@@ -58,20 +57,20 @@ describe('entity reducer', () => {
 })
 
 describe('routine entity reducer', () => {
-  const INITIAL_STATE = Immutable({
-    byId: Immutable({
+  const INITIAL_STATE = {
+    byId: {
       1: {
         id: 1,
-        readings: Immutable([0, 2, 4, 5])
+        readings: [0, 2, 4, 5]
       },
       2: {
         id: 2,
-        readings: Immutable([1, 3, 6])
+        readings: [1, 3, 6]
       },
       3: 'a routine'
-    }),
-    allIds: Immutable([1, 2, 3])
-  })
+    },
+    allIds: [1, 2, 3]
+  }
 
   it('should handle MERGE_READINGS', () => {
     const readings = [
@@ -87,15 +86,15 @@ describe('routine entity reducer', () => {
       byId: {
         1: {
           id: 1,
-          readings: Immutable([5, '0,2,4'])
+          readings: [5, '0,2,4']
         },
         2: {
           id: 2,
-          readings: Immutable([6, '1,3'])
+          readings: [6, '1,3']
         },
         3: 'a routine'
       },
-      allIds: Immutable([1, 2, 3])
+      allIds: [1, 2, 3]
     })
   })
 })
