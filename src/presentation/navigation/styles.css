@@ -1,0 +1,32 @@
+@value secondary from '../constants/colors.css';
+
+.mainNavigation {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 54px;
+  width: 100%;
+  background: secondary;
+}
+
+.mainNavigation .title {
+  padding-top: 14px;
+  color: white;
+}
+
+.mainNavigation a {
+  display: block;
+  color: white;
+  width: 144px;
+  height: 54px;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 18px;
+}
+
+.mainNavigation a.active {
+  background: rgba(0, 0, 0, .2)
+}

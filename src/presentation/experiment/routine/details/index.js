@@ -9,17 +9,17 @@ import RoutineDetailsPresenter from './presenter'
 import {
   selectSelectedRoutine,
   selectRoutineFetchingStatus
-} from '../../../redux/routine/selector'
+} from '../../../../redux/routine/selector'
 import {
   selectSelectedRoutineTimeline
-} from '../../../redux/reading/selector'
+} from '../../../../redux/reading/selector'
 import {
   destroyRoutineRequest,
   clearSelectedRoutine
-} from '../../../redux/routine/actions'
+} from '../../../../redux/routine/actions'
 import {
   fetchRoutineReadingsRequest
-} from '../../../redux/reading/actions'
+} from '../../../../redux/reading/actions'
 
 class RoutineDetails extends Component {
   componentWillMount () {

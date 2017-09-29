@@ -1,0 +1,46 @@
+@value primary, accent1 from './colors.css';
+@value fontFamily: BentonSans, Helvetica, Arial, sans-serif;
+@value baseSize: 14px;
+
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: fontFamily;  
+  color: accent1;
+  font-weight: 500;  
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p, a {
+  font-weight: 300;  
+  font-size: baseSize;
+}
+
+a {
+  color: primary;
+}
+
+*.light {
+  color: white
+}

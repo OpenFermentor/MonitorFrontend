@@ -1,0 +1,4 @@
+@value accent4 from './colors.css';
+
+@value border: 1px solid accent4;
+@value borderRadius: 2px;

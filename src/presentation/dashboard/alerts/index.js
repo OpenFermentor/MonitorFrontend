@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 
 import {
   selectPendingAlerts
-} from '../../../core/redux/alert/selector'
+} from '../../../redux/alert/selector'
 import {
   dismissAlert
-} from '../../../core/redux/alert/actions.js'
+} from '../../../redux/alert/actions.js'
 
 import AlertsPresenter from './presenter'
 

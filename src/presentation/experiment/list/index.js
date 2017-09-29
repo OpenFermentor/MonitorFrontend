@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import RoutinesPresenter from './presenter'
+import ExperimentsPresenter from './presenter'
 
 import {
   selectAllRoutines,
   selectRoutineFetchingStatus
-} from '../../redux/routine/selector'
+} from '../../../redux/routine/selector'
 import {
   fetchRoutinesRequest,
   setSelectedRoutine
-} from '../../redux/routine/actions'
+} from '../../../redux/routine/actions'
 
-class Routines extends Component {
+class Experiments extends Component {
   componentWillMount () {
     this.props.requestRoutines()
   }
@@ -24,7 +24,7 @@ class Routines extends Component {
 
   render () {
     return (
-      <RoutinesPresenter
+      <ExperimentsPresenter
         routines={this.props.routines}
         onSelectRoutine={this.onSelectRoutine.bind(this)}
         onCancel={this.props.history.goBack}
@@ -49,4 +49,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Routines)
+export default connect(mapStateToProps, mapDispatchToProps)(Experiments)

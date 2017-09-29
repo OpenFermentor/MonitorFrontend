@@ -1,0 +1,16 @@
+@value baseSize, fontFamily from '../../constants/typography.css';
+@value primary from '../../constants/colors.css';
+@value borderRadius from '../../constants/border.css';
+
+.button * {
+  font-family: fontFamily !important;
+  font-size: baseSize !important;
+  font-weight: 400 !important;
+  padding-top: 12px !important;
+  padding-bottom: 8px !important;
+  border-radius: borderRadius !important;
+}
+
+.button.primary {
+  background-color: primary !important;
+}

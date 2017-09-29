@@ -1,0 +1,23 @@
+@value horizontalContent from '../../constants/measures.css';
+
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.container.noPadding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.container.center {
+  width: horizontalContent;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}

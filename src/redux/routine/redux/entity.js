@@ -39,59 +39,19 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
 }
 
 const replaceRoutines = (state, { routines }) =>
-  replaceByIdEntries(state, routines.reverse().map(({
-    id,
-    title,
-    strain,
-    medium,
-    targetTemp,
-    targetPh,
-    targetCo2,
-    targetDensity,
-    estimatedTimeSeconds,
-    extraNotes
-  }) => ({
-    id,
-    title,
-    strain,
-    medium,
-    targetTemp,
-    targetPh,
-    targetCo2,
-    targetDensity,
-    estimatedTimeSeconds,
-    extraNotes,
+  replaceByIdEntries(state, routines.reverse().map(routine => ({
+    ...routine,
     readings: []
   })))
 
 const addRoutine = (state, { routine }) =>
   addByIdEntry(state, {
-    id: routine.id,
-    title: routine.title,
-    strain: routine.strain,
-    medium: routine.medium,
-    targetTemp: routine.targetTemp,
-    targetPh: routine.targetPh,
-    targetCo2: routine.targetCo2,
-    targetDensity: routine.targetDensity,
-    estimatedTimeSeconds: routine.estimatedTimeSeconds,
-    extraNotes: routine.extraNotes,
+    ...routine,
     readings: []
   })
 
 const updateRoutine = (state, { routine }) =>
-  updateByIdEntry(state, {
-    id: routine.id,
-    title: routine.title,
-    strain: routine.strain,
-    medium: routine.medium,
-    targetTemp: routine.targetTemp,
-    targetPh: routine.targetPh,
-    targetCo2: routine.targetCo2,
-    targetDensity: routine.targetDensity,
-    estimatedTimeSeconds: routine.estimatedTimeSeconds,
-    extraNotes: routine.extraNotes
-  })
+  updateByIdEntry(state, routine)
 
 const removeRoutine = (state, { routine }) =>
   omit(state, routine.id)

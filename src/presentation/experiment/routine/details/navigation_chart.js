@@ -5,13 +5,13 @@ import _ from 'lodash'
 
 import {
   selectSelectedRoutineNavigationTimeline
-} from '../../../redux/reading/selector'
+} from '../../../../redux/reading/selector'
 
 import {
   setDataRange
-} from '../../../redux/routine/actions'
+} from '../../../../redux/routine/actions'
 
-import TimelineNavigationChart from '../../common/timeline_navigation_chart'
+import TimelineNavigationChart from '../../../common/timeline_navigation_chart'
 
 class NavigationChart extends Component {
   onRangeChange ({ start, end }) {
