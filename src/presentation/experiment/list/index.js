@@ -4,12 +4,15 @@ import { connect } from 'react-redux'
 import ExperimentsPresenter from './presenter'
 
 import {
-  selectAllRoutines,
+  selectRoutines,
+  selectSearchInProgress,
   selectRoutineFetchingStatus
 } from '../../../redux/routine/selector'
 import {
   fetchRoutinesRequest,
-  setSelectedRoutine
+  setSelectedRoutine,
+  clearSearchTerm,
+  setSearchTerm
 } from '../../../redux/routine/actions'
 
 class Experiments extends Component {
@@ -19,14 +22,25 @@ class Experiments extends Component {
 
   onSelectRoutine (routine) {
     this.props.setSelectedRoutine(routine)
-    this.props.history.push(`/routines/detail`)
+    this.props.history.push(`/experiments/${routine.id}`)
+  }
+
+  onSearch (event, { value }) {
+    if (!value) {
+      this.props.clearSearchTerm()
+    } else {
+      this.props.setSearchTerm(value)
+    }
   }
 
   render () {
     return (
       <ExperimentsPresenter
         routines={this.props.routines}
+        searchInProgress={this.props.searchInProgress}
+
         onSelectRoutine={this.onSelectRoutine.bind(this)}
+        onSearch={this.onSearch.bind(this)}
         onCancel={this.props.history.goBack}
       />
     )
@@ -34,18 +48,19 @@ class Experiments extends Component {
 }
 
 const mapStateToProps = state => {
-  const { fetching, error } = selectRoutineFetchingStatus(state)
   return {
-    routines: selectAllRoutines(state),
-    fetching,
-    error
+    ...selectRoutineFetchingStatus(state),
+    searchInProgress: selectSearchInProgress(state),
+    routines: selectRoutines(state)
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     requestRoutines: () => dispatch(fetchRoutinesRequest()),
-    setSelectedRoutine: routine => dispatch(setSelectedRoutine(routine))
+    setSelectedRoutine: routine => dispatch(setSelectedRoutine(routine)),
+    clearSearchTerm: () => dispatch(clearSearchTerm()),
+    setSearchTerm: searchTerm => dispatch(setSearchTerm(searchTerm))
   }
 }
 

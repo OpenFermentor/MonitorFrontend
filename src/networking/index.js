@@ -70,6 +70,10 @@ class HttpService {
     return this._get('routines')
   }
 
+  getRoutine (routine) {
+    return this._get(`routines/${routine.id}`)
+  }
+
   createRoutine (routine) {
     return this._post('routines', { routine })
   }

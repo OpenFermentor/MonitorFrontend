@@ -1,0 +1,10 @@
+@value accent2 from '../../constants/colors.css';
+
+.message {
+  width: 100%;
+  text-align: center;
+}
+
+.message h1.dimmed {
+  color: accent2;
+}

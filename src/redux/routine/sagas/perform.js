@@ -2,6 +2,8 @@ import { call, put } from 'redux-saga/effects'
 import {
   fetchRoutinesFailure,
   fetchRoutinesSuccess,
+  fetchFailure,
+  fetchSuccess,
   createRoutineFailure,
   createRoutineSuccess,
   updateRoutineFailure,
@@ -20,6 +22,15 @@ export function * performFetchRoutines (httpService) {
     yield put(fetchRoutinesSuccess(response.data.data))
   } catch (error) {
     yield put(fetchRoutinesFailure(error))
+  }
+}
+
+export function * performFetchRoutine (httpService, { routine }) {
+  try {
+    const response = yield call([httpService, 'getRoutine'], routine)
+    yield put(fetchSuccess(response.data.data))
+  } catch (error) {
+    yield put(fetchFailure(error))
   }
 }
 

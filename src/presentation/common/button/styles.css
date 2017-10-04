@@ -5,7 +5,7 @@
 .button * {
   font-family: fontFamily !important;
   font-size: baseSize !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   padding-top: 12px !important;
   padding-bottom: 8px !important;
   border-radius: borderRadius !important;

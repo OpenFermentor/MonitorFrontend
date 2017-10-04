@@ -12,11 +12,12 @@ const MainNavigation = ({ routes }) => (
           <h3 className='title'>OpenFermentor</h3>
         </Grid.Column>
 
-        { routes.map(({ title, path }, index) => (
+        { routes.map(({ title, exact, path }, index) => (
           <Grid.Column width={4}>
             <NavLink
               key={index}
               to={path}
+              exact={exact}
               activeClassName='active'
             >
               {title}

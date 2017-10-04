@@ -4,8 +4,9 @@ import { Route } from 'react-router-dom'
 import LocalToolbar from '../common/toolbar/local'
 
 import Experiments from './list'
-import Experiment from './routine/details'
-import ExperimentAnalysis from './routine/details/navigation_chart'
+import Experiment from './details'
+import ExperimentAnalysis from './analysis'
+import ExperimentCreation from './upsert'
 
 const ROUTES = match => [{
   path: match.url,
@@ -39,6 +40,8 @@ const ExperimentNavigation = ({ match }) => {
           component={component}
         />
       ))}
+
+      <Route path={match.url} component={ExperimentCreation} />
 
     </div>
   )

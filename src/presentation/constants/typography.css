@@ -2,6 +2,11 @@
 @value fontFamily: BentonSans, Helvetica, Arial, sans-serif;
 @value baseSize: 14px;
 
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
 h1, h2, h3, h4, h5, h6, p, a {
   font-family: fontFamily;  
   color: accent1;

@@ -1,3 +1,5 @@
+@value primary from '../../../../constants/colors.css';
+
 .dragabbleHandlerAnchor {
   top: 35px;
   position: absolute;
@@ -6,14 +8,14 @@
 .dragabbleHandlerAnchor .handler {
   width: 24px;
   height: 24px;
-  background: #F27C21;
+  background: primary;
   border-radius: 12px;
   padding-top: 2px;
   padding-left: 2px;
 }
 
 .lockedAnchor {
-  background: #F27C21;
+  background: primary;
   height: 90px;
   width: 5px;
   margin-top: -35px;

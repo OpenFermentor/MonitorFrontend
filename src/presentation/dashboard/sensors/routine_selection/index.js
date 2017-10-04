@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import RoutineSelectionPresenter from './presenter'
 
 import {
-  selectAllRoutines,
+  selectRoutines,
   selectRoutineFetchingStatus
 } from '../../../../redux/routine/selector'
 import {
@@ -34,7 +34,7 @@ class RoutineSelection extends Component {
 const mapStateToProps = state => {
   const { fetching, error } = selectRoutineFetchingStatus(state)
   return {
-    routines: selectAllRoutines(state),
+    routines: selectRoutines(state),
     fetching,
     error
   }

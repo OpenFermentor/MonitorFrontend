@@ -6,6 +6,7 @@ const entity = state => state.entities.routine
 const actionStatus = state => state.actionStatus.routine
 
 export const selectRoutineFetchingStatus = createSelector(actionStatus, ({ fetching, error }) => ({ fetching, error }))
+export const selectSearchInProgress = createSelector(actionStatus, ({ searchTerm }) => !!searchTerm)
 
 export const selectIsRunningRoutine = createSelector(actionStatus, ({ runningRoutine }) => !!runningRoutine)
 
@@ -38,11 +39,13 @@ export const selectRunningRoutineLastValue = createSelector(
     _.last(routine.byId[actionStatus.runningRoutine].readings) || {}
 )
 
-export const selectAllRoutines = createSelector(
+export const selectRoutines = createSelector(
   entity,
-  routine => {
-    return routine.allIds.map(id => routine.byId[id])
-  }
+  actionStatus,
+  ({ byId, allIds }, { searchTerm }) =>
+    allIds.map(id => byId[id]).filter(({ title }) =>
+      !searchTerm || title.toLowerCase().search(searchTerm) > -1
+    )
 )
 
 export const selectSelectedRoutine = createSelector(

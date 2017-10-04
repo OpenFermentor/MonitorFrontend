@@ -13,6 +13,7 @@
     "lodash": "^4.17.4",
     "memoizee": "^0.4.9",
     "moment": "^2.18.1",
+    "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-chartjs": "^0.8.0",
     "react-dom": "^15.6.1",

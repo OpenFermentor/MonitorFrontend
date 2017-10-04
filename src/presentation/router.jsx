@@ -8,11 +8,12 @@ import PhCalibration from './calibration/ph'
 import Experiment from './experiment'
 
 const ROUTES = [{
-  path: '/dashboard',
+  path: '/',
+  exact: true,
   component: Dashboard,
   title: 'En curso'
 }, {
-  path: '/experiment',
+  path: '/experiments',
   component: Experiment,
   title: 'Experimentos'
 }, {
@@ -28,10 +29,11 @@ export default class Router extends Component {
         <div>
           <MainNavigation routes={ROUTES} />
 
-          { ROUTES.map(({ path, component }, index) => (
+          { ROUTES.map(({ path, component, exact }, index) => (
             <Route
               key={index}
               path={path}
+              exact={exact}
               component={component}
             />
           ))}

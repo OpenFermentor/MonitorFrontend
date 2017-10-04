@@ -6,6 +6,8 @@ import {
   STOP_ROUTINE_REQUEST,
   START_ROUTINE_REQUEST,
   FETCH_ROUTINES_REQUEST,
+  SET_SELECTED_ROUTINE,
+  FETCH_REQUEST,
   CREATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_REQUEST,
   DESTROY_ROUTINE_REQUEST
@@ -16,7 +18,8 @@ import {
   performFetchRoutines,
   performCreateRoutine,
   performUpdateRoutine,
-  performRemoveRoutine
+  performRemoveRoutine,
+  performFetchRoutine
 } from './perform'
 import performRoutineChannelConnection from './perform_routine_channel_connection'
 
@@ -25,6 +28,8 @@ export default [
   takeEvery(STOP_ROUTINE_REQUEST, performStopRoutine, httpService),
   takeEvery(START_ROUTINE_REQUEST, performStartRoutine, httpService),
   takeEvery(FETCH_ROUTINES_REQUEST, performFetchRoutines, httpService),
+  takeEvery(FETCH_REQUEST, performFetchRoutine, httpService),
+  takeEvery(SET_SELECTED_ROUTINE, performFetchRoutine, httpService),
   takeEvery(CREATE_ROUTINE_REQUEST, performCreateRoutine, httpService),
   takeEvery(UPDATE_ROUTINE_REQUEST, performUpdateRoutine, httpService),
   takeEvery(DESTROY_ROUTINE_REQUEST, performRemoveRoutine, httpService)

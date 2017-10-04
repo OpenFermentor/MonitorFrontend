@@ -1,30 +1,29 @@
 import React from 'react'
-import {
-  Segment,
-  Message
-} from 'semantic-ui-react'
 import moment from 'moment'
-import { Link } from 'react-router-dom'
 import './styles.css'
 
 import Table from '../../common/table'
 import Screen from '../../common/screen'
 import Container from '../../common/container'
-import Button from '../../common/button'
 import Search from '../../common/search'
+import Message from '../../common/message'
+import ButtonLink from '../../common/button/link'
 
-const ExperimentsPresenter = ({ routines, onSelectRoutine, onCancel, error }) => {
+const ExperimentsPresenter = ({ routines, searchInProgress, error, onSelectRoutine, onSearch, onCancel }) => {
+  const emptyRoutines = routines.length === 0 && !searchInProgress
   return (
     <Screen>
 
       <Container row>
-        <Search placeholder='Buscar experimento' />
-        <Button primary>Crear experimento</Button>
+        { !emptyRoutines &&
+          <Search placeholder='Buscar experimento' onSearchChange={onSearch} open={false} />
+        }
+        <ButtonLink primary to='/experiments' queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
       </Container>
 
       <Container>
         { routines.length > 0 &&
-          <Table>
+          <Table selectable>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Nombre</Table.HeaderCell>
@@ -35,7 +34,7 @@ const ExperimentsPresenter = ({ routines, onSelectRoutine, onCancel, error }) =>
 
             <Table.Body>
               { routines.map(routine => (
-                <Table.Row key={routine.id}>
+                <Table.Row key={routine.id} onClick={() => onSelectRoutine(routine)}>
                   <Table.Cell>{routine.title}</Table.Cell>
                   <Table.Cell>{routine.strain}</Table.Cell>
                   <Table.Cell>{(routine.startedAt && (moment(routine.startedAt).format('DD/MM/YYYY HH:mm'))) || '-'}</Table.Cell>
@@ -50,16 +49,23 @@ const ExperimentsPresenter = ({ routines, onSelectRoutine, onCancel, error }) =>
         { error &&
           <Message
             error
-            header={error.message}
+            title={error.message}
           />
         }
 
-        { routines.length === 0 &&
-          <Segment textAlign='center' padded='very'>
-            <h1>No hay experimentos</h1>
-            <Link to='/routines/create'>Crear experimento</Link>
-          </Segment>
+        { emptyRoutines &&
+          <Message
+            title='No hay experimentos'
+          />
         }
+
+        { routines.length === 0 && searchInProgress &&
+          <Message
+            title='Sin resultados'
+            dimmed
+          />
+        }
+
       </Container>
 
     </Screen>

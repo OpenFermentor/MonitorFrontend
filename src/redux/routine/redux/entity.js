@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import {
   FETCH_ROUTINES_SUCCESS,
+  FETCH_SUCCESS,
   CREATE_ROUTINE_SUCCESS,
   UPDATE_ROUTINE_SUCCESS,
   DESTROY_ROUTINE_SUCCESS
@@ -28,6 +29,7 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case FETCH_ROUTINES_SUCCESS: return replaceRoutines(state, action)
     case CREATE_ROUTINE_SUCCESS: return addRoutine(state, action)
     case UPDATE_ROUTINE_SUCCESS: return updateRoutine(state, action)
+    case FETCH_SUCCESS: return updateRoutine(state, action)
     case DESTROY_ROUTINE_SUCCESS: return removeRoutine(state, action)
     case readingActionTypes.FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
 
@@ -51,7 +53,10 @@ const addRoutine = (state, { routine }) =>
   })
 
 const updateRoutine = (state, { routine }) =>
-  updateByIdEntry(state, routine)
+  updateByIdEntry(state, {
+    ...routine,
+    readings: (state[routine.id] || {}).readings || []
+  })
 
 const removeRoutine = (state, { routine }) =>
   omit(state, routine.id)
