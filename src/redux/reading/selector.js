@@ -37,7 +37,7 @@ export const selectRunningRoutineCurrentValue = createSelector(
     if (readings.length === 0) {
       return null
     }
-    return byId[_.last(readings)]
+    return _.last(readings)
   }
 )
 

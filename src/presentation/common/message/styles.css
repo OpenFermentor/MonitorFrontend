@@ -2,9 +2,19 @@
 
 .message {
   width: 100%;
-  text-align: center;
+}
+
+.message.centerVertical {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .message h1.dimmed {
   color: accent2;
+}
+
+.message .body {
+  text-align: center;  
 }

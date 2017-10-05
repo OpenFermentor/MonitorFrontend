@@ -13,9 +13,8 @@ const MainNavigation = ({ routes }) => (
         </Grid.Column>
 
         { routes.map(({ title, exact, path }, index) => (
-          <Grid.Column width={4}>
+          <Grid.Column width={4} key={index}>
             <NavLink
-              key={index}
               to={path}
               exact={exact}
               activeClassName='active'

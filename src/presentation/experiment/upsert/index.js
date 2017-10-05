@@ -8,13 +8,11 @@ import {
   selectRoutineFetchingStatus,
   selectSelectedRoutine
 } from '../../../redux/routine/selector'
+
 import {
-  selectSelectedRoutineTimeline
-} from '../../../redux/reading/selector'
-import {
-  fetchRequest,
   updateRoutineRequest,
-  createRoutineRequest
+  createRoutineRequest,
+  destroyRoutineRequest
 } from '../../../redux/routine/actions'
 
 class UpsertExperiment extends Component {
@@ -38,10 +36,15 @@ class UpsertExperiment extends Component {
   onSubmit (routine) {
     this.setState({ submitting: true })
     if (this.props.routine) {
-      this.props.requestUpdateRoutine(routine)
+      this.props.requestUpdate(routine)
     } else {
-      this.props.requestCreateRoutine(routine)
+      this.props.requestCreate(routine)
     }
+  }
+
+  onDestroy () {
+    this.setState({ submitting: true })
+    this.props.requestDestroy(this.props.routine)
   }
 
   shouldOpenModal () {
@@ -59,6 +62,7 @@ class UpsertExperiment extends Component {
         error={this.props.error}
         routine={this.props.routine}
         onCancel={() => this.props.history.goBack()}
+        onDestroy={this.onDestroy.bind(this)}
         onSubmit={this.onSubmit.bind(this)}
       />
     )
@@ -67,15 +71,14 @@ class UpsertExperiment extends Component {
 
 const mapStateToProps = state => ({
   ...selectRoutineFetchingStatus(state),
-  routine: selectSelectedRoutine(state),
-  timeline: selectSelectedRoutineTimeline(state)
+  routine: selectSelectedRoutine(state)
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestRoutine: routine => dispatch(fetchRequest(routine)),
-    requestUpdateRoutine: routine => dispatch(updateRoutineRequest(routine)),
-    requestCreateRoutine: routine => dispatch(createRoutineRequest(routine))
+    requestDestroy: routine => dispatch(destroyRoutineRequest(routine)),
+    requestUpdate: routine => dispatch(updateRoutineRequest(routine)),
+    requestCreate: routine => dispatch(createRoutineRequest(routine))
   }
 }
 

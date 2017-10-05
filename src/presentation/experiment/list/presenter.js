@@ -18,7 +18,7 @@ const ExperimentsPresenter = ({ routines, searchInProgress, error, onSelectRouti
         { !emptyRoutines &&
           <Search placeholder='Buscar experimento' onSearchChange={onSearch} open={false} />
         }
-        <ButtonLink primary to='/experiments' queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
+        <ButtonLink primary queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
       </Container>
 
       <Container>

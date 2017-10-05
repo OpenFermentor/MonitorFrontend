@@ -1,0 +1,13 @@
+@value secondary from '../../constants/colors.css';
+
+.modal .header {
+  background: secondary !important;
+}
+
+.modal .header h4 {
+  margin-bottom: 0;
+}
+
+.modal .header .icon {
+  color: white;
+}

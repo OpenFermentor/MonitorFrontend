@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { Modal, Message, Grid, Form, Divider } from 'semantic-ui-react'
+import { Message, Grid, Form, Divider } from 'semantic-ui-react'
 import moment from 'moment'
 import './styles.css'
+
 import TextInput from '../../common/text_input'
 import TextArea from '../../common/text_area'
 import Button from '../../common/button'
 import Container from '../../common/container'
+import Modal from '../../common/modal'
 
 export default class UpsertRoutine extends Component {
   constructor (props) {
@@ -37,8 +39,12 @@ export default class UpsertRoutine extends Component {
 
   render () {
     return (
-      <Modal open onClose={this.props.onCancel} size='large'>
-        <Modal.Header>{this.props.routine ? 'Editar rutina' : 'Crear Rutina'}</Modal.Header>
+      <Modal
+        open
+        onClose={this.props.onCancel}
+        size='large'
+        title={this.props.routine ? 'Editar rutina' : 'Crear Rutina'}
+      >
         <Modal.Content scrolling>
           <Modal.Description>
             { this.props.error && this.props.error.type === 'String' &&
@@ -85,7 +91,7 @@ export default class UpsertRoutine extends Component {
                 name='extraNotes'
                 error={this.props.error}
                 label='Notas adicionales'
-                value={this.state.extraNotes}
+                value={this.state.extraNotes || ''}
                 onChange={extraNotes => this.setState({ extraNotes })}
               />
 
@@ -206,8 +212,10 @@ export default class UpsertRoutine extends Component {
         </Modal.Content>
 
         <Modal.Actions>
-          <Container row end noPadding>
-            <Button onClick={this.props.onCancel}>Cancelar</Button>
+          <Container row end={!this.props.routine} noPadding>
+            { this.props.routine &&
+              <Button negative onClick={this.props.onDestroy}>Eliminar</Button>
+            }
             <Button onClick={this.onSubmit.bind(this)} primary type='submit'>Guardar</Button>
           </Container>
         </Modal.Actions>

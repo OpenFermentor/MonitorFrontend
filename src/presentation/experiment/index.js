@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import LocalToolbar from '../common/toolbar/local'
+import Toolbar from '../common/toolbar'
 
 import Experiments from './list'
 import Experiment from './details'
@@ -28,7 +28,7 @@ const ExperimentNavigation = ({ match }) => {
   const routes = ROUTES(match)
   return (
     <div>
-      <LocalToolbar
+      <Toolbar
         breadcrumb={routes}
       />
 

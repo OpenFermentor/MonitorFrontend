@@ -10,23 +10,17 @@ const MAGNITUDE_COLORS = {
   density: '#50AEF5'
 }
 
-const SensorChart = ({ timeline, magnitudes }) => {
+const SensorChart = ({ timeline, magnitudes, height = 60 }) => {
   return (
     <Container>
       <div className='sensorChart'>
-        {/* <div className='header'>
-          <h2>{title}</h2>
-          { currentValue &&
-            <h2>{currentValue}{valueUnit}</h2>
-          }
-        </div> */}
         { (!timeline || timeline.labels.length === 0) &&
           <p>No hay datos</p>
         }
         {
           timeline && timeline.labels.length > 0 &&
           <LineChart
-            height={60}
+            height={height}
             labels={timeline.labels}
             datasets={magnitudes.map(magnitude => ({ data: timeline[magnitude], stroke: MAGNITUDE_COLORS[magnitude] }))}
           />

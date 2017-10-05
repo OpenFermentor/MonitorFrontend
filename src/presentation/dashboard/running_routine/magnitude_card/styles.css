@@ -1,0 +1,18 @@
+@value border, borderRadius from '../../../constants/border.css';
+@value accent5 from '../../../constants/colors.css';
+
+.magnitudeChart {
+  border: border;
+  border-radius: borderRadius;
+  padding: 20px;
+}
+
+.magnitudeChart:hover {
+  background: accent5;
+}
+
+.magnitudeChart h1 {
+  font-size: 50px;
+  font-weight: 300;
+  text-align: center;
+}

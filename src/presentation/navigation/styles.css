@@ -30,3 +30,12 @@
 .mainNavigation a.active {
   background: rgba(0, 0, 0, .2)
 }
+
+.mainNavigation a:hover {
+  background: rgba(0, 0, 0, .1);
+  color: white;
+}
+
+.mainNavigation a.active:hover {
+  background: rgba(0, 0, 0, .2)  
+}

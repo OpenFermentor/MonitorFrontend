@@ -1,55 +1,102 @@
 import React, { Component } from 'react'
+import { Grid } from 'semantic-ui-react'
 import './styles.css'
 
 import SensorChart from '../../common/sensor_chart'
-import NavigationChart from './navigation_chart'
 import Alerts from '../alerts'
 import Toolbar from '../../common/toolbar'
+import Screen from '../../common/screen'
+import Container from '../../common/container'
+
+import MagnitudeCard from './magnitude_card'
+import ExpandedMagnitudeModal from './expanded_magnitude_modal'
+
+const magnitudeTitle = magnitude => {
+  switch (magnitude) {
+    case 'temp': return 'Temperatura'
+    case 'ph': return 'pH'
+    case 'density': return 'Transmitancia'
+  }
+}
 
 export default class SensorsDashboardPresenter extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      expandedMagnitude: false
+    }
+  }
+
+  onClickMagnitude (magnitude) {
+    this.setState({ expandedMagnitude: magnitude })
+  }
+
+  clearExpandedMagnitude () {
+    this.setState({ expandedMagnitude: null })
+  }
+
   render () {
     return (
-      <div className='dashboard'>
+      <Screen>
 
         <Toolbar
-          title={this.props.routineTitle}
-          rightTitle='Finalizar'
-          onClickRight={this.props.onRoutineStop}
+          title={this.props.routine.title}
+          rightActionTitle='Finalizar'
+          onClickRightAction={this.props.onRoutineStop}
         />
+
+        { this.state.expandedMagnitude &&
+          <ExpandedMagnitudeModal
+            title={magnitudeTitle(this.state.expandedMagnitude)}
+            magnitude={this.state.expandedMagnitude}
+            timeline={this.props.timeline}
+            onClose={this.clearExpandedMagnitude.bind(this)}
+          />
+        }
 
         <Alerts />
 
-        <div className='cardRow'>
-          <SensorChart
-            title='Temperatura'
-            value='temp'
-            valueUnit='ºC'
-            currentValue={this.props.currentValue.temp}
-            data={this.props.timeline}
-          />
-        </div>
-        <div className='cardRow'>
-          <SensorChart
-            title='pH'
-            value='ph'
-            valueUnit=''
-            currentValue={0}
-            data={this.props.timeline}
-          />
-        </div>
-        <div className='cardRow'>
-          <SensorChart
-            title='Transmitancia'
-            value='density'
-            valueUnit='NTU'
-            currentValue={0}
-            data={this.props.timeline}
-          />
-        </div>
+        <Container>
+          <Grid>
+            <Grid.Column width={5}>
+              <MagnitudeCard
+                title={magnitudeTitle('temp')}
+                valueUnit='ºC'
+                targetValue={this.props.routine.targetTemp}
+                currentValue={this.props.currentValue.temp}
+                onClick={() => this.onClickMagnitude('temp')}
+              />
+            </Grid.Column>
+            <Grid.Column width={6}>
+              <MagnitudeCard
+                title={magnitudeTitle('ph')}
+                valueUnit='pH'
+                targetValue={this.props.routine.targetPh}
+                currentValue={this.props.currentValue.ph}
+                onClick={() => this.onClickMagnitude('ph')}
+                />
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <MagnitudeCard
+                title={magnitudeTitle('density')}
+                valueUnit='NTU'
+                targetValue={this.props.routine.targetDensity}
+                currentValue={this.props.currentValue.density}
+                onClick={() => this.onClickMagnitude('density')}
+                />
+            </Grid.Column>
+          </Grid>
+        </Container>
 
-        <NavigationChart />
+        { this.props.timeline &&
+          <SensorChart
+            magnitudes={['temp', 'ph', 'density']}
+            timeline={this.props.timeline}
+            height={140}
+          />
+        }
 
-      </div>
+      </Screen>
     )
   }
 }

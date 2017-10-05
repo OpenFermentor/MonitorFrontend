@@ -11,12 +11,23 @@ import {
   selectSelectedRoutineTimeline
 } from '../../../redux/reading/selector'
 import {
-  fetchRequest
+  fetchRequest,
+  startRoutineRequest
 } from '../../../redux/routine/actions'
 
 class Experiment extends Component {
   componentWillMount () {
     this.props.requestRoutine(this.props.match.params)
+  }
+
+  componentWillReceiveProps ({ routine = {} }) {
+    if (this.props.routine && !this.props.routine.started && routine.started) {
+      this.props.history.push('/')
+    }
+  }
+
+  onStart () {
+    this.props.startRoutine(this.props.routine)
   }
 
   render () {
@@ -27,7 +38,7 @@ class Experiment extends Component {
         routine={this.props.routine}
         timeline={this.props.timeline}
 
-        onAnalyzeData={() => this.props.history.push(`/experiments/${this.props.routine.id}/analysis`)}
+        onStart={this.onStart.bind(this)}
       />
     )
   }
@@ -43,7 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestRoutine: routine => dispatch(fetchRequest(routine))
+    requestRoutine: routine => dispatch(fetchRequest(routine)),
+    startRoutine: routine => dispatch(startRoutineRequest(routine))
   }
 }
 

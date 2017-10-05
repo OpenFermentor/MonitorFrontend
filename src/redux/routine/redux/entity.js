@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import {
   FETCH_ROUTINES_SUCCESS,
   FETCH_SUCCESS,
+  START_ROUTINE_SUCCESS,
   CREATE_ROUTINE_SUCCESS,
   UPDATE_ROUTINE_SUCCESS,
   DESTROY_ROUTINE_SUCCESS
@@ -15,10 +16,9 @@ import {
   updateByIdEntry,
   replaceAllEntriesIds,
   addEntryId,
-  updateByIdEntries,
   removeEntryId
 } from '../../helper'
-import { groupBy, flatten, omit } from 'lodash'
+import { omit } from 'lodash'
 
 const INITIAL_STATE_BY_ID = {}
 
@@ -30,11 +30,11 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case CREATE_ROUTINE_SUCCESS: return addRoutine(state, action)
     case UPDATE_ROUTINE_SUCCESS: return updateRoutine(state, action)
     case FETCH_SUCCESS: return updateRoutine(state, action)
+    case START_ROUTINE_SUCCESS: return startRoutine(state, action)
     case DESTROY_ROUTINE_SUCCESS: return removeRoutine(state, action)
     case readingActionTypes.FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
 
     case readingActionTypes.ADD_READING: return addRoutineReading(state, action)
-    case readingActionTypes.MERGE_READINGS: return mergeRoutinesReadings(state, action)
 
     default: return state
   }
@@ -58,6 +58,12 @@ const updateRoutine = (state, { routine }) =>
     readings: (state[routine.id] || {}).readings || []
   })
 
+const startRoutine = (state, { routine }) =>
+  updateByIdEntry(state, {
+    ...routine,
+    started: true
+  })
+
 const removeRoutine = (state, { routine }) =>
   omit(state, routine.id)
 
@@ -73,20 +79,6 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
     id: routine.id,
     readings: replaceAllEntriesIds(state[routine.id].readings, readings)
   })
-
-const mergeRoutinesReadings = (state, { readings }) => {
-  const readingsByRoutine = Object.entries(groupBy(readings, 'routineId'))
-  return updateByIdEntries(state, readingsByRoutine.map(([routineIdKey, readings]) => {
-    const readingsIds = flatten(readings.map(({ readingsIds }) => readingsIds))
-    const routineId = parseInt(routineIdKey)
-    return {
-      id: routineId,
-      readings: state[routineId].readings
-        .filter(readingId => !readingsIds.includes(readingId))
-        .concat(readings.map(({ readingsIds }) => readingsIds.toString()))
-    }
-  }))
-}
 
 const INITIAL_STATE_ALL_IDS = []
 

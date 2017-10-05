@@ -14,14 +14,23 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
   const loopDelayInMinutes = routine && moment.duration(routine.loopDelay).minutes()
   return (
     <Screen loading={fetching}>
+      <Container>
+        { error &&
+          <Message
+            title={error.message}
+          />
+        }
+      </Container>
+
       { routine &&
         <div>
           <Container row>
             <h1>{routine.title}</h1>
             <Container row>
-              <ButtonLink primary to={`/experiments/${routine.id}`} queryParams={{ showModal: 'true' }}>Editar</ButtonLink>
-
-              <Button primary onClick={onStart}>Comenzar</Button>
+              <ButtonLink primary queryParams={{ showModal: 'true' }}>Editar</ButtonLink>
+              { !routine.started &&
+                <Button primary onClick={onStart}>Comenzar</Button>
+              }
             </Container>
           </Container>
 
@@ -50,7 +59,7 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
             <Container row>
               <h1>Ejecución</h1>
               { routine.startedDate &&
-                <Button primary onClick={onAnalyzeData}>Analizar datos</Button>
+                <ButtonLink primary pathname={`/experiments/${routine.id}/analysis`}>Analizar datos</ButtonLink>
               }
             </Container>
 
@@ -103,7 +112,7 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
 
             { routine.readings.length > 0 &&
               <SensorChart
-                magnitudes={['temp', 'pH', 'density', 'co2']}
+                magnitudes={['temp', 'ph', 'density', 'co2']}
                 timeline={timeline}
               />
             }
@@ -112,14 +121,6 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
 
         </div>
       }
-
-      <Container>
-        { error &&
-          <Message
-            title={error.message}
-          />
-        }
-      </Container>
 
     </Screen>
   )

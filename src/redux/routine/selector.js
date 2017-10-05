@@ -10,11 +10,11 @@ export const selectSearchInProgress = createSelector(actionStatus, ({ searchTerm
 
 export const selectIsRunningRoutine = createSelector(actionStatus, ({ runningRoutine }) => !!runningRoutine)
 
-export const selectRunningRoutineTitle = createSelector(
+export const selectRunningRoutine = createSelector(
   entity,
   actionStatus,
   (routine, actionStatus) =>
-    routine.byId[actionStatus.runningRoutine].title
+    routine.byId[actionStatus.runningRoutine]
 )
 
 export const selectRunningRoutineReadings = createSelector(

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import queryString from 'query-string'
 import Button from '../index'
 
-const ButtonLink = ({ children, to, queryParams, ...props }) => {
+const ButtonLink = ({ children, pathname, queryParams = '', ...props }) => {
   return (
-    <Link to={{ to, search: queryString.stringify(queryParams) }}>
+    <Link to={{ pathname, search: queryString.stringify(queryParams) }}>
       <Button {...props}>{children}</Button>
     </Link>
   )

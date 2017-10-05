@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import {
-  selectRunningRoutineTitle
+  selectRunningRoutine
 } from '../../../redux/routine/selector'
 import {
   selectRunningRoutineTimeline,
@@ -19,7 +19,7 @@ class RunningRoutineDashboard extends Component {
   render () {
     return (
       <RunningRoutineDashboardPresenter
-        routineTitle={this.props.routineTitle}
+        routine={this.props.routine}
         currentValue={this.props.currentValue || {}}
         timeline={this.props.timeline}
         onPressSelectRoutine={() => this.props.history.push('/routines/select')}
@@ -31,7 +31,7 @@ class RunningRoutineDashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  routineTitle: selectRunningRoutineTitle(state),
+  routine: selectRunningRoutine(state),
   currentValue: selectRunningRoutineCurrentValue(state),
   timeline: selectRunningRoutineTimeline(state)
 })
