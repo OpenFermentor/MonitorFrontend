@@ -10,7 +10,6 @@ import phCalibrationReducer from './calibration/ph/redux'
 const entities = combineReducers({
   routine: routineReducer.entity,
   reading: readingReducer.entity,
-  sensors: sensorsReducer.entity,
   alert: alertReducer.entity
 })
 
@@ -18,6 +17,7 @@ const actionStatus = combineReducers({
   routine: routineReducer.actionStatus,
   reading: readingReducer.actionStatus,
   boot: bootReducer.actionStatus,
+  sensors: sensorsReducer.actionStatus,
   phCalibration: phCalibrationReducer.actionStatus
 })
 

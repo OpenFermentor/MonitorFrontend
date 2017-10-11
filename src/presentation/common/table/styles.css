@@ -1,0 +1,22 @@
+@value baseSize, fontFamily from '../../constants/typography.css';
+@value accent1, accent2 from '../../constants/colors.css';
+@value border from '../../constants/border.css';
+
+
+.simpleTable * {
+  font-family: fontFamily !important;
+  font-size: baseSize !important;
+  color: accent1 !important;
+  font-weight: 500 !important;
+}
+
+.simpleTable thead * {
+  color: accent2 !important;
+}
+
+.simpleTable tr th {
+  border-bottom: none !important;
+}
+.simpleTable tr td {
+  border-top: border !important;
+}

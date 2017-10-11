@@ -1,4 +1,5 @@
 import normalizeErrorMessage from './normalize_error_message'
+import transformSnakeToCamelCase from './transform_snake_to_camel_case'
 
 const normalizeError = error => {
   let message
@@ -12,9 +13,11 @@ const normalizeError = error => {
     message = 'Algo ha salido mal, inténtalo luego'
     problem = 'SERVER'
   } else if (error.response.status >= 400) {
-    message = error.response.data
+    message = error.response.data || {}
     problem = 'CLIENT'
   }
+
+  message = transformSnakeToCamelCase(message)
 
   return {
     problem,

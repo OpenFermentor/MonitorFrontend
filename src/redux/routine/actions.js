@@ -11,6 +11,10 @@ import {
   FETCH_ROUTINES_FAILURE,
   FETCH_ROUTINES_SUCCESS,
 
+  FETCH_REQUEST,
+  FETCH_FAILURE,
+  FETCH_SUCCESS,
+
   CREATE_ROUTINE_REQUEST,
   CREATE_ROUTINE_FAILURE,
   CREATE_ROUTINE_SUCCESS,
@@ -26,6 +30,9 @@ import {
   SET_SELECTED_ROUTINE,
   CLEAR_SELECTED_ROUTINE,
 
+  SET_SEARCH_TERM,
+  CLEAR_SEARCH_TERM,
+
   SET_DATA_RANGE
 } from './action_types'
 
@@ -40,6 +47,10 @@ export const startRoutineSuccess = routine => ({ type: START_ROUTINE_SUCCESS, ro
 export const fetchRoutinesRequest = () => ({ type: FETCH_ROUTINES_REQUEST })
 export const fetchRoutinesFailure = error => ({ type: FETCH_ROUTINES_FAILURE, error })
 export const fetchRoutinesSuccess = routines => ({ type: FETCH_ROUTINES_SUCCESS, routines })
+
+export const fetchRequest = routine => ({ type: FETCH_REQUEST, routine })
+export const fetchFailure = error => ({ type: FETCH_FAILURE, error })
+export const fetchSuccess = routine => ({ type: FETCH_SUCCESS, routine })
 
 export const createRoutineRequest = ({
   title,
@@ -78,3 +89,6 @@ export const setDataRange = (start, end) => ({ type: SET_DATA_RANGE, start, end 
 
 export const setSelectedRoutine = routine => ({ type: SET_SELECTED_ROUTINE, routine })
 export const clearSelectedRoutine = routine => ({ type: CLEAR_SELECTED_ROUTINE })
+
+export const setSearchTerm = (searchTerm = '') => ({ type: SET_SEARCH_TERM, searchTerm: searchTerm.toLowerCase() })
+export const clearSearchTerm = () => ({ type: CLEAR_SEARCH_TERM })

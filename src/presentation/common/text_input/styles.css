@@ -1,0 +1,9 @@
+.textInput {
+  margin-bottom: 15px;
+}
+
+.textInput .error {
+  font-size: 12px;
+  margin-top: -10px;
+  color: #912d2b;
+}

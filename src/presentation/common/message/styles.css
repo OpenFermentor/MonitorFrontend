@@ -1,0 +1,20 @@
+@value accent2 from '../../constants/colors.css';
+
+.message {
+  width: 100%;
+}
+
+.message.centerVertical {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message h1.dimmed {
+  color: accent2;
+}
+
+.message .body {
+  text-align: center;  
+}

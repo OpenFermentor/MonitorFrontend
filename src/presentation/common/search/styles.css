@@ -1,0 +1,21 @@
+@value baseSize, fontFamily from '../../constants/typography.css';
+@value accent1, accent2 from '../../constants/colors.css';
+@value border, borderRadius from '../../constants/border.css';
+
+.search input {
+  border: border !important;
+  border-radius: borderRadius !important;
+  font-family: fontFamily !important;
+  font-size: baseSize !important;
+  color: accent1 !important;
+  width: 250px !important;
+}
+
+.search .icon {
+  color: accent2 !important;
+  opacity: 1 !important;
+}
+
+.search input:placeholder {
+  color: accent2 !important;
+}

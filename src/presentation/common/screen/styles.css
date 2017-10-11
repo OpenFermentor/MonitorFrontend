@@ -1,0 +1,11 @@
+@value horizontalContent from '../../constants/measures.css';
+
+.screen {
+  margin-top: 102px;
+}
+
+.screen.center {
+  width: horizontalContent;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,47 +1,53 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { matchPath, withRouter } from 'react-router'
+import { Grid } from 'semantic-ui-react'
+import Button from '../button'
 import './styles.css'
-import IconButton from '../button/icon'
-import { Button } from 'semantic-ui-react'
 
-export default class Toolbar extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      sidebarOpen: false
-    }
-  }
+import Container from '../container'
 
-  render () {
-    return (
-      <div className='toolbar'>
-        <div className='content'>
-          <div className='leftContent'>
-            <h3>{this.props.title}</h3>
-          </div>
+const matchedBreadcumbIndex = (location, breadcrumb) =>
+  breadcrumb.findIndex(({ path, exact }) => matchPath(location.pathname, { path, exact }))
 
-          { this.props.rightIcon && this.props.onClickRight &&
-            <IconButton name='settings' color='white' onClick={this.props.onClickRight} />
+const Toolbar = ({ match, location, title, breadcrumb = [], rightActionTitle, onClickRightAction }) => {
+  const matchedIndex = matchedBreadcumbIndex(location, breadcrumb)
+  return (
+    <div className='localToolbar'>
+      <Container center row>
+        <Grid>
+          { title &&
+            <Grid.Column width={6}>
+              <h3>{title}</h3>
+            </Grid.Column>
           }
-
-          <div>
-            { this.props.rightTitle && this.props.onClickRight &&
-              <Button basic inverted onClick={this.props.onClickRight}>{this.props.rightTitle}</Button>
-            }
-            { this.props.secondRightTitle && this.props.secondRightDownloadUrl &&
-              <a href={this.props.secondRightDownloadUrl} target='_blank'>
-                <Button basic inverted>{this.props.secondRightTitle}</Button>
-              </a>
-            }
-
-            { this.props.secondRightTitle && this.props.onClickSecondRight &&
-              <a href={this.props.secondRightDownloadUrl} target='_blank'>
-                <Button inverted onClick={this.props.onClickSecondRight}>{this.props.secondRightTitle}</Button>
-              </a>
-            }
-          </div>
-
+          { breadcrumb &&
+            breadcrumb.map(({ path, title }, index) => {
+              if (index > matchedIndex) {
+                return null
+              }
+              return (
+                <Grid.Column width={3} key={index}>
+                  <NavLink
+                    to={path}
+                    isActive={() => index === matchedIndex}
+                    activeClassName='active'
+                  >
+                    {title}
+                  </NavLink>
+                </Grid.Column>
+              )
+            })
+          }
+        </Grid>
+        <div className='actions'>
+          { rightActionTitle && onClickRightAction &&
+            <Button primary onClick={onClickRightAction}>{rightActionTitle}</Button>
+          }
         </div>
-      </div>
-    )
-  }
+      </Container>
+    </div>
+  )
 }
+
+export default withRouter(Toolbar)

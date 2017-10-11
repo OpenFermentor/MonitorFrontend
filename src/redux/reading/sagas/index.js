@@ -5,11 +5,13 @@ import {
   FETCH_ROUTINE_READINGS_REQUEST
 } from '../action_types'
 import {
-  performFetchRoutineReadings,
-  performMergeOldReadings
+  FETCH_SUCCESS
+} from '../../routine/action_types.js'
+import {
+  performFetchRoutineReadings
 } from './perform'
 
 export default [
   takeEvery(FETCH_ROUTINE_READINGS_REQUEST, performFetchRoutineReadings, httpService),
-  takeEvery('BOOTED', performMergeOldReadings)
+  takeEvery(FETCH_SUCCESS, performFetchRoutineReadings, httpService)
 ]

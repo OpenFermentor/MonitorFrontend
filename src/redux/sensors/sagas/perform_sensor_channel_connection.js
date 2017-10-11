@@ -1,12 +1,9 @@
 import { call, take, put, fork } from 'redux-saga/effects'
 import { eventChannel, END } from 'redux-saga'
 import {
-  addReading
+  sensorsError,
+  sensorsOperative
 } from '../actions'
-import {
-  addAlert
-} from '../../alert/actions'
-import moment from 'moment'
 
 export default function * performSensorChannelConnection (socketService) {
   socketService.connect()
@@ -34,13 +31,13 @@ const joinSensorChannel = socket => eventChannel(emmiter => {
 function * receiveSensorEvents (socketService) {
   const eventSensor = yield call(receiveStatusEventsChannel, socketService)
   while (true) {
-    let { temp = 0, ph = 0, density = 0, co2 = 0, insertedAt = moment().format() } = yield take(eventSensor)
-    yield put(addReading({ temp, ph, density, co2, insertedAt }))
+    yield take(eventSensor)
+    yield put(sensorsOperative())
   }
 }
 
 const receiveStatusEventsChannel = socketService => eventChannel(emmiter => {
-  socketService.receiveStatusEvents(reading => emmiter(reading))
+  socketService.receiveStatusEvents(action => emmiter(action))
   return () => {}
 })
 
@@ -48,7 +45,7 @@ function * receiveErrorEvents (socketService) {
   const emmitedError = yield call(errorEventsEmitter, socketService)
   while (true) {
     let { message } = yield take(emmitedError)
-    yield put(addAlert({ message }))
+    yield put(sensorsError(message))
   }
 }
 

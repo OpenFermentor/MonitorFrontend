@@ -1,59 +1,40 @@
 import React, { Component } from 'react'
 
-import SensorChart from '../../common/sensor_chart'
-import Toolbar from '../../common/toolbar'
 import Alerts from '../alerts'
-import RoutineSelection from './routine_selection'
+import Message from '../../common/message'
+import Screen from '../../common/screen'
 
 export default class SensorsDashboardPresenter extends Component {
   render () {
     return (
-      <div className='dashboard'>
-
-        <Toolbar
-          title='En espera'
-          rightTitle='Experimentos'
-          onClickRight={this.props.onNavigateToExperiments}
-
-          secondRightTitle='Calibar ph-metro'
-          onClickSecondRight={this.props.onNavigateToCalibration}
-        />
+      <Screen>
 
         <Alerts />
 
-        <div className='cardRow'>
-          <RoutineSelection />
-        </div>
+        { this.props.status.error &&
+          <Message
+            centerVertical
+            title='Se produjo un error en los sensores'
+            subtitle={this.props.status.error}
+          />
+        }
 
-        <div className='cardRow'>
-          <SensorChart
-            title='Temperatura'
-            value='temp'
-            valueUnit='ºC'
-            currentValue={this.props.lastValue.temp}
-            data={this.props.timeline}
+        { this.props.status.operative &&
+          <Message
+            centerVertical
+            title='Sensores en funcionamiento'
           />
-        </div>
-        <div className='cardRow'>
-          <SensorChart
-            title='pH'
-            value='ph'
-            valueUnit=''
-            currentValue={this.props.lastValue.ph}
-            data={this.props.timeline}
-          />
-        </div>
-        <div className='cardRow'>
-          <SensorChart
-            title='Transmitancia'
-            value='density'
-            valueUnit=''
-            currentValue={this.props.lastValue.density}
-            data={this.props.timeline}
-          />
-        </div>
+        }
 
-      </div>
+        { !this.props.status.operative && !this.props.status.error &&
+          <Message
+            centerVertical
+            dimmed
+            title='Cargando estado de sensores...'
+          />
+        }
+
+      </Screen>
     )
   }
 }

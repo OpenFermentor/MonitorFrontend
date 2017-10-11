@@ -5,12 +5,12 @@
   margin-right: auto;
 }
 
-.content {
+.calibration .content {
   padding-top: 10px;
   height: 180px;
 }
 
-.loader {
+.calibration .loader {
   margin-left: auto;
   margin-right: auto;
   width: 350px;
@@ -18,6 +18,6 @@
   margin: 20px auto 10px auto;
 }
 
-.action {
+.calibration .action {
   margin-top: 50px;
 }

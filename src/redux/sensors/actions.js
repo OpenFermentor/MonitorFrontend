@@ -1,5 +1,7 @@
 import {
-  ADD_READING
+  SENSORS_ERROR,
+  SENSORS_OPERATIVE
 } from './action_types'
 
-export const addReading = ({ temp, ph, co2, density, insertedAt }) => ({ type: ADD_READING, temp, ph, co2, density, insertedAt })
+export const sensorsError = error => ({ type: SENSORS_ERROR, error })
+export const sensorsOperative = () => ({ type: SENSORS_OPERATIVE })
