@@ -8,10 +8,10 @@ import './styles.css'
 import Container from '../container'
 
 const matchedBreadcumbIndex = (location, breadcrumb) =>
-  breadcrumb.findIndex(({ path, exact }) => matchPath(location.pathname, { path, exact }))
+  breadcrumb.find(({ path, exact }) => matchPath(location.pathname, { path, exact }))
 
 const Toolbar = ({ match, location, title, breadcrumb = [], rightActionTitle, onClickRightAction }) => {
-  const matchedIndex = matchedBreadcumbIndex(location, breadcrumb)
+  const matchedItem = matchedBreadcumbIndex(location, breadcrumb)
   return (
     <div className='localToolbar'>
       <Container center row>
@@ -22,15 +22,18 @@ const Toolbar = ({ match, location, title, breadcrumb = [], rightActionTitle, on
             </Grid.Column>
           }
           { breadcrumb &&
-            breadcrumb.map(({ path, title }, index) => {
-              if (index > matchedIndex) {
+            breadcrumb.map(({ path, title, itemIndex }) => {
+              if (itemIndex > matchedItem.itemIndex) {
+                return null
+              }
+              if (itemIndex === matchedItem.itemIndex && title !== matchedItem.title) {
                 return null
               }
               return (
-                <Grid.Column width={3} key={index}>
+                <Grid.Column width={3} key={itemIndex}>
                   <NavLink
                     to={path}
-                    isActive={() => index === matchedIndex}
+                    isActive={() => itemIndex === matchedItem.itemIndex}
                     activeClassName='active'
                   >
                     {title}

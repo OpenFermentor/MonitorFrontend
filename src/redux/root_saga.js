@@ -3,6 +3,7 @@ import sensorsSagas from './sensors/sagas'
 import readingSagas from './reading/sagas'
 import systemSagas from './system/sagas'
 import phCalibrationSagas from './calibration/ph/sagas'
+import pumpCalibrationSagas from './calibration/pump/sagas'
 
 export default function * root () {
   yield [
@@ -10,6 +11,7 @@ export default function * root () {
     ...sensorsSagas,
     ...readingSagas,
     ...phCalibrationSagas,
+    ...pumpCalibrationSagas,
     ...systemSagas
   ]
 }

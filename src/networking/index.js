@@ -98,6 +98,22 @@ class HttpService {
     return this._get('ph/status')
   }
 
+  pushAcid () {
+    return this._post('ph/push_acid')
+  }
+
+  testAcidDrop () {
+    return this._post('ph/test_acid_drop')
+  }
+
+  pushBase () {
+    return this._post('ph/push_base')
+  }
+
+  testBaseDrop () {
+    return this._post('ph/test_base_drop')
+  }
+
   systemRestart () {
     return this._post('system/restart')
   }
