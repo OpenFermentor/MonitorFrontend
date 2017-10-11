@@ -58,8 +58,6 @@ export const createRoutineRequest = ({
   medium,
   targetTemp,
   targetPh,
-  targetCo2,
-  targetDensity,
   estimatedTimeSeconds,
   extraNotes
 }) => ({
@@ -69,8 +67,6 @@ export const createRoutineRequest = ({
   medium,
   targetTemp,
   targetPh,
-  targetCo2,
-  targetDensity,
   estimatedTimeSeconds,
   extraNotes
 })

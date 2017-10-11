@@ -39,9 +39,7 @@ export default class TimelineNavigationChart extends Component {
             showYAxis={false}
             datasets={[
               { data: this.props.timeline.temp, stroke: '#F27C21', label: 'Temperatura' },
-              { data: this.props.timeline.co2, stroke: '#6DE6AC', label: 'CO2' },
-              { data: this.props.timeline.ph, stroke: '#9D5BDB', label: 'pH' },
-              { data: this.props.timeline.density, stroke: '#50AEF5', label: 'Transmitancia' }
+              { data: this.props.timeline.ph, stroke: '#9D5BDB', label: 'pH' }
             ]}
           />
         </div>

@@ -4,7 +4,6 @@ export default [{
   routineId: 1,
   temp: 100,
   ph: 5,
-  co2: 1,
   turb: 18
 }, {
   id: 1,
@@ -12,7 +11,6 @@ export default [{
   routineId: 2,
   temp: 100,
   ph: 5,
-  co2: 1,
   turb: 18
 }, {
   id: 2,
@@ -20,7 +18,6 @@ export default [{
   routineId: 1,
   temp: 100,
   ph: 5,
-  co2: 1,
   turb: 18
 }, {
   id: 3,
@@ -28,7 +25,6 @@ export default [{
   routineId: 2,
   temp: 100,
   ph: 5,
-  co2: 1,
   turb: 18
 }, {
   id: 4,
@@ -36,6 +32,5 @@ export default [{
   routineId: 1,
   temp: 100,
   ph: 5,
-  co2: 1,
   turb: 18
 }]

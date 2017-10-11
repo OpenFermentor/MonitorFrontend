@@ -76,8 +76,6 @@ const getTimeline = readings => {
     insertedAt: readings.map(({ insertedAt }) => insertedAt),
     labels: normalizedReadings.map(({ insertedAt }) => insertedAt),
     temp: normalizedReadings.map(({ temp }) => temp),
-    co2: normalizedReadings.map(({ co2 }) => co2),
-    density: normalizedReadings.map(({ density }) => density),
     ph: normalizedReadings.map(({ ph }) => ph)
   }
 }

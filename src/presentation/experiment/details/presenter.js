@@ -77,7 +77,7 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
                 </p>
               </Grid.Column>
 
-              <Grid.Column width={12}>
+              <Grid.Column width={4}>
                 <h5>Intervalo de recolección de medidas</h5>
                 <p>
                   { loopDelayInMinutes === 0 &&
@@ -103,16 +103,11 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
                 <p>{routine.phTolerance} pH</p>
               </Grid.Column>
 
-              <Grid.Column width={4}>
-                <h5>Transmitancia objetivo</h5>
-                <p>{routine.targetDensity}</p>
-              </Grid.Column>
-
             </Grid>
 
             { routine.readings.length > 0 &&
               <SensorChart
-                magnitudes={['temp', 'ph', 'density', 'co2']}
+                magnitudes={['temp', 'ph']}
                 timeline={timeline}
               />
             }

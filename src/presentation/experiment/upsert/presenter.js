@@ -183,30 +183,6 @@ export default class UpsertRoutine extends Component {
                 />
               </Grid>
 
-              <Grid>
-                <TextInput
-                  name='targetDensity'
-                  error={this.props.error}
-                  label='Transmitancia'
-                  placeholder='Objetivo'
-                  type='number'
-                  required
-                  value={this.state.targetDensity}
-                  width={8}
-                  onChange={targetDensity => this.setState({ targetDensity })}
-                />
-                <TextInput
-                  name='densityTolerance'
-                  error={this.props.error}
-                  className='inlineSecondField'
-                  placeholder='Tolerancia'
-                  type='number'
-                  value={this.state.densityTolerance}
-                  width={8}
-                  onChange={densityTolerance => this.setState({ densityTolerance })}
-                />
-              </Grid>
-
             </Form>
           </Modal.Description>
         </Modal.Content>

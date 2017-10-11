@@ -49,8 +49,8 @@ const alertEventsEmitter = socketService => eventChannel(emmiter => {
 function * receiveUpdateEvents (socketService) {
   const emmitedUpdate = yield call(updateEventsEmitter, socketService)
   while (true) {
-    let { routine_id, id, temp, ph, density, co2, inserted_at = moment().format() } = yield take(emmitedUpdate)
-    yield put(addReading({ routineId: routine_id, id, temp, ph, density, co2, insertedAt: inserted_at }))
+    let { routine_id, id, temp, ph, inserted_at = moment().format() } = yield take(emmitedUpdate)
+    yield put(addReading({ routineId: routine_id, id, temp, ph, insertedAt: inserted_at }))
   }
 }
 

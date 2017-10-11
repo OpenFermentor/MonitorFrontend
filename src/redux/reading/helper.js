@@ -21,8 +21,6 @@ export const groupReadingsByDateFormat = (readings, dateFormat) => {
       readingsAmount = 0,
       totalTemp = 0,
       totalPH = 0,
-      totalCO2 = 0,
-      totalDensity = 0,
       totalDate = 0,
       routineId = reading.routineId
     } = readingsGroup[dateGroup] || {}
@@ -32,20 +30,16 @@ export const groupReadingsByDateFormat = (readings, dateFormat) => {
       readingsAmount: readingsAmount + 1,
       totalTemp: totalTemp + reading.temp,
       totalPH: totalPH + reading.ph,
-      totalCO2: totalCO2 + reading.co2,
-      totalDensity: totalDensity + reading.density,
       totalDate: totalDate + moment(reading.insertedAt).valueOf()
     }
     return readingsGroup
   }, {})
-  return Object.entries(readingsGroupedByDate).map(([date, { readingsIds, readingsAmount, totalTemp, totalPH, totalCO2, totalDensity, routineId, totalDate }], index) => ({
+  return Object.entries(readingsGroupedByDate).map(([date, { readingsIds, readingsAmount, totalTemp, totalPH, routineId, totalDate }], index) => ({
     routineId,
     readingsIds,
     id: index,
     temp: totalTemp / readingsAmount,
     ph: totalPH / readingsAmount,
-    co2: totalCO2 / readingsAmount,
-    density: totalDensity / readingsAmount,
     insertedAt: date,
     insertedAtValue: moment(totalDate / readingsAmount).format()
   }))
