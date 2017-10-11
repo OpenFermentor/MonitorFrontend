@@ -34,6 +34,10 @@ class HttpServiceMock {
     return {}
   }
 
+  systemRestart () {
+    return {}
+  }
+
   getRoutineReadings (routine) {
     return {
       data: {

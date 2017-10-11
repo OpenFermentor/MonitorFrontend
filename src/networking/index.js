@@ -97,6 +97,10 @@ class HttpService {
   calibrationStatus () {
     return this._get('ph/status')
   }
+
+  systemRestart () {
+    return this._post('system/restart')
+  }
 }
 
 export default new HttpService()
