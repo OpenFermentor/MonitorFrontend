@@ -157,7 +157,7 @@ describe('sagas', () => {
   })
 
   it('perfom update routine failure', () => {
-    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, targetCo2: 1, targetDensity: 0.5, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
+    const routine = { title: 'a title', strain: 30, medium: 'a medium', targetTemp: 1, targetPh: 4, estimatedTimeSeconds: 100, extraNotes: 'some notes' }
     const iterator = performFetchRoutineReadings(httpServiceMock, { routine })
     expect(iterator.next().value).toEqual(call([httpServiceMock, 'getRoutineReadings'], routine))
     expect(iterator.throw('an error').value).toEqual(put(fetchRoutineReadingsFailure('an error')))

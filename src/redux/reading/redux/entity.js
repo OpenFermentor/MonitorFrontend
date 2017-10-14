@@ -29,9 +29,7 @@ const addReading = (state, { reading }) =>
     routineId: reading.routineId,
     insertedAt: reading.insertedAt,
     temp: reading.temp || 0,
-    ph: reading.ph || 0,
-    density: reading.density || 0,
-    co2: reading.co2 || 0
+    ph: reading.ph || 0
   })
 
 const INITIAL_STATE_ALL_IDS = []
@@ -64,9 +62,7 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
       routineId: reading.routineId,
       insertedAt: reading.insertedAt,
       temp: reading.temp,
-      ph: reading.ph,
-      co2: reading.co2,
-      density: reading.density
+      ph: reading.ph
     }))),
     allIds: addEntriesIds(state.allIds.filter(id => state.byId[id].routineId !== routine.id), readings)
   })
