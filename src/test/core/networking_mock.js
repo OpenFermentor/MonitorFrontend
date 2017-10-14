@@ -34,6 +34,26 @@ class HttpServiceMock {
     return {}
   }
 
+  systemRestart () {
+    return {}
+  }
+
+  pushAcid () {
+    return {}
+  }
+
+  testAcidDrop () {
+    return {}
+  }
+
+  pushBase () {
+    return {}
+  }
+
+  testBaseDrop () {
+    return {}
+  }
+
   getRoutineReadings (routine) {
     return {
       data: {

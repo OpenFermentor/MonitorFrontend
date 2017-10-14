@@ -1,18 +1,17 @@
 import React from 'react'
 import './styles.css'
 
-import Toolbar from '../../common/toolbar'
+import Container from '../../common/container'
+import Button from '../../common/button'
 import Stepper from './stepper'
 import Calibration from './calibration'
 
 const PhCalibrationPresenter = ({ currentValue, inProgress, error, finished, onStartCalibration, onFinish, onCancel }) => (
   <div className='phCalibration'>
 
-    <Toolbar
-      title='Calibración ph-metro'
-      rightTitle='Cancelar'
-      onClickRight={onCancel}
-    />
+    <Container row end>
+      <Button onClick={onCancel}>Cancelar</Button>
+    </Container>
 
     <Stepper currentValue={currentValue} />
 

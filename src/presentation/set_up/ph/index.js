@@ -19,7 +19,7 @@ class PhCalibration extends Component {
 
   onCancel () {
     this.props.finishPhMeterCalibration()
-    this.props.history.replace('/')
+    this.props.history.goBack()
   }
 
   render () {

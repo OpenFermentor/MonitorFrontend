@@ -6,6 +6,8 @@ import sensorsReducer from './sensors/redux'
 import alertReducer from './alert/redux'
 import bootReducer from './boot/redux'
 import phCalibrationReducer from './calibration/ph/redux'
+import pumpCalibrationReducer from './calibration/pump/redux'
+import systemReducer from './system/redux'
 
 const entities = combineReducers({
   routine: routineReducer.entity,
@@ -18,7 +20,9 @@ const actionStatus = combineReducers({
   reading: readingReducer.actionStatus,
   boot: bootReducer.actionStatus,
   sensors: sensorsReducer.actionStatus,
-  phCalibration: phCalibrationReducer.actionStatus
+  phCalibration: phCalibrationReducer.actionStatus,
+  pumpCalibration: pumpCalibrationReducer.actionStatus,
+  system: systemReducer.actionStatus
 })
 
 const rootReducer = combineReducers({

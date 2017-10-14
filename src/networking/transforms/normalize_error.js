@@ -8,8 +8,7 @@ const normalizeError = error => {
   if (error.message === 'Network Error') {
     message = 'No se puede conectar a la red de OpenFermentor'
     problem = 'NETWORK'
-  }
-  if (error.response.status >= 500) {
+  } else if (error.response.status >= 500) {
     message = 'Algo ha salido mal, inténtalo luego'
     problem = 'SERVER'
   } else if (error.response.status >= 400) {

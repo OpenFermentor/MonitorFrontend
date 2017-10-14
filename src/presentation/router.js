@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import MainNavigation from './navigation'
 
 import Dashboard from './dashboard'
-import PhCalibration from './calibration/ph'
+import SetUp from './set_up'
 import Experiment from './experiment'
 
 const ROUTES = [{
@@ -17,8 +17,8 @@ const ROUTES = [{
   component: Experiment,
   title: 'Experimentos'
 }, {
-  path: '/calibration/ph',
-  component: PhCalibration,
+  path: '/calibration',
+  component: SetUp,
   title: 'Calibración'
 }]
 
