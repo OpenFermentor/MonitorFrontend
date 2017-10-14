@@ -27,14 +27,6 @@ const ExperimentAnalysisPresenter = ({ timeline, fetching, error, onAnalyzeData,
         />
       </Container>
 
-      <Container>
-        <h2>Transmitancia</h2>
-        <SensorChart
-          magnitudes={['density']}
-          timeline={timeline}
-        />
-      </Container>
-
       <NavigationChart />
     </Screen>
   )

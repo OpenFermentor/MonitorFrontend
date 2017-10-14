@@ -5,9 +5,7 @@ import LineChart from '../../common/chart/line'
 
 const MAGNITUDE_COLORS = {
   temp: '#F27C21',
-  ph: '#9D5BDB',
-  co2: '#6DE6AC',
-  density: '#50AEF5'
+  ph: '#9D5BDB'
 }
 
 const SensorChart = ({ timeline, magnitudes, height = 60 }) => {

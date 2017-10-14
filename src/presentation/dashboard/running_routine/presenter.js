@@ -15,7 +15,6 @@ const magnitudeTitle = magnitude => {
   switch (magnitude) {
     case 'temp': return 'Temperatura'
     case 'ph': return 'pH'
-    case 'density': return 'Transmitancia'
   }
 }
 
@@ -58,7 +57,7 @@ export default class SensorsDashboardPresenter extends Component {
 
         <Container>
           <Grid>
-            <Grid.Column width={5}>
+            <Grid.Column width={8}>
               <MagnitudeCard
                 title={magnitudeTitle('temp')}
                 valueUnit='ºC'
@@ -67,7 +66,7 @@ export default class SensorsDashboardPresenter extends Component {
                 onClick={() => this.onClickMagnitude('temp')}
               />
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={8}>
               <MagnitudeCard
                 title={magnitudeTitle('ph')}
                 valueUnit='pH'
@@ -76,21 +75,12 @@ export default class SensorsDashboardPresenter extends Component {
                 onClick={() => this.onClickMagnitude('ph')}
                 />
             </Grid.Column>
-            <Grid.Column width={5}>
-              <MagnitudeCard
-                title={magnitudeTitle('density')}
-                valueUnit='NTU'
-                targetValue={this.props.routine.targetDensity}
-                currentValue={this.props.currentValue.density}
-                onClick={() => this.onClickMagnitude('density')}
-                />
-            </Grid.Column>
           </Grid>
         </Container>
 
         { this.props.timeline &&
           <SensorChart
-            magnitudes={['temp', 'ph', 'density']}
+            magnitudes={['temp', 'ph']}
             timeline={this.props.timeline}
             height={140}
           />
