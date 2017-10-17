@@ -1,11 +1,13 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import {
   fetchRoutinesFailure,
   fetchRoutinesSuccess,
   fetchFailure,
   fetchSuccess,
+  createRoutineRequest,
   createRoutineFailure,
   createRoutineSuccess,
+  updateRoutineRequest,
   updateRoutineFailure,
   updateRoutineSuccess,
   destroyRoutineFailure,
@@ -15,6 +17,10 @@ import {
   stopRunningRoutineFailure,
   stopRunningRoutineSuccess
 } from '../actions'
+
+import {
+  selectUpsertActionStatus
+} from '../selector'
 
 export function * performFetchRoutines (httpService) {
   try {
@@ -34,7 +40,16 @@ export function * performFetchRoutine (httpService, { routine }) {
   }
 }
 
-export function * performCreateRoutine (httpService, { type, ...routine }) {
+export function * performSubmitUpsert () {
+  const { operation, routine } = yield select(selectUpsertActionStatus)
+  if (operation === 'creation') {
+    yield put(createRoutineRequest(routine))
+  } else {
+    yield put(updateRoutineRequest(routine))
+  }
+}
+
+export function * performCreateRoutine (httpService, { type, routine }) {
   try {
     const response = yield call([httpService, 'createRoutine'], routine)
     yield put(createRoutineSuccess(response.data.data))

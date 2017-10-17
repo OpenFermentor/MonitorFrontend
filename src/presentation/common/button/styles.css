@@ -2,7 +2,7 @@
 @value primary from '../../constants/colors.css';
 @value borderRadius from '../../constants/border.css';
 
-.button * {
+.ofButton {
   font-family: fontFamily !important;
   font-size: baseSize !important;
   font-weight: 500 !important;
@@ -11,6 +11,6 @@
   border-radius: borderRadius !important;
 }
 
-.button.primary {
+.ofButton.primary {
   background-color: primary !important;
 }

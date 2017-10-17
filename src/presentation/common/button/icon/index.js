@@ -1,11 +1,8 @@
 import React from 'react'
-import Icon from '../../icon'
 import { Button } from 'semantic-ui-react'
 
-const IconButton = ({ name, color, onClick }) => (
-  <Button basic onClick={onClick}>
-    <Icon name={name} color={color} />
-  </Button>
+const IconButton = props => (
+  <Button {...props} />
 )
 
 export default IconButton

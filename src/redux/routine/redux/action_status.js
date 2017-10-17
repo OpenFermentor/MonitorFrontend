@@ -3,6 +3,8 @@ import {
   merge
 } from '../../helper'
 
+import upsertActionStatusReducer from './upsert_action_status'
+
 import reduceReducers from 'reduce-reducers'
 import {
   START_ROUTINE_SUCCESS,
@@ -37,7 +39,7 @@ const INITIAL_STATE = {
   dataRangeEnd: null
 }
 
-const appStateReducer = (state = INITIAL_STATE, action) => {
+const actionStatusReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'RESET': return merge(state, INITIAL_STATE)
 
@@ -79,4 +81,13 @@ merge(state, { searchTerm: null })
 const setSearchTerm = (state, { searchTerm }) =>
   merge(state, { searchTerm })
 
-export default reduceReducers(requestReducer, appStateReducer)
+const upsertReducer = (state, action) => {
+  if (!state) {
+    return { upsert: upsertActionStatusReducer(undefined, action) }
+  }
+  return merge(state, {
+    upsert: upsertActionStatusReducer(state.upsert, action)
+  })
+}
+
+export default reduceReducers(requestReducer, actionStatusReducer, upsertReducer)
