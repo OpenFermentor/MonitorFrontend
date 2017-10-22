@@ -51,5 +51,14 @@ export const selectRoutines = createSelector(
 export const selectSelectedRoutine = createSelector(
   entity,
   actionStatus,
-  ({ byId }, { selectedRoutine }) => byId[selectedRoutine]
+  ({ byId }, { selectedRoutine, runningRoutine }) => {
+    if (selectedRoutine) {
+      return ({
+        ...byId[selectedRoutine],
+        running: runningRoutine === selectedRoutine
+      })
+    }
+  }
 )
+
+export const selectUpsertActionStatus = state => actionStatus(state).upsert

@@ -10,7 +10,8 @@ import {
   FETCH_REQUEST,
   CREATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_REQUEST,
-  DESTROY_ROUTINE_REQUEST
+  DESTROY_ROUTINE_REQUEST,
+  UPSERT_SUBMIT
 } from '../action_types'
 import {
   performStopRoutine,
@@ -19,13 +20,15 @@ import {
   performCreateRoutine,
   performUpdateRoutine,
   performRemoveRoutine,
-  performFetchRoutine
+  performFetchRoutine,
+  performSubmitUpsert
 } from './perform'
 import performRoutineChannelConnection from './perform_routine_channel_connection'
 
 export default [
   takeEvery('BOOTED', performRoutineChannelConnection, socketService),
   takeEvery(STOP_ROUTINE_REQUEST, performStopRoutine, httpService),
+  takeEvery(UPSERT_SUBMIT, performSubmitUpsert),
   takeEvery(START_ROUTINE_REQUEST, performStartRoutine, httpService),
   takeEvery(FETCH_ROUTINES_REQUEST, performFetchRoutines, httpService),
   takeEvery(FETCH_REQUEST, performFetchRoutine, httpService),

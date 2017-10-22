@@ -33,7 +33,20 @@ import {
   SET_SEARCH_TERM,
   CLEAR_SEARCH_TERM,
 
-  SET_DATA_RANGE
+  SET_DATA_RANGE,
+
+  UPSERT_SET_CURRENT_SECTION,
+
+  UPSERT_ADD_TEMPERATURE_RANGE,
+  UPSERT_SET_TEMPERATURE_RANGE,
+  UPSERT_REMOVE_TEMPERATURE_RANGE,
+
+  UPSERT_UPDATE_ROUTINE,
+
+  UPSERT_START_CREATION,
+  UPSERT_START_EDITION,
+
+  UPSERT_SUBMIT
 } from './action_types'
 
 export const stopRunningRoutineRequest = () => ({ type: STOP_ROUTINE_REQUEST })
@@ -52,24 +65,7 @@ export const fetchRequest = routine => ({ type: FETCH_REQUEST, routine })
 export const fetchFailure = error => ({ type: FETCH_FAILURE, error })
 export const fetchSuccess = routine => ({ type: FETCH_SUCCESS, routine })
 
-export const createRoutineRequest = ({
-  title,
-  strain,
-  medium,
-  targetTemp,
-  targetPh,
-  estimatedTimeSeconds,
-  extraNotes
-}) => ({
-  type: CREATE_ROUTINE_REQUEST,
-  title,
-  strain,
-  medium,
-  targetTemp,
-  targetPh,
-  estimatedTimeSeconds,
-  extraNotes
-})
+export const createRoutineRequest = routine => ({ type: CREATE_ROUTINE_REQUEST, routine })
 export const createRoutineFailure = error => ({ type: CREATE_ROUTINE_FAILURE, error })
 export const createRoutineSuccess = routine => ({ type: CREATE_ROUTINE_SUCCESS, routine })
 
@@ -88,3 +84,16 @@ export const clearSelectedRoutine = routine => ({ type: CLEAR_SELECTED_ROUTINE }
 
 export const setSearchTerm = (searchTerm = '') => ({ type: SET_SEARCH_TERM, searchTerm: searchTerm.toLowerCase() })
 export const clearSearchTerm = () => ({ type: CLEAR_SEARCH_TERM })
+
+export const upsertStartCreation = () => ({ type: UPSERT_START_CREATION })
+export const upsertStartEdition = routine => ({ type: UPSERT_START_EDITION, routine })
+
+export const upsertSetCurrentSection = currentSection => ({ type: UPSERT_SET_CURRENT_SECTION, currentSection })
+
+export const upsertUpdateRoutine = routine => ({ type: UPSERT_UPDATE_ROUTINE, routine })
+
+export const upsertAddTemperatureRange = () => ({ type: UPSERT_ADD_TEMPERATURE_RANGE })
+export const upsertSetTemperatureRange = tempRange => ({ type: UPSERT_SET_TEMPERATURE_RANGE, tempRange })
+export const upsertRemoveTemperatureRange = tempRange => ({ type: UPSERT_REMOVE_TEMPERATURE_RANGE, tempRange })
+
+export const submitUpsert = () => ({ type: UPSERT_SUBMIT })

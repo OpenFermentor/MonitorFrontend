@@ -6,13 +6,16 @@ import UpsertExperimentPresenter from './presenter'
 
 import {
   selectRoutineFetchingStatus,
+  selectUpsertActionStatus,
   selectSelectedRoutine
 } from '../../../redux/routine/selector'
 
 import {
-  updateRoutineRequest,
-  createRoutineRequest,
-  destroyRoutineRequest
+  submitUpsert,
+  destroyRoutineRequest,
+  upsertSetCurrentSection,
+  upsertStartCreation,
+  upsertStartEdition
 } from '../../../redux/routine/actions'
 
 class UpsertExperiment extends Component {
@@ -23,7 +26,18 @@ class UpsertExperiment extends Component {
     }
   }
 
+  componentWillMount () {
+    if (this.props.selectedRoutine) {
+      this.props.startEdition(this.props.selectedRoutine)
+    } else {
+      this.props.startCreation()
+    }
+  }
+
   componentWillReceiveProps (newProps) {
+    if (!this.props.selectedRoutine && newProps.selectedRoutine) {
+      this.props.startEdition(newProps.selectedRoutine)
+    }
     if (!this.shouldOpenModal() || !this.state.submitting || newProps.fetching) {
       return
     }
@@ -35,11 +49,7 @@ class UpsertExperiment extends Component {
 
   onSubmit (routine) {
     this.setState({ submitting: true })
-    if (this.props.routine) {
-      this.props.requestUpdate(routine)
-    } else {
-      this.props.requestCreate(routine)
-    }
+    this.props.submitUpsert()
   }
 
   onDestroy () {
@@ -61,9 +71,13 @@ class UpsertExperiment extends Component {
         fetching={this.props.fetching}
         error={this.props.error}
         routine={this.props.routine}
+        operation={this.props.operation}
+        currentSection={this.props.currentSection}
+
         onCancel={() => this.props.history.goBack()}
         onDestroy={this.onDestroy.bind(this)}
         onSubmit={this.onSubmit.bind(this)}
+        onNextSection={() => this.props.setCurrentSection('parameters')}
       />
     )
   }
@@ -71,15 +85,16 @@ class UpsertExperiment extends Component {
 
 const mapStateToProps = state => ({
   ...selectRoutineFetchingStatus(state),
-  routine: selectSelectedRoutine(state)
+  ...selectUpsertActionStatus(state),
+  selectedRoutine: selectSelectedRoutine(state)
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    requestDestroy: routine => dispatch(destroyRoutineRequest(routine)),
-    requestUpdate: routine => dispatch(updateRoutineRequest(routine)),
-    requestCreate: routine => dispatch(createRoutineRequest(routine))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  requestDestroy: routine => dispatch(destroyRoutineRequest(routine)),
+  submitUpsert: () => dispatch(submitUpsert()),
+  setCurrentSection: section => dispatch(upsertSetCurrentSection(section)),
+  startCreation: routine => dispatch(upsertStartCreation(routine)),
+  startEdition: routine => dispatch(upsertStartEdition(routine))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpsertExperiment)

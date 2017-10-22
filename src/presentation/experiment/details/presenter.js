@@ -27,7 +27,9 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
           <Container row>
             <h1>{routine.title}</h1>
             <Container row>
-              <ButtonLink primary queryParams={{ showModal: 'true' }}>Editar</ButtonLink>
+              { !routine.running &&
+                <ButtonLink primary queryParams={{ showModal: 'true' }}>Editar</ButtonLink>
+              }
               { !routine.started &&
                 <Button primary onClick={onStart}>Comenzar</Button>
               }
