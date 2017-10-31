@@ -11,16 +11,19 @@ import ExperimentCreation from './upsert'
 const ROUTES = match => [{
   path: match.url,
   exact: true,
+  itemIndex: 0,
   component: Experiments,
   title: 'Experimentos'
 }, {
   path: match.url + '/:id',
   exact: true,
+  itemIndex: 1,
   component: Experiment,
   title: 'Experimento'
 }, {
   path: match.url + '/:id/analysis',
   component: ExperimentAnalysis,
+  itemIndex: 2,
   title: 'Análisis'
 }]
 

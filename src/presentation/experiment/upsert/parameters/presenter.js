@@ -40,7 +40,7 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
         />
 
         { tempRanges.map(tempRange => (
-          <Grid>
+          <Grid key={tempRange.id}>
             <TextInput
               label='Temperatura (ºC)'
               placeholder='Temperatura (ºC)'
@@ -49,27 +49,17 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
               value={tempRange.temp}
               width={6}
               min={0}
-              onChange={temp => onSetTemperatureRange({ ...tempRange, temp })}
+              onChange={temp => onSetTemperatureRange({ ...tempRange, temp: parseInt(temp) })}
             />
-            <TextInput
-              label='Luego de'
-              placeholder='Horas'
-              type='number'
-              value={tempRange.hours}
-              width={4}
-              min={0}
-              onChange={hours => onSetTemperatureRange({ ...tempRange, hours })}
-            />
-            <TextInput
-              className='inlineSecondField'
-              placeholder='Minutos'
-              type='number'
-              value={tempRange.minutes}
-              width={4}
-              max={60}
-              min={0}
-              onChange={minutes => onSetTemperatureRange({ ...tempRange, minutes })}
-            />
+
+            <Grid.Column width={8}>
+              <TextInputTime
+                label='Luego de'
+                seconds={tempRange.fromSecond}
+                width={8}
+                onChange={fromSecond => onSetTemperatureRange({ ...tempRange, fromSecond })}
+              />
+            </Grid.Column>
 
             <Grid.Column width={2}>
               <ButtonIcon

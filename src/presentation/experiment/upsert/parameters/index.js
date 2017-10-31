@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
 
 import {
   upsertUpdateRoutine,
@@ -17,26 +16,6 @@ import {
 import UpsertExperimentParametersPresenter from './presenter'
 
 class UpsertExperimentParameters extends Component {
-  onSetTemperatureRange (tempRange) {
-    const hoursDuration = moment.duration(parseInt(tempRange.hours), 'hours').asSeconds() || 0
-    const minutesDuration = moment.duration(parseInt(tempRange.minutes), 'minutes').asSeconds() || 0
-    this.props.setTemperatureRange({
-      ...tempRange,
-      fromSecond: hoursDuration + minutesDuration
-    })
-  }
-
-  mapTempRangesToHoursAndSeconds () {
-    this.props.tempRanges.map(tempRange => {
-      const fromSecondsDuration = moment.duration(tempRange.fromSecond)
-      return {
-        ...tempRange,
-        hours: fromSecondsDuration.hours(),
-        minutes: fromSecondsDuration.minutes()
-      }
-    })
-  }
-
   render () {
     return (
       <UpsertExperimentParametersPresenter
@@ -44,7 +23,7 @@ class UpsertExperimentParameters extends Component {
         tempRanges={this.props.tempRanges}
         error={this.props.error}
 
-        onSetTemperatureRange={this.onSetTemperatureRange.bind(this)}
+        onSetTemperatureRange={this.props.setTemperatureRange}
         onAddTempRange={this.props.addTemperatureRange}
         onRemoveTemperatureRange={this.props.removeTemperatureRange}
         onUpdateRoutine={this.props.updateRoutine}
