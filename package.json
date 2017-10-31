@@ -37,9 +37,7 @@
     "eject": "react-scripts eject",
     "lint": "standard --verbose | snazzy",
     "lint-fix": "standard --fix",
-    "precommit": "npm run git-hook",
-    "prepush": "npm run git-hook",
-    "git-hook": "npm run lint && npm run test-coverage"
+    "git-hook": "npm run lint"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
