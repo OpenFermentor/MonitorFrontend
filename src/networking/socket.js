@@ -14,11 +14,7 @@ class SocketService {
   }
 
   joinRoutineTopic ({ onSuccess, onFailure, onTimeout }) {
-    this.routineChannel = this.socket.channel('routine')
-    this.routineChannel.join()
-      .receive('ok', onSuccess)
-      .receive('error', onFailure)
-      .receive('timeout', onTimeout)
+    this.routineChannel = this._joinChannel({ channelName: 'routine', onSuccess, onFailure, onTimeout })
   }
 
   leaveRoutineTopic () {
@@ -42,11 +38,7 @@ class SocketService {
   }
 
   joinSensorTopic ({ onSuccess, onFailure, onTimeout }) {
-    this.sensorsChannel = this.socket.channel('sensors')
-    this.sensorsChannel.join()
-      .receive('ok', onSuccess)
-      .receive('error', onFailure)
-      .receive('timeout', onTimeout)
+    this.sensorsChannel = this._joinChannel({ channelName: 'sensors', onSuccess, onFailure, onTimeout })
   }
 
   leaveSensorTopic () {
@@ -59,6 +51,27 @@ class SocketService {
 
   receiveSensorsErrorEvents (callback) {
     this.sensorsChannel.on('error', callback)
+  }
+
+  joinInstructionTopic ({ onSuccess, onFailure, onTimeout }) {
+    this.instructionChannel = this._joinChannel({ channelName: 'instructions', onSuccess, onFailure, onTimeout })
+  }
+
+  leaveInstructionTopic () {
+    this.instructionChannel.leave()
+  }
+
+  receiveInstructionEvents (callback) {
+    this.instructionChannel.on('instruction', callback)
+  }
+
+  _joinChannel ({ channelName, onSuccess, onFailure, onTimeout }) {
+    const channel = this.socket.channel(channelName)
+    channel.join()
+      .receive('ok', onSuccess)
+      .receive('error', onFailure)
+      .receive('timeout', onTimeout)
+    return channel
   }
 }
 

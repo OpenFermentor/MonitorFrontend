@@ -22,7 +22,7 @@ export default function * performSensorChannelConnection (socketService) {
 const joinSensorChannel = socket => eventChannel(emmiter => {
   socket.joinSensorTopic({
     onSuccess: () => { emmiter({ joined: true }) },
-    onError: () => emmiter(END),
+    onFailure: () => emmiter(END),
     onTimeout: () => emmiter(END)
   })
   return () => socket.leaveSensorTopic()

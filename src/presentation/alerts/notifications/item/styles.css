@@ -26,10 +26,6 @@
   box-shadow: none !important;
 }
 
-.notificationAlert button:hover {
-  background: rbga(255, 255, 255, 0.3) !important;
-}
-
 .notificationAlert ul {
   padding-left: 26px;
 }

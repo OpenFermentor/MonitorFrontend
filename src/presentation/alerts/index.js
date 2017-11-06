@@ -9,10 +9,10 @@ import ModalAlert from './modal'
 import NotificationAlerts from './notifications'
 
 const Alerts = ({ alerts }) => {
-  const systemAlert = alerts.find(alert => alert.status === 'system')
-  if (systemAlert) {
+  const modalAlert = alerts.find(alert => alert.status === 'system' || alert.status === 'instruction')
+  if (modalAlert) {
     return (
-      <ModalAlert alert={systemAlert} />
+      <ModalAlert alert={modalAlert} />
     )
   } else {
     const notificationAlerts = alerts.filter(alert => alert.status !== 'status')
