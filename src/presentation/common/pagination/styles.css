@@ -1,0 +1,14 @@
+.pagination p, a {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.pagination .pageControl {
+  margin-top: -12px;
+  display: flex;
+  align-items: center;
+}
+
+.pagination .pageControl svg {
+  top: 12px;
+}

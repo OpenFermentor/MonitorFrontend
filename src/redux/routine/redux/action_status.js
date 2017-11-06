@@ -16,7 +16,8 @@ import {
   CLEAR_SEARCH_TERM,
   SET_SEARCH_TERM,
   FETCH_SUCCESS,
-  FETCH_ROUTINES_REQUEST
+  FETCH_ROUTINES_REQUEST,
+  FETCH_ROUTINES_SUCCESS
 } from '../action_types'
 
 const requestReducer = buildActionStatusReducer({
@@ -36,7 +37,8 @@ const INITIAL_STATE = {
   searchTerm: null,
   selectedRoutine: null,
   dataRangeStart: null,
-  dataRangeEnd: null
+  dataRangeEnd: null,
+  pagination: null
 }
 
 const actionStatusReducer = (state = INITIAL_STATE, action) => {
@@ -55,6 +57,7 @@ const actionStatusReducer = (state = INITIAL_STATE, action) => {
     case CLEAR_SELECTED_ROUTINE: return clearSelectedRoutine(state, action)
 
     case FETCH_ROUTINES_REQUEST: return clearSelectedRoutine(state, action)
+    case FETCH_ROUTINES_SUCCESS: return addRoutinesPagination(state, action)
 
     default: return state
   }
@@ -80,6 +83,16 @@ merge(state, { searchTerm: null })
 
 const setSearchTerm = (state, { searchTerm }) =>
   merge(state, { searchTerm })
+
+const addRoutinesPagination = (state, { pagination }) =>
+  merge(state, {
+    pagination: {
+      page: parseInt(pagination.page),
+      perPage: parseInt(pagination.perPage),
+      maxPage: parseInt(pagination.maxPage),
+      totalCount: parseInt(pagination.totalCount)
+    }
+  })
 
 const upsertReducer = (state, action) => {
   if (!state) {

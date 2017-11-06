@@ -6,7 +6,8 @@ import ExperimentsPresenter from './presenter'
 import {
   selectRoutines,
   selectSearchInProgress,
-  selectRoutineFetchingStatus
+  selectRoutineFetchingStatus,
+  selectRoutinePagination
 } from '../../../redux/routine/selector'
 import {
   fetchRoutinesRequest,
@@ -38,8 +39,10 @@ class Experiments extends Component {
       <ExperimentsPresenter
         routines={this.props.routines}
         searchInProgress={this.props.searchInProgress}
+        pagination={this.props.pagination}
 
         onSelectRoutine={this.onSelectRoutine.bind(this)}
+        onNavigateToPage={this.props.requestRoutines}
         onSearch={this.onSearch.bind(this)}
         onCancel={this.props.history.goBack}
       />
@@ -51,13 +54,14 @@ const mapStateToProps = state => {
   return {
     ...selectRoutineFetchingStatus(state),
     searchInProgress: selectSearchInProgress(state),
+    pagination: selectRoutinePagination(state),
     routines: selectRoutines(state)
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestRoutines: () => dispatch(fetchRoutinesRequest()),
+    requestRoutines: page => dispatch(fetchRoutinesRequest(page)),
     setSelectedRoutine: routine => dispatch(setSelectedRoutine(routine)),
     clearSearchTerm: () => dispatch(clearSearchTerm()),
     setSearchTerm: searchTerm => dispatch(setSearchTerm(searchTerm))
