@@ -43,7 +43,14 @@ const startCreation = () =>
   merge(INITIAL_STATE, { operation: 'creation' })
 
 const startEdition = (state, { routine }) =>
-  merge(INITIAL_STATE, { operation: 'edition', routine: merge(state.routine, routine) })
+  merge(INITIAL_STATE, {
+    operation: 'edition',
+    routine: merge(state.routine, routine),
+    tempRanges: routine.tempRanges.map(tempRange => ({
+      id: generateRandomId(),
+      ...tempRange
+    }))
+  })
 
 const setCurentSection = (state, { currentSection }) =>
   merge(state, { currentSection })

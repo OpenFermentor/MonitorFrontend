@@ -41,11 +41,11 @@ export function * performFetchRoutine (httpService, { routine }) {
 }
 
 export function * performSubmitUpsert () {
-  const { operation, routine } = yield select(selectUpsertActionStatus)
+  const { operation, routine, tempRanges } = yield select(selectUpsertActionStatus)
   if (operation === 'creation') {
-    yield put(createRoutineRequest(routine))
+    yield put(createRoutineRequest({ ...routine, tempRanges }))
   } else {
-    yield put(updateRoutineRequest(routine))
+    yield put(updateRoutineRequest({ ...routine, tempRanges }))
   }
 }
 

@@ -3,6 +3,7 @@ import { Form, Grid } from 'semantic-ui-react'
 
 import TextInput from '../../../common/text_input'
 import TextArea from '../../../common/text_area'
+import TextInputTime from '../../../common/text_input/time'
 
 const UpsertExperimentDetails = ({ routine, error, onUpdateRoutine }) => {
   return (
@@ -38,30 +39,14 @@ const UpsertExperimentDetails = ({ routine, error, onUpdateRoutine }) => {
             width={8}
             onChange={medium => onUpdateRoutine({ ...routine, medium })}
           />
-
-          <TextInput
-            name='estimatedTimeSeconds'
-            error={error}
-            label='Tiempo estimado del experimento'
-            placeholder='Horas'
-            type='number'
-            width={8}
-            min={0}
-            value={routine.hours}
-            onChange={hours => onUpdateRoutine({ ...routine, hours })}
-          />
-          <TextInput
-            type='number'
-            placeholder='Minutos'
-            className='inlineSecondField'
-            width={8}
-            max={60}
-            min={0}
-            step={15}
-            value={routine.minutes}
-            onChange={minutes => onUpdateRoutine({ ...routine, minutes })}
-          />
         </Grid>
+
+        <TextInputTime
+          label='Tiempo estimado en segundos'
+          seconds={routine.estimatedTimeSeconds}
+          width={8}
+          onChange={estimatedTimeSeconds => onUpdateRoutine({ ...routine, estimatedTimeSeconds })}
+        />
 
         <TextArea
           name='extraNotes'
