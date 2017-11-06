@@ -36,8 +36,8 @@ const joinRoutineChannel = socket => eventChannel(emmiter => {
 function * receiveAlertEvents (socketService) {
   const emmitedAlert = yield call(alertEventsEmitter, socketService)
   while (true) {
-    let { message, errors } = yield take(emmitedAlert)
-    yield put(addAlert({ message, errors }))
+    let { message, status, errors } = yield take(emmitedAlert)
+    yield put(addAlert({ message, status, errors }))
   }
 }
 

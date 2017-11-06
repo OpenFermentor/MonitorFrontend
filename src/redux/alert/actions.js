@@ -3,5 +3,5 @@ import {
   DISMISS
 } from './action_types'
 
-export const addAlert = ({ id, message, errors, insertedAt }) => ({ type: ADD, id, message, errors, insertedAt })
+export const addAlert = ({ message, status, errors, insertedAt }) => ({ type: ADD, message, status, errors, insertedAt })
 export const dismissAlert = alert => ({ type: DISMISS, alert })

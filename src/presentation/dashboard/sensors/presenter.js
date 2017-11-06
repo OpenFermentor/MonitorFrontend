@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import Alerts from '../alerts'
 import Message from '../../common/message'
 import Screen from '../../common/screen'
 
@@ -8,8 +7,6 @@ export default class SensorsDashboardPresenter extends Component {
   render () {
     return (
       <Screen>
-
-        <Alerts />
 
         { this.props.status.error &&
           <Message
