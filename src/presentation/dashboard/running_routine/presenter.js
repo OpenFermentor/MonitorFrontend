@@ -3,7 +3,6 @@ import { Grid } from 'semantic-ui-react'
 import './styles.css'
 
 import SensorChart from '../../common/sensor_chart'
-import Alerts from '../alerts'
 import Toolbar from '../../common/toolbar'
 import Screen from '../../common/screen'
 import Container from '../../common/container'
@@ -52,8 +51,6 @@ export default class SensorsDashboardPresenter extends Component {
             onClose={this.clearExpandedMagnitude.bind(this)}
           />
         }
-
-        <Alerts />
 
         <Container>
           <Grid>

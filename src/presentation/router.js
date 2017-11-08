@@ -6,6 +6,7 @@ import MainNavigation from './navigation'
 import Dashboard from './dashboard'
 import SetUp from './set_up'
 import Experiment from './experiment'
+import Alerts from './alerts'
 
 const ROUTES = [{
   path: '/',
@@ -28,6 +29,8 @@ export default class Router extends Component {
       <BrowserRouter>
         <div>
           <MainNavigation routes={ROUTES} />
+
+          <Alerts />
 
           { ROUTES.map(({ path, component, exact }, index) => (
             <Route
