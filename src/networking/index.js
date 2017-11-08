@@ -66,8 +66,8 @@ class HttpService {
     return this._post('routines/stop')
   }
 
-  getRoutines () {
-    return this._get('routines')
+  getRoutines (page) {
+    return this._get('routines', { params: { page } })
   }
 
   getRoutine (routine) {

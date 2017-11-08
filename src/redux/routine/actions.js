@@ -57,9 +57,9 @@ export const startRoutineRequest = routine => ({ type: START_ROUTINE_REQUEST, ro
 export const startRoutineFailure = error => ({ type: START_ROUTINE_FAILURE, error })
 export const startRoutineSuccess = routine => ({ type: START_ROUTINE_SUCCESS, routine })
 
-export const fetchRoutinesRequest = () => ({ type: FETCH_ROUTINES_REQUEST })
+export const fetchRoutinesRequest = (page = 1) => ({ type: FETCH_ROUTINES_REQUEST, page })
 export const fetchRoutinesFailure = error => ({ type: FETCH_ROUTINES_FAILURE, error })
-export const fetchRoutinesSuccess = routines => ({ type: FETCH_ROUTINES_SUCCESS, routines })
+export const fetchRoutinesSuccess = (routines, pagination) => ({ type: FETCH_ROUTINES_SUCCESS, routines, pagination })
 
 export const fetchRequest = routine => ({ type: FETCH_REQUEST, routine })
 export const fetchFailure = error => ({ type: FETCH_FAILURE, error })

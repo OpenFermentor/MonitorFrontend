@@ -22,10 +22,10 @@ import {
   selectUpsertActionStatus
 } from '../selector'
 
-export function * performFetchRoutines (httpService) {
-  try {
-    const response = yield call([httpService, 'getRoutines'])
-    yield put(fetchRoutinesSuccess(response.data.data))
+export function * performFetchRoutines (httpService, { page }) {
+  try {    
+    const response = yield call([httpService, 'getRoutines'], page)
+    yield put(fetchRoutinesSuccess(response.data.data, response.data.paginate))
   } catch (error) {
     yield put(fetchRoutinesFailure(error))
   }
