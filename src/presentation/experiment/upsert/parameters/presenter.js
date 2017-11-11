@@ -6,6 +6,8 @@ import TextInputTime from '../../../common/text_input/time'
 import Button from '../../../common/button'
 import ButtonIcon from '../../../common/button/icon'
 
+import LoopDelay from './loop_delay'
+
 const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange, onSetTemperatureRange, onRemoveTemperatureRange, onUpdateRoutine }) => {
   return (
     <div>
@@ -13,15 +15,8 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
 
       <Form>
 
-        <TextInput
-          name='loopDelay'
-          error={error}
-          type='number'
-          label='Intervalo de recolección de medidas'
-          placeholder='Minutos'
-          min={0}
-          step={15}
-          value={routine.loopDelay}
+        <LoopDelay
+          routine={routine}
           onChange={loopDelay => onUpdateRoutine({ ...routine, loopDelay })}
         />
 

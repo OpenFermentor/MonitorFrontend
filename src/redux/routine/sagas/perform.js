@@ -23,7 +23,7 @@ import {
 } from '../selector'
 
 export function * performFetchRoutines (httpService, { page }) {
-  try {    
+  try {
     const response = yield call([httpService, 'getRoutines'], page)
     yield put(fetchRoutinesSuccess(response.data.data, response.data.paginate))
   } catch (error) {
