@@ -17,7 +17,7 @@ const UpsertExperimentBreadcrumb = ({ currentSection, setCurrentSection }) => {
       <Container row>
         <Grid centered={false}>
           { SECTIONS.map(({ section, title }, index) => (
-            <Grid.Column width={4} key={index} padded='horizontally'>
+            <Grid.Column width={4} key={index}>
               <a
                 className={classNames({
                   active: index === currentSectionIndex,

@@ -42,7 +42,7 @@ const UpsertExperimentDetails = ({ routine, error, onUpdateRoutine }) => {
         </Grid>
 
         <TextInputTime
-          label='Tiempo estimado en segundos'
+          label='Tiempo estimado'
           seconds={routine.estimatedTimeSeconds}
           width={8}
           onChange={estimatedTimeSeconds => onUpdateRoutine({ ...routine, estimatedTimeSeconds })}
