@@ -38,7 +38,7 @@ const ExperimentsPresenter = ({ routines, pagination, searchInProgress, error, o
                 <Table.Row key={routine.id} onClick={() => onSelectRoutine(routine)}>
                   <Table.Cell>{routine.title}</Table.Cell>
                   <Table.Cell>{routine.strain}</Table.Cell>
-                  <Table.Cell>{(routine.startedAt && (moment(routine.startedAt).format('DD/MM/YYYY HH:mm'))) || '-'}</Table.Cell>
+                  <Table.Cell>{(routine.startedDate && (moment(routine.startedDate).format('DD/MM/YYYY HH:mm'))) || '-'}</Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
