@@ -6,6 +6,10 @@ import ExperimentAnalysisPresenter from './presenter'
 import {
   selectRoutineFetchingStatus
 } from '../../../redux/routine/selector'
+
+import {
+  selectSelectedRoutineLogEntries
+} from '../../../redux/routine_log_entry/selector'
 import {
   selectSelectedRoutineTimeline
 } from '../../../redux/reading/selector'
@@ -24,6 +28,7 @@ class ExperimentAnalysis extends Component {
         fetching={this.props.fetching}
         error={this.props.error}
         timeline={this.props.timeline}
+        logEntries={this.props.logEntries}
       />
     )
   }
@@ -32,7 +37,8 @@ class ExperimentAnalysis extends Component {
 const mapStateToProps = state => {
   return {
     ...selectRoutineFetchingStatus(state),
-    timeline: selectSelectedRoutineTimeline(state)
+    timeline: selectSelectedRoutineTimeline(state),
+    logEntries: selectSelectedRoutineLogEntries(state)
   }
 }
 

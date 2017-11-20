@@ -1,0 +1,23 @@
+@value primary, accent1, accent2 from '../../../constants/colors.css';
+
+.logEntry {
+  margin-bottom: 20px;
+}
+
+.logEntry .heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.logEntry .heading * {
+  margin-bottom: 0;
+}
+
+.logEntry .title {
+  font-weight: 600 !important;
+  color: accent1;
+}
+
+.logEntry .date {
+  color: accent2;
+}

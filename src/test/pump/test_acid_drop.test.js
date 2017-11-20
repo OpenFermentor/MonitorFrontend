@@ -5,14 +5,14 @@ import {
   TEST_ACID_DROP_REQUEST,
   TEST_ACID_DROP_FAILURE,
   TEST_ACID_DROP_SUCCESS
-} from '../../../redux/calibration/pump/action_types'
+} from '../../redux/calibration/pump/action_types'
 import {
   testAcidDropRequest,
   testAcidDropFailure,
   testAcidDropSuccess
-} from '../../../redux/calibration/pump/actions'
-import reducer from '../../../redux/calibration/pump/redux'
-import { performTestAcidDrop } from '../../../redux/calibration/pump/sagas/perform'
+} from '../../redux/calibration/pump/actions'
+import reducer from '../../redux/calibration/pump/redux'
+import { performTestAcidDrop } from '../../redux/calibration/pump/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

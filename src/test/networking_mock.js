@@ -61,6 +61,14 @@ class HttpServiceMock {
       }
     }
   }
+
+  getRoutineLogEntries (routine) {
+    return {
+      data: {
+        data: [{ id: 1 }, { id: 2 }]
+      }
+    }
+  }
 }
 
 export default new HttpServiceMock()

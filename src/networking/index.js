@@ -74,6 +74,10 @@ class HttpService {
     return this._get(`routines/${routine.id}`)
   }
 
+  getRoutineLogEntries (routine) {
+    return this._get(`routines/${routine.id}/log_entries`)
+  }
+
   createRoutine (routine) {
     return this._post('routines', { routine })
   }

@@ -2,12 +2,12 @@
 
 import {
   ADD_READING
-} from '../../../redux/reading/action_types'
+} from '../../redux/reading/action_types'
 import {
   addReading
-} from '../../../redux/reading/actions'
-import reducer from '../../../redux/reading/redux'
-import routineReducer from '../../../redux/routine/redux'
+} from '../../redux/reading/actions'
+import reducer from '../../redux/reading/redux'
+import routineReducer from '../../redux/routine/redux'
 
 describe('actions', () => {
   it('should create an action to add a routine reading', () => {
