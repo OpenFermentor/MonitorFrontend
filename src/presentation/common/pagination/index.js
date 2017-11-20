@@ -54,7 +54,7 @@ const nextPages = (page, maxPage, navigateToPage) => {
   ]
 }
 
-const iterate = length =>
+const iterate = (length = 0) =>
   Array(length).fill()
 
 const pageLink = (page, navigateToPage) =>

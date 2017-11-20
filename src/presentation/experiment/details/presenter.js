@@ -8,7 +8,6 @@ import Container from '../../common/container'
 import SensorChart from '../../common/sensor_chart'
 import Button from '../../common/button'
 import ButtonLink from '../../common/button/link'
-import Message from '../../common/message'
 
 import Network from '../../../networking'
 
@@ -16,14 +15,6 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
   const loopDelayInMinutes = routine && moment.duration(routine.loopDelay).minutes()
   return (
     <Screen loading={fetching}>
-      <Container>
-        { error &&
-          <Message
-            title={error.message}
-          />
-        }
-      </Container>
-
       { routine &&
         <div>
           <Container row>
