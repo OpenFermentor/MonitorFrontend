@@ -20,7 +20,7 @@ export default class TextInputTime extends Component {
           label={this.props.label}
           placeholder='Horas'
           type='number'
-          value={hours}
+          value={!hours ? '' : hours}
           width={this.props.width || 4}
           min={0}
           onChange={changedHours => this.onChange(changedHours, minutes)}
@@ -29,7 +29,7 @@ export default class TextInputTime extends Component {
           className='inlineSecondField'
           placeholder='Minutos'
           type='number'
-          value={minutes}
+          value={!minutes ? '' : minutes}
           width={this.props.width || 4}
           max={60}
           min={0}

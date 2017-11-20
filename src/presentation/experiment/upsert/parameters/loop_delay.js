@@ -15,7 +15,7 @@ const LoopDelay = ({ routine, onChange }) => {
       label='Intervalo de recolección de medidas'
       placeholder='Minutos'
       type='number'
-      value={minutes}
+      value={!minutes ? '' : minutes}
       min={0}
       step={15}
       onChange={newMinutes => onChangeInput(newMinutes)}

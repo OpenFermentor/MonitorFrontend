@@ -1,4 +1,5 @@
 import React from 'react'
+import './styles.css'
 import { Form, Grid, Checkbox } from 'semantic-ui-react'
 
 import TextInput from '../../../common/text_input'
@@ -83,11 +84,13 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
 
         <h4>pH</h4>
 
-        <Checkbox
-          defaultChecked={routine.balancePh}
-          label='Balancear pH automáticamente'
-          onChange={() => onUpdateRoutine({ ...routine, balancePh: !routine.balancePh })}
-        />
+        <div className='balancePh'>
+          <Checkbox
+            defaultChecked={routine.balancePh}
+            label='Balancear pH automáticamente'
+            onChange={() => onUpdateRoutine({ ...routine, balancePh: !routine.balancePh })}
+          />
+        </div>
         <Grid>
           <TextInput
             name='targetPh'
