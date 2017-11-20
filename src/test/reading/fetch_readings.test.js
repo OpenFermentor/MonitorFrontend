@@ -5,15 +5,15 @@ import {
   FETCH_ROUTINE_READINGS_REQUEST,
   FETCH_ROUTINE_READINGS_FAILURE,
   FETCH_ROUTINE_READINGS_SUCCESS
-} from '../../../redux/reading/action_types'
+} from '../../redux/reading/action_types'
 import {
   fetchRoutineReadingsRequest,
   fetchRoutineReadingsFailure,
   fetchRoutineReadingsSuccess
-} from '../../../redux/reading/actions'
-import reducer from '../../../redux/reading/redux'
-import routineReducer from '../../../redux/routine/redux'
-import { performFetchRoutineReadings } from '../../../redux/reading/sagas/perform'
+} from '../../redux/reading/actions'
+import reducer from '../../redux/reading/redux'
+import routineReducer from '../../redux/routine/redux'
+import { performFetchRoutineReadings } from '../../redux/reading/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

@@ -5,14 +5,14 @@ import {
   UPDATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_FAILURE,
   UPDATE_ROUTINE_SUCCESS
-} from '../../../redux/routine/action_types'
+} from '../../redux/routine/action_types'
 import {
   updateRoutineRequest,
   updateRoutineFailure,
   updateRoutineSuccess
-} from '../../../redux/routine/actions'
-import reducer from '../../../redux/routine/redux'
-import { performUpdateRoutine } from '../../../redux/routine/sagas/perform'
+} from '../../redux/routine/actions'
+import reducer from '../../redux/routine/redux'
+import { performUpdateRoutine } from '../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

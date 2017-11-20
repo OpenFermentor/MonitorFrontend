@@ -5,14 +5,14 @@ import {
   RESTART_REQUEST,
   RESTART_FAILURE,
   RESTART_SUCCESS
-} from '../../../redux/system/action_types'
+} from '../../redux/system/action_types'
 import {
   restartRequest,
   restartFailure,
   restartSuccess
-} from '../../../redux/system/actions'
-import reducer from '../../../redux/system/redux'
-import { performSystemRestart } from '../../../redux/system/sagas/perform'
+} from '../../redux/system/actions'
+import reducer from '../../redux/system/redux'
+import { performSystemRestart } from '../../redux/system/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

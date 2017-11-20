@@ -3,11 +3,11 @@
 import Immutable from 'seamless-immutable'
 import {
   ADD
-} from '../../../redux/alert/action_types'
+} from '../../redux/alert/action_types'
 import {
   addAlert
-} from '../../../redux/alert/actions'
-import reducer from '../../../redux/alert/redux'
+} from '../../redux/alert/actions'
+import reducer from '../../redux/alert/redux'
 
 describe('actions', () => {
   it('should create an action to add a routine alert', () => {

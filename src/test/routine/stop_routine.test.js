@@ -5,14 +5,14 @@ import {
   STOP_ROUTINE_REQUEST,
   STOP_ROUTINE_FAILURE,
   STOP_ROUTINE_SUCCESS
-} from '../../../redux/routine/action_types'
+} from '../../redux/routine/action_types'
 import {
   stopRunningRoutineRequest,
   stopRunningRoutineFailure,
   stopRunningRoutineSuccess
-} from '../../../redux/routine/actions'
-import reducer from '../../../redux/routine/redux'
-import { performStopRoutine } from '../../../redux/routine/sagas/perform'
+} from '../../redux/routine/actions'
+import reducer from '../../redux/routine/redux'
+import { performStopRoutine } from '../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

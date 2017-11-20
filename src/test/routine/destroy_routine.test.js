@@ -5,14 +5,14 @@ import {
   DESTROY_ROUTINE_REQUEST,
   DESTROY_ROUTINE_FAILURE,
   DESTROY_ROUTINE_SUCCESS
-} from '../../../redux/routine/action_types'
+} from '../../redux/routine/action_types'
 import {
   destroyRoutineRequest,
   destroyRoutineFailure,
   destroyRoutineSuccess
-} from '../../../redux/routine/actions'
-import reducer from '../../../redux/routine/redux'
-import { performRemoveRoutine } from '../../../redux/routine/sagas/perform'
+} from '../../redux/routine/actions'
+import reducer from '../../redux/routine/redux'
+import { performRemoveRoutine } from '../../redux/routine/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

@@ -5,14 +5,14 @@ import {
   TEST_BASE_DROP_REQUEST,
   TEST_BASE_DROP_FAILURE,
   TEST_BASE_DROP_SUCCESS
-} from '../../../redux/calibration/pump/action_types'
+} from '../../redux/calibration/pump/action_types'
 import {
   testBaseDropRequest,
   testBaseDropFailure,
   testBaseDropSuccess
-} from '../../../redux/calibration/pump/actions'
-import reducer from '../../../redux/calibration/pump/redux'
-import { performTestBaseDrop } from '../../../redux/calibration/pump/sagas/perform'
+} from '../../redux/calibration/pump/actions'
+import reducer from '../../redux/calibration/pump/redux'
+import { performTestBaseDrop } from '../../redux/calibration/pump/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

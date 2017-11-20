@@ -9,6 +9,7 @@ import {
   DESTROY_ROUTINE_SUCCESS
 } from '../action_types'
 import * as readingActionTypes from '../../reading/action_types'
+import * as routineLogEntryActionTypes from '../../routine_log_entry/action_types'
 import {
   merge,
   replaceByIdEntries,
@@ -35,6 +36,7 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
     case readingActionTypes.FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
 
     case readingActionTypes.ADD_READING: return addRoutineReading(state, action)
+    case routineLogEntryActionTypes.FETCH_ROUTINE_LOG_ENTRIES_SUCCESS: return replaceRoutineLogEntries(state, action)
 
     default: return state
   }
@@ -43,19 +45,22 @@ const routinesById = (state = INITIAL_STATE_BY_ID, action) => {
 const replaceRoutines = (state, { routines }) =>
   replaceByIdEntries(state, routines.reverse().map(routine => ({
     ...routine,
-    readings: []
+    readings: [],
+    logEntries: []
   })))
 
 const addRoutine = (state, { routine }) =>
   addByIdEntry(state, {
     ...routine,
-    readings: []
+    readings: [],
+    logEntries: []
   })
 
 const updateRoutine = (state, { routine }) =>
   updateByIdEntry(state, {
     ...routine,
-    readings: (state[routine.id] || {}).readings || []
+    readings: (state[routine.id] || {}).readings || [],
+    logEntries: (state[routine.id] || {}).logEntries || []
   })
 
 const startRoutine = (state, { routine }) =>
@@ -78,6 +83,12 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
   updateByIdEntry(state, {
     id: routine.id,
     readings: replaceAllEntriesIds(state[routine.id].readings, readings)
+  })
+
+const replaceRoutineLogEntries = (state, { routine, logEntries }) =>
+  updateByIdEntry(state, {
+    id: routine.id,
+    logEntries: replaceAllEntriesIds(state[routine.id].logEntries, logEntries)
   })
 
 const INITIAL_STATE_ALL_IDS = []

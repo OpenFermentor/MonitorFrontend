@@ -5,14 +5,14 @@ import {
   PUSH_BASE_REQUEST,
   PUSH_BASE_FAILURE,
   PUSH_BASE_SUCCESS
-} from '../../../redux/calibration/pump/action_types'
+} from '../../redux/calibration/pump/action_types'
 import {
   pushBaseRequest,
   pushBaseFailure,
   pushBaseSuccess
-} from '../../../redux/calibration/pump/actions'
-import reducer from '../../../redux/calibration/pump/redux'
-import { performPushBase } from '../../../redux/calibration/pump/sagas/perform'
+} from '../../redux/calibration/pump/actions'
+import reducer from '../../redux/calibration/pump/redux'
+import { performPushBase } from '../../redux/calibration/pump/sagas/perform'
 import httpServiceMock from '../networking_mock'
 
 describe('actions', () => {

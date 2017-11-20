@@ -1,0 +1,19 @@
+@value border from '../../constants/border.css';
+
+.analysisContent {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+.analysisContent .data {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.analysisContent .events {
+  flex: 0.3;
+  border-left: border;
+  padding-left: 20px;
+}
