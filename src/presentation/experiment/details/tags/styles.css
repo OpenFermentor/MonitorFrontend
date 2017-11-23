@@ -1,0 +1,16 @@
+@value borderRadius from '../../../constants/border.css';
+
+.tags {
+  display: flex;
+  margin-top: -20px;
+}
+.tag {
+  padding: 7px 10px;
+  border-radius: borderRadius;
+  margin-right: 10px;
+  border: 1px solid rgb(48, 145, 214) !important;
+}
+
+.tag p {
+  color: rgb(48, 145, 214) !important;
+}
