@@ -30,8 +30,10 @@ import {
   SET_SELECTED_ROUTINE,
   CLEAR_SELECTED_ROUTINE,
 
-  SET_SEARCH_TERM,
-  CLEAR_SEARCH_TERM,
+  SEARCH_REQUEST,
+  SEARCH_FAILURE,
+  SEARCH_SUCCESS,
+  CLEAR_SEARCH,
 
   SET_DATA_RANGE,
 
@@ -82,8 +84,10 @@ export const setDataRange = (start, end) => ({ type: SET_DATA_RANGE, start, end 
 export const setSelectedRoutine = routine => ({ type: SET_SELECTED_ROUTINE, routine })
 export const clearSelectedRoutine = routine => ({ type: CLEAR_SELECTED_ROUTINE })
 
-export const setSearchTerm = (searchTerm = '') => ({ type: SET_SEARCH_TERM, searchTerm: searchTerm.toLowerCase() })
-export const clearSearchTerm = () => ({ type: CLEAR_SEARCH_TERM })
+export const searchRequest = searchTerm => ({ type: SEARCH_REQUEST, searchTerm })
+export const searchFailure = error => ({ type: SEARCH_FAILURE, error })
+export const searchSuccess = searchResults => ({ type: SEARCH_SUCCESS, searchResults })
+export const clearSearch = () => ({ type: CLEAR_SEARCH })
 
 export const upsertStartCreation = () => ({ type: UPSERT_START_CREATION })
 export const upsertStartEdition = routine => ({ type: UPSERT_START_EDITION, routine })
