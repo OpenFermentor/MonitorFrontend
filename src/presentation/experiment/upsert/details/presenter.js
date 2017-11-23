@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Grid } from 'semantic-ui-react'
 
 import TextInput from '../../../common/text_input'
+import TagsInput from '../../../common/tags_input'
 import TextArea from '../../../common/text_area'
 import TextInputTime from '../../../common/text_input/time'
 
@@ -54,6 +55,14 @@ const UpsertExperimentDetails = ({ routine, error, onUpdateRoutine }) => {
           label='Notas adicionales'
           value={routine.extraNotes || ''}
           onChange={extraNotes => onUpdateRoutine({ ...routine, extraNotes })}
+        />
+
+        <TagsInput
+          label='Etiquetas'
+          placeholder='Agregar etiqueta'
+          tags={routine.tags}
+          tagDisplayProp='value'
+          onChange={tags => onUpdateRoutine({ ...routine, tags })}
         />
 
       </Form>

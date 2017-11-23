@@ -16,9 +16,7 @@ import {
 const INITIAL_STATE = {
   currentSection: 'details',
   operation: null,
-  routine: {
-    targetDensity: 0
-  },
+  routine: {},
   tempRanges: []
 }
 

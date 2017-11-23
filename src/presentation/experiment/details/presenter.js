@@ -11,14 +11,16 @@ import ButtonLink from '../../common/button/link'
 
 import Network from '../../../networking'
 
+import TagsList from './tags'
+
 const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData, onUpdate, onStart }) => {
   const loopDelayInMinutes = routine && moment.duration(routine.loopDelay).minutes()
   return (
     <Screen loading={fetching}>
       { routine &&
-        <div>
+        <div className='routineDetails'>
           <Container row>
-            <h1>{routine.title}</h1>
+            <h2 className='title'>{routine.title}</h2>
             <Container row>
               { !routine.running &&
                 <ButtonLink primary queryParams={{ showModal: 'true' }}>Editar</ButtonLink>
@@ -29,8 +31,10 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
             </Container>
           </Container>
 
+          <TagsList tags={routine.tags} />
+
           <Container>
-            <h2>Información básica</h2>
+            <h3>Información básica</h3>
             <Grid>
               <Grid.Column width={4}>
                 <h5>Microorganismo</h5>
@@ -58,7 +62,7 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
           <Container>
 
             <Container row>
-              <h1>Ejecución</h1>
+              <h3>Ejecución</h3>
               { routine.startedDate &&
                 <Container row>
                   <ButtonLink primary pathname={`/experiments/${routine.id}/analysis`}>Analizar datos</ButtonLink>

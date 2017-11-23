@@ -1,0 +1,20 @@
+.react-tagsinput {
+  border: 1px solid rgba(34,36,38,.15) !important;
+  border-radius: .28571429rem !important;
+}
+
+.react-tagsinput-tag {
+  background-color: rgb(199, 233, 255) !important;
+  border: none !important;
+  color: rgb(48, 145, 214) !important;
+}
+
+.react-tagsinput-tag a {
+  color: rgb(48, 145, 214) !important;  
+}
+
+.tags-input input {
+  border: none !important;
+  width: auto !important;
+  padding-top: 5px !important;
+}
