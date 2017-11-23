@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, takeLatest } from 'redux-saga/effects'
 import socketService from '../../../networking/socket'
 import httpService from '../../../networking'
 
@@ -11,7 +11,8 @@ import {
   CREATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_REQUEST,
   DESTROY_ROUTINE_REQUEST,
-  UPSERT_SUBMIT
+  UPSERT_SUBMIT,
+  SEARCH_REQUEST
 } from '../action_types'
 import {
   performStopRoutine,
@@ -21,7 +22,8 @@ import {
   performUpdateRoutine,
   performRemoveRoutine,
   performFetchRoutine,
-  performSubmitUpsert
+  performSubmitUpsert,
+  performSearchRoutines
 } from './perform'
 import performRoutineChannelConnection from './perform_routine_channel_connection'
 
@@ -35,5 +37,6 @@ export default [
   takeEvery(SET_SELECTED_ROUTINE, performFetchRoutine, httpService),
   takeEvery(CREATE_ROUTINE_REQUEST, performCreateRoutine, httpService),
   takeEvery(UPDATE_ROUTINE_REQUEST, performUpdateRoutine, httpService),
-  takeEvery(DESTROY_ROUTINE_REQUEST, performRemoveRoutine, httpService)
+  takeEvery(DESTROY_ROUTINE_REQUEST, performRemoveRoutine, httpService),
+  takeLatest(SEARCH_REQUEST, performSearchRoutines, httpService)
 ]

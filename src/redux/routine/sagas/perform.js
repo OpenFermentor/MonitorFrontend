@@ -1,4 +1,5 @@
 import { call, put, select } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 import {
   fetchRoutinesFailure,
   fetchRoutinesSuccess,
@@ -15,7 +16,9 @@ import {
   startRoutineFailure,
   startRoutineSuccess,
   stopRunningRoutineFailure,
-  stopRunningRoutineSuccess
+  stopRunningRoutineSuccess,
+  searchFailure,
+  searchSuccess
 } from '../actions'
 
 import {
@@ -28,6 +31,16 @@ export function * performFetchRoutines (httpService, { page }) {
     yield put(fetchRoutinesSuccess(response.data.data, response.data.paginate))
   } catch (error) {
     yield put(fetchRoutinesFailure(error))
+  }
+}
+
+export function * performSearchRoutines (httpService, { searchTerm }) {
+  yield call(delay, 500)
+  try {
+    const response = yield call([httpService, 'searchRoutines'], searchTerm)
+    yield put(searchSuccess(response.data.data))
+  } catch (error) {
+    yield put(searchFailure(error))
   }
 }
 

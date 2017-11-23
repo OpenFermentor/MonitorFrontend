@@ -70,6 +70,15 @@ class HttpService {
     return this._get('routines', { params: { page } })
   }
 
+  searchRoutines (searchTerm) {
+    return this._get('routines', { params: {
+      title: searchTerm,
+      strain: searchTerm,
+      medium: searchTerm,
+      tag: searchTerm
+    } })
+  }
+
   getRoutine (routine) {
     return this._get(`routines/${routine.id}`)
   }

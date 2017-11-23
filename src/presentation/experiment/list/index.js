@@ -12,8 +12,8 @@ import {
 import {
   fetchRoutinesRequest,
   setSelectedRoutine,
-  clearSearchTerm,
-  setSearchTerm
+  clearSearch,
+  searchRequest
 } from '../../../redux/routine/actions'
 
 class Experiments extends Component {
@@ -28,9 +28,9 @@ class Experiments extends Component {
 
   onSearch (event, { value }) {
     if (!value) {
-      this.props.clearSearchTerm()
+      this.props.clearSearch()
     } else {
-      this.props.setSearchTerm(value)
+      this.props.searchRequest(value)
     }
   }
 
@@ -63,8 +63,8 @@ const mapDispatchToProps = dispatch => {
   return {
     requestRoutines: page => dispatch(fetchRoutinesRequest(page)),
     setSelectedRoutine: routine => dispatch(setSelectedRoutine(routine)),
-    clearSearchTerm: () => dispatch(clearSearchTerm()),
-    setSearchTerm: searchTerm => dispatch(setSearchTerm(searchTerm))
+    clearSearch: () => dispatch(clearSearch()),
+    searchRequest: searchTerm => dispatch(searchRequest(searchTerm))
   }
 }
 

@@ -13,11 +13,11 @@ import {
   SET_SELECTED_ROUTINE,
   CLEAR_SELECTED_ROUTINE,
 
-  CLEAR_SEARCH_TERM,
-  SET_SEARCH_TERM,
   FETCH_SUCCESS,
   FETCH_ROUTINES_REQUEST,
-  FETCH_ROUTINES_SUCCESS
+  FETCH_ROUTINES_SUCCESS,
+  SEARCH_SUCCESS,
+  CLEAR_SEARCH
 } from '../action_types'
 
 const requestReducer = buildActionStatusReducer({
@@ -29,12 +29,18 @@ const requestReducer = buildActionStatusReducer({
   create: true,
   update: true,
   remove: true,
-  extraActions: ['ROUTINES.START_ROUTINE', 'ROUTINES.STOP_ROUTINE', 'ROUTINES.SET_SELECTED_ROUTINE']
+  extraActions: [
+    'ROUTINES.START_ROUTINE',
+    'ROUTINES.STOP_ROUTINE',
+    'ROUTINES.SEARCH',
+    'ROUTINES.SET_SELECTED_ROUTINE'
+  ]
 })
 
 const INITIAL_STATE = {
   runningRoutine: null,
   searchTerm: null,
+  searchResults: null,
   selectedRoutine: null,
   dataRangeStart: null,
   dataRangeEnd: null,
@@ -44,9 +50,6 @@ const INITIAL_STATE = {
 const actionStatusReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'RESET': return merge(state, INITIAL_STATE)
-
-    case CLEAR_SEARCH_TERM: return clearSearchTerm(state, action)
-    case SET_SEARCH_TERM: return setSearchTerm(state, action)
 
     case START_ROUTINE_SUCCESS: return setRunningRoutine(state, action)
     case STOP_ROUTINE_SUCCESS: return clearRunningRoutine(state, action)
@@ -58,6 +61,9 @@ const actionStatusReducer = (state = INITIAL_STATE, action) => {
 
     case FETCH_ROUTINES_REQUEST: return clearSelectedRoutine(state, action)
     case FETCH_ROUTINES_SUCCESS: return addRoutinesPagination(state, action)
+
+    case SEARCH_SUCCESS: return setSearchResults(state, action)
+    case CLEAR_SEARCH: return clearSearchResults(state, action)
 
     default: return state
   }
@@ -78,11 +84,11 @@ const clearSelectedRoutine = state =>
 const setSelectedRoutine = (state, { routine }) =>
   merge(state, { selectedRoutine: routine.id })
 
-const clearSearchTerm = state =>
-merge(state, { searchTerm: null })
+const clearSearchResults = state =>
+merge(state, { searchResults: null })
 
-const setSearchTerm = (state, { searchTerm }) =>
-  merge(state, { searchTerm })
+const setSearchResults = (state, { searchResults }) =>
+  merge(state, { searchResults })
 
 const addRoutinesPagination = (state, { pagination }) =>
   merge(state, {
