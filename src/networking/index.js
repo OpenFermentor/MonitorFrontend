@@ -66,6 +66,10 @@ class HttpService {
     return this._post('routines/stop')
   }
 
+  getRunningRoutine () {
+    return this._get('routines/current')
+  }
+
   getRoutines (page) {
     return this._get('routines', { params: { page } })
   }

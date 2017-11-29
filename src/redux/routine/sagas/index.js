@@ -23,12 +23,14 @@ import {
   performRemoveRoutine,
   performFetchRoutine,
   performSubmitUpsert,
-  performSearchRoutines
+  performSearchRoutines,
+  performResumeRunningRoutine
 } from './perform'
 import performRoutineChannelConnection from './perform_routine_channel_connection'
 
 export default [
   takeEvery('BOOTED', performRoutineChannelConnection, socketService),
+  takeEvery('BOOTED', performResumeRunningRoutine, httpService),
   takeEvery(STOP_ROUTINE_REQUEST, performStopRoutine, httpService),
   takeEvery(UPSERT_SUBMIT, performSubmitUpsert),
   takeEvery(START_ROUTINE_REQUEST, performStartRoutine, httpService),

@@ -44,6 +44,18 @@ export function * performSearchRoutines (httpService, { searchTerm }) {
   }
 }
 
+export function * performResumeRunningRoutine (httpService) {
+  try {
+    const response = yield call([httpService, 'getRunningRoutine'])
+    if (response.status === 200) {
+      yield put(fetchSuccess(response.data.data))
+      yield put(startRoutineSuccess(response.data.data))
+    }
+  } catch (error) {
+    yield put(fetchFailure(error))
+  }
+}
+
 export function * performFetchRoutine (httpService, { routine }) {
   try {
     const response = yield call([httpService, 'getRoutine'], routine)
