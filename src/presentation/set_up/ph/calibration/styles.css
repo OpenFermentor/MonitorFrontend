@@ -1,6 +1,8 @@
+@value accent1, accent2 from '../../../constants/colors.css';
+
 .calibration {
-  width: 500px;
-  margin-top: 300px;
+  width: 650px;
+  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -10,14 +12,104 @@
   height: 180px;
 }
 
-.calibration .loader {
-  margin-left: auto;
-  margin-right: auto;
-  width: 350px;
-  height: 40px;
-  margin: 20px auto 10px auto;
-}
-
 .calibration .action {
   margin-top: 50px;
+}
+
+.calibration h2, .calibration .instructions {
+  margin-bottom: 30px;
+}
+
+.calibration p, .calibration .instructions li {
+  font-size: 18px;
+  line-height: 24px;
+  color: accent1;
+  font-weight: 500;
+}
+
+.calibration .instructions {
+  padding-left: 14px;
+}
+
+.calibration p.warning {
+  text-align: center;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-bottom: 35px;
+}
+
+.calibration .loader {
+  margin: 50px 0px;
+}
+
+.calibration h1.success {
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.calibration .steps {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin-left: -30px;
+  width: calc(100% + 60px);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.calibration .steps .step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px solid accent2;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.calibration .steps .step.active {
+  background: accent1;
+  border-color: accent1;
+}
+
+.calibration .steps .step.done {
+  border-color: accent1;
+  background: #fff;
+}
+
+.calibration .steps .step.done span {
+  color: accent1;
+}
+
+.calibration .steps .step.active span {
+  color: #fff;
+}
+
+.calibration .steps .step span {
+  color: accent2;
+  font-size: 28px;
+}
+
+.calibration .steps .step:first-child {
+  margin-left: 30px;
+}
+
+.calibration .steps .step:last-child {
+  margin-right: 30px;
+}
+
+.calibration .steps .line {
+  background: accent2;
+  height: 5px;
+  flex: 1 1 100%;
+}
+
+.calibration .steps .line.active, .calibration .steps .line.done {  
+  background: accent1;
 }
