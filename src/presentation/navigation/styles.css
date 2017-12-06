@@ -39,3 +39,9 @@
 .mainNavigation a.active:hover {
   background: rgba(0, 0, 0, .2)  
 }
+
+@media print {
+  .mainNavigation {
+    display: none;
+  }
+}

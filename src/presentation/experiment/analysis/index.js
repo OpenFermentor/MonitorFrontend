@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import ExperimentAnalysisPresenter from './presenter'
 
 import {
-  selectRoutineFetchingStatus
+  selectRoutineFetchingStatus, selectSelectedRoutine
 } from '../../../redux/routine/selector'
 
 import {
@@ -25,6 +25,7 @@ class ExperimentAnalysis extends Component {
   render () {
     return (
       <ExperimentAnalysisPresenter
+        routine={this.props.routine}
         fetching={this.props.fetching}
         error={this.props.error}
         timeline={this.props.timeline}
@@ -37,6 +38,7 @@ class ExperimentAnalysis extends Component {
 const mapStateToProps = state => {
   return {
     ...selectRoutineFetchingStatus(state),
+    routine: selectSelectedRoutine(state),
     timeline: selectSelectedRoutineTimeline(state),
     logEntries: selectSelectedRoutineLogEntries(state)
   }

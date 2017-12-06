@@ -3,8 +3,12 @@ import React from 'react'
 
 import Modal from '../../common/modal'
 import SensorChart from '../../common/sensor_chart'
+import Button from '../../common/button'
+import Container from '../../common/container'
 
-const ExpandedMagnitudeModal = ({ title, magnitude, timeline, onClose }) => {
+const isExternalMagnitude = magnitude => ['observancy', 'biomass', 'substratum'].includes(magnitude)
+
+const ExpandedMagnitudeModal = ({ title, magnitude, timeline, onClose, onAddReadings }) => {
   return (
     <Modal
       open
@@ -18,7 +22,15 @@ const ExpandedMagnitudeModal = ({ title, magnitude, timeline, onClose }) => {
           timeline={timeline}
           height={140}
         />
+
       </Modal.Content>
+      { isExternalMagnitude(magnitude) &&
+        <Modal.Actions>
+          <Container row end noPadding>
+            <Button primary onClick={onAddReadings}>Agregar lectura</Button>
+          </Container>
+        </Modal.Actions>
+      }
     </Modal>
   )
 }

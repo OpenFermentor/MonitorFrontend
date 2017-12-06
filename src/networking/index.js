@@ -107,6 +107,10 @@ class HttpService {
     return this._get(`routines/${routine.id}/readings`)
   }
 
+  createReading (routine, reading) {
+    return this._post(`routines/${routine.id}/readings`, { reading })
+  }
+
   startCalibration (value) {
     return this._post(`ph/${value}`)
   }

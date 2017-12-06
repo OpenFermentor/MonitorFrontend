@@ -3,7 +3,8 @@ import { omitBy } from 'lodash'
 import reduceReducers from 'reduce-reducers'
 import {
   ADD_READING,
-  FETCH_ROUTINE_READINGS_SUCCESS
+  FETCH_ROUTINE_READINGS_SUCCESS,
+  CREATE_EXTERNAL_READING_SUCCESS
 } from '../action_types'
 import * as routineActionTypes from '../../routine/action_types'
 import {
@@ -19,6 +20,7 @@ const byIdReducer = (state = INITIAL_STATE_BY_ID, action) => {
   switch (action.type) {
     case 'RESET': return INITIAL_STATE_BY_ID
     case ADD_READING: return addReading(state, action)
+    case CREATE_EXTERNAL_READING_SUCCESS: return addReading(state, action)
     default: return state
   }
 }
@@ -29,7 +31,10 @@ const addReading = (state, { reading }) =>
     routineId: reading.routineId,
     insertedAt: reading.insertedAt,
     temp: reading.temp || 0,
-    ph: reading.ph || 0
+    ph: reading.ph || 0,
+    observancy: reading.observancy || 0,
+    biomass: reading.biomass || 0,
+    substratum: reading.substratum || 0
   })
 
 const INITIAL_STATE_ALL_IDS = []
@@ -62,7 +67,10 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
       routineId: reading.routineId,
       insertedAt: reading.insertedAt,
       temp: reading.temp,
-      ph: reading.ph
+      ph: reading.ph,
+      observancy: reading.observancy,
+      biomass: reading.biomass,
+      substratum: reading.substratum
     }))),
     allIds: addEntriesIds(state.allIds.filter(id => state.byId[id].routineId !== routine.id), readings)
   })

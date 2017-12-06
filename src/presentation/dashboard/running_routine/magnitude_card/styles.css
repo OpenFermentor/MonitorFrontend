@@ -2,9 +2,11 @@
 @value accent5 from '../../../constants/colors.css';
 
 .magnitudeChart {
+  flex: 1;
   border: border;
   border-radius: borderRadius;
   padding: 20px;
+  margin: 0 5px;
 }
 
 .magnitudeChart:hover {

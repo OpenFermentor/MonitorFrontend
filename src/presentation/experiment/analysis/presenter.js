@@ -4,18 +4,23 @@ import './styles.css'
 import Screen from '../../common/screen'
 import Container from '../../common/container'
 import SensorChart from '../../common/sensor_chart'
+import Button from '../../common/button'
 
 import NavigationChart from './navigation_chart'
 import LogEntry from './log_entry'
 
-const ExperimentAnalysisPresenter = ({ timeline, logEntries, fetching, error }) => {
+const ExperimentAnalysisPresenter = ({ routine = {}, timeline, logEntries, fetching, error }) => {
   return (
     <Screen loading={fetching || timeline.labels.lenght === 0}>
 
       <div className='analysisContent'>
         <div className='data'>
+          <Container row>
+            <h2>{routine.title}</h2>
+            <Button primary onClick={() => window.print()}>Imprimir</Button>
+          </Container>
           <Container>
-            <h2>Temperatura</h2>
+            <h3>Temperatura</h3>
             <SensorChart
               magnitudes={['temp']}
               timeline={timeline}
@@ -23,9 +28,33 @@ const ExperimentAnalysisPresenter = ({ timeline, logEntries, fetching, error }) 
           </Container>
 
           <Container>
-            <h2>pH</h2>
+            <h3>pH</h3>
             <SensorChart
               magnitudes={['ph']}
+              timeline={timeline}
+            />
+          </Container>
+
+          <Container>
+            <h3>Observancia</h3>
+            <SensorChart
+              magnitudes={['observancy']}
+              timeline={timeline}
+            />
+          </Container>
+
+          <Container>
+            <h3>Sustrato</h3>
+            <SensorChart
+              magnitudes={['substratum']}
+              timeline={timeline}
+            />
+          </Container>
+
+          <Container>
+            <h3>Biomasa</h3>
+            <SensorChart
+              magnitudes={['biomass']}
               timeline={timeline}
             />
           </Container>
