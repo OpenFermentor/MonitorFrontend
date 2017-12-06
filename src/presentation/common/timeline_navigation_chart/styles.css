@@ -24,3 +24,9 @@
 .timelineNavigationChart .handler {
   position: absolute;
 }
+
+@media print {
+  .timelineNavigationChart {
+    display: none;
+  }
+}

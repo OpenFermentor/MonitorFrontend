@@ -2,6 +2,7 @@
 
 .logEntry {
   margin-bottom: 20px;
+  overflow-y: scroll;
 }
 
 .logEntry .heading {

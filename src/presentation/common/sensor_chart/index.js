@@ -4,8 +4,11 @@ import Container from '../../common/container'
 import LineChart from '../../common/chart/line'
 
 const MAGNITUDE_COLORS = {
-  temp: '#F27C21',
-  ph: '#9D5BDB'
+  temp: '#DB9439',
+  ph: '#8DB5B2',
+  observancy: '#C6625B',
+  substratum: '#739E53',
+  biomass: '#A37EA0'
 }
 
 const SensorChart = ({ timeline, magnitudes, height = 60 }) => {

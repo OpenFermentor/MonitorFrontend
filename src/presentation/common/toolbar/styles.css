@@ -36,3 +36,9 @@
   color: accent1;
   padding-top: 8px;
 }
+
+@media print {
+  .localToolbar {
+    display: none;
+  }
+}

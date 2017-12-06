@@ -4,17 +4,32 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
 }
 
 .analysisContent .data {
   flex: 1;
   padding-right: 20px;
+  padding-bottom: 120px;  
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 
 .analysisContent .events {
   flex: 0.3;
+  max-height: 100vh;
+  overflow-y: scroll;
   border-left: border;
   padding-left: 20px;
-  padding-bottom: 20px;
+  
+  padding-bottom: 120px;
+}
+
+@media print {
+  .analysisContent .data {
+    max-height: none;
+    overflow-y: none;
+  }
+  .analysisContent .events {
+    display: none;
+  }
 }

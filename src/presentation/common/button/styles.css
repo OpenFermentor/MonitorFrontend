@@ -14,3 +14,9 @@
 .ofButton.primary {
   background-color: primary !important;
 }
+
+@media print {
+  .ofButton {
+    display: none;
+  }
+}
