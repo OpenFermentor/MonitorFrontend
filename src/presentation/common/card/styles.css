@@ -13,6 +13,14 @@
   background: white;
   border-radius: 3px;
   border: 1px solid #eee;
-  padding: 30px;
   margin: 10px;
+}
+
+.card .cardHeader {
+  border-bottom: 1px solid #eee;
+  padding: 30px;
+}
+
+.card .cardInner {
+  padding: 30px;
 }
