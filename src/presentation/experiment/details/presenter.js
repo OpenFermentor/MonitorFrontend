@@ -126,7 +126,7 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
 
             { routine.readings.length > 0 &&
               <SensorChart
-                magnitudes={['temp', 'ph', 'observancy', 'substratum', 'biomass']}
+                magnitudes={['temp', 'ph', 'product', 'substratum', 'biomass']}
                 timeline={timeline}
               />
             }

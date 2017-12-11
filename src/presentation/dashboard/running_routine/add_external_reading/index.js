@@ -18,7 +18,7 @@ class AddExternalRoutine extends Component {
     super(props)
     this.state = {
       magnitudes: {
-        observancy: null,
+        product: null,
         substratum: null,
         biomass: null
       },

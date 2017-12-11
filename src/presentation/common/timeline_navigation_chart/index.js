@@ -40,7 +40,7 @@ export default class TimelineNavigationChart extends Component {
             datasets={[
               { data: this.props.timeline.temp, stroke: '#DB9439', label: 'Temperatura' },
               { data: this.props.timeline.ph, stroke: '#8DB5B2', label: 'pH' },
-              { data: this.props.timeline.observancy, stroke: '#C6625B', label: 'Observancia' },
+              { data: this.props.timeline.product, stroke: '#C6625B', label: 'Product' },
               { data: this.props.timeline.substratum, stroke: '#739E53', label: 'Sustrato' },
               { data: this.props.timeline.biomass, stroke: '#A37EA0', label: 'Biomasa' }
             ]}

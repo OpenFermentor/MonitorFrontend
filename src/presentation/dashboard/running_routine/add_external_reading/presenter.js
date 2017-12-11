@@ -18,13 +18,13 @@ const AddExternalRoutinePresenter = ({ magnitudes, error, onUpdateMagnitudes, on
       <Modal.Content>
         <Form>
           <TextInput
-            name='observancy'
+            name='product'
             error={error}
-            label='Observancia'
+            label='Producto'
             required
             type='number'
             min={0}
-            onChange={observancy => onUpdateMagnitudes({ ...magnitudes, observancy })}
+            onChange={product => onUpdateMagnitudes({ ...magnitudes, product })}
           />
           <TextInput
             name='substratum'

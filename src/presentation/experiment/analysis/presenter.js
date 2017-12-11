@@ -36,9 +36,9 @@ const ExperimentAnalysisPresenter = ({ routine = {}, timeline, logEntries, fetch
           </Container>
 
           <Container>
-            <h3>Observancia</h3>
+            <h3>Producto</h3>
             <SensorChart
-              magnitudes={['observancy']}
+              magnitudes={['product']}
               timeline={timeline}
             />
           </Container>
