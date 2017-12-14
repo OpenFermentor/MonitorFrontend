@@ -27,19 +27,23 @@ export default class Router extends Component {
   render () {
     return (
       <BrowserRouter>
-        <div>
-          <MainNavigation routes={ROUTES} />
+        <div className='base'>
+          <div className='mainWrapper'>
+            <MainNavigation routes={ROUTES} />
+
+            <div className='mainContent'>
+              { ROUTES.map(({ path, component, exact }, index) => (
+                <Route
+                  key={index}
+                  path={path}
+                  exact={exact}
+                  component={component}
+                />
+              ))}
+            </div>
+          </div>
 
           <Alerts />
-
-          { ROUTES.map(({ path, component, exact }, index) => (
-            <Route
-              key={index}
-              path={path}
-              exact={exact}
-              component={component}
-            />
-          ))}
 
         </div>
       </BrowserRouter>

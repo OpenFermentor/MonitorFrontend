@@ -44,7 +44,10 @@ class UpsertExperiment extends Component {
     if (newProps.error) {
       return this.setState({ submitting: false })
     }
+
+    this.setState({ submitting: false })
     this.props.history.goBack()
+    this.props.setCurrentSection('details')
   }
 
   onSubmit (routine) {

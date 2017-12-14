@@ -45,7 +45,7 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
               value={tempRange.temp}
               width={6}
               min={0}
-              onChange={temp => onSetTemperatureRange({ ...tempRange, temp: parseInt(temp) })}
+              onChange={temp => onSetTemperatureRange({ ...tempRange, temp: parseInt(temp, 10) })}
             />
 
             <Grid.Column width={8}>

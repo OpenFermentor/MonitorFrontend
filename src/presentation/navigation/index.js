@@ -24,10 +24,6 @@ const MainNavigation = ({ routes }) => (
           </Grid.Column>
         ))}
 
-        <Grid.Column width={4}>
-          <div />
-        </Grid.Column>
-
       </Grid>
     </Container>
   </div>

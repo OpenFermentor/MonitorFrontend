@@ -9,7 +9,7 @@
 .analysisContent .data {
   flex: 1;
   padding-right: 20px;
-  padding-bottom: 120px;  
+  padding-bottom: 120px;
   max-height: 100vh;
   overflow-y: scroll;
 }
@@ -17,11 +17,9 @@
 .analysisContent .events {
   flex: 0.3;
   max-height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-left: border;
-  padding-left: 20px;
-  
-  padding-bottom: 120px;
+  padding: 0px 20px 120px;
 }
 
 @media print {

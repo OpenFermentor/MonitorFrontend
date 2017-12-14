@@ -23,7 +23,7 @@ const SensorChart = ({ timeline, magnitudes, height = 60 }) => {
           <LineChart
             height={height}
             labels={timeline.labels}
-            datasets={magnitudes.map(magnitude => ({ data: timeline[magnitude], stroke: MAGNITUDE_COLORS[magnitude] }))}
+            datasets={magnitudes.map(magnitude => ({ data: timeline[magnitude].map(m => m.toFixed(2)), stroke: MAGNITUDE_COLORS[magnitude] }))}
           />
         }
       </div>

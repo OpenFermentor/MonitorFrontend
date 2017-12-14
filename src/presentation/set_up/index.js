@@ -28,7 +28,7 @@ const ROUTES = match => [{
 const SetUp = ({ match }) => {
   const routes = ROUTES(match)
   return (
-    <div>
+    <div className='contentWrapper'>
       <Toolbar
         breadcrumb={routes}
       />

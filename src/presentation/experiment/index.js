@@ -30,7 +30,7 @@ const ROUTES = match => [{
 const ExperimentNavigation = ({ match }) => {
   const routes = ROUTES(match)
   return (
-    <div>
+    <div className='contentWrapper'>
       <Toolbar
         breadcrumb={routes}
       />
