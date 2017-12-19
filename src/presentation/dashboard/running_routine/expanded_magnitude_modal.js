@@ -6,7 +6,7 @@ import SensorChart from '../../common/sensor_chart'
 import Button from '../../common/button'
 import Container from '../../common/container'
 
-const isExternalMagnitude = magnitude => ['observancy', 'biomass', 'substratum'].includes(magnitude)
+const isExternalMagnitude = magnitude => ['product', 'biomass', 'substratum'].includes(magnitude)
 
 const ExpandedMagnitudeModal = ({ title, magnitude, timeline, onClose, onAddReadings }) => {
   return (

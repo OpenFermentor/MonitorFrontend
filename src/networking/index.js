@@ -91,6 +91,14 @@ class HttpService {
     return this._get(`routines/${routine.id}/log_entries`)
   }
 
+  getRoutineCalculations (routine) {
+    return this._get(`routines/${routine.id}/readings/calculations`)
+  }
+
+  calculationsToCsv (routine) {
+    return `${process.env.REACT_APP_BASE_API_URL}/routines/${routine.id}/readings/calculations_to_csv`
+  }
+
   createRoutine (routine) {
     return this._post('routines', { routine })
   }

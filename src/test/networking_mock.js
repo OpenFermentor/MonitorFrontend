@@ -62,6 +62,16 @@ class HttpServiceMock {
     }
   }
 
+  getRoutineCalculations (routine) {
+    return {
+      data: {
+        data: {
+          biomassPerformance: []
+        }
+      }
+    }
+  }
+
   getRoutineLogEntries (routine) {
     return {
       data: {
