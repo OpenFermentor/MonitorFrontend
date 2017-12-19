@@ -17,6 +17,8 @@ const magnitudeTitle = magnitude => {
     case 'observancy': return 'Observancia'
     case 'substratum': return 'Sustrato'
     case 'biomass': return 'Biomasa'
+
+    default: return 'Magnitud'
   }
 }
 

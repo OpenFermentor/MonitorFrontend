@@ -27,7 +27,7 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
           name='targetTemp'
           error={error}
           required
-          label='Temperatura inicial'
+          label='Temperatura inicial objetivo'
           placeholder='Temperatura (ºC)'
           type='number'
           value={routine.targetTemp}

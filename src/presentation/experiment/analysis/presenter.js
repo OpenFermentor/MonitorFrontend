@@ -11,12 +11,12 @@ import LogEntry from './log_entry'
 
 const ExperimentAnalysisPresenter = ({ routine = {}, timeline, logEntries, fetching, error }) => {
   return (
-    <Screen loading={fetching || timeline.labels.lenght === 0}>
+    <Screen loading={fetching || timeline.labels.lenght === 0} classes='analysis' center={false}>
 
       <div className='analysisContent'>
         <div className='data'>
           <Container row>
-            <h2>{routine.title}</h2>
+            <h2 className='titleHeader'>{routine.title}</h2>
             <Button primary onClick={() => window.print()}>Imprimir</Button>
           </Container>
           <Container>
