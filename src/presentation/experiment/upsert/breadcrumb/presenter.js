@@ -10,7 +10,13 @@ const SECTIONS = [
   { section: 'parameters', title: 'Configuar parámetros' }
 ]
 
-const UpsertExperimentBreadcrumb = ({ currentSection, setCurrentSection }) => {
+const basicInfoFilled = routine => (routine.title && routine.strain && routine.medium)
+
+const handleBreadcrumClick = (routine, section, setCurrentSection) => {
+  if (section === 'details' || basicInfoFilled(routine)) setCurrentSection(section)
+}
+
+const UpsertExperimentBreadcrumb = ({ routine, currentSection, setCurrentSection }) => {
   const currentSectionIndex = SECTIONS.findIndex(({ section }) => section === currentSection)
   return (
     <div className='upsertExperimentBreadcrumb'>
@@ -21,9 +27,10 @@ const UpsertExperimentBreadcrumb = ({ currentSection, setCurrentSection }) => {
               <a
                 className={classNames({
                   active: index === currentSectionIndex,
-                  dimmed: index > currentSectionIndex
+                  dimmed: index > currentSectionIndex,
+                  disabled: !basicInfoFilled(routine)
                 })}
-                onClick={() => setCurrentSection(section)}
+                onClick={() => handleBreadcrumClick(routine, section, setCurrentSection)}
               >
                 {title}
               </a>

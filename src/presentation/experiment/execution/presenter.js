@@ -12,13 +12,14 @@ import LogEntry from './log_entry'
 
 const ExperimentExecutionPresenter = ({ routine = {}, timeline, logEntries, fetching, error }) => {
   return (
-    <Screen loading={fetching || timeline.labels.lenght === 0}>
+    <Screen loading={fetching || timeline.labels.lenght === 0} classes='analysis' center={false}>
 
       <div className='analysisContent'>
         <div className='data'>
 
           <Container row>
-            <h2>{routine.title}</h2>
+
+            <h2 className='titleHeader'>{routine.title}</h2>
             <Container row end>
               <a href={Network.routineToCsvUrl(routine)}>
                 <Button primary>Exportar a csv</Button>

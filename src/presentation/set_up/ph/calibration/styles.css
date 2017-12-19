@@ -2,7 +2,6 @@
 
 .calibration {
   width: 650px;
-  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -110,6 +109,6 @@
   flex: 1 1 100%;
 }
 
-.calibration .steps .line.active, .calibration .steps .line.done {  
+.calibration .steps .line.active, .calibration .steps .line.done {
   background: accent1;
 }

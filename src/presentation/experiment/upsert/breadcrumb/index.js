@@ -11,12 +11,13 @@ import {
 
 import UpsertExperimentBreadcrumbPresenter from './presenter'
 
-const UpsertExperimentBreadcrumb = ({ currentSection, setCurrentSection }) => {
+const UpsertExperimentBreadcrumb = ({ routine, currentSection, setCurrentSection }) => {
   return (
     <UpsertExperimentBreadcrumbPresenter
+      routine={routine}
       currentSection={currentSection}
       setCurrentSection={setCurrentSection}
-    />
+      />
   )
 }
 

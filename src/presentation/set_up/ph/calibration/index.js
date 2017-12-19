@@ -15,7 +15,7 @@ const currentValueToPh = value => {
   }
 }
 
-const Calibration = ({ inProgress, error, finished, onStart, onFinish, currentValue }) => (
+const Calibration = ({ inProgress, error, finished, onCancel, onStart, onFinish, currentValue }) => (
   <div className='calibration'>
     { !finished &&
       <Card title='Calibrar pH-metro' description='Antes de poder usar el pH-metro, deberá calibrarlo. Siga las instrucciones para hacerlo.'>
@@ -44,6 +44,8 @@ const Calibration = ({ inProgress, error, finished, onStart, onFinish, currentVa
               </div>
             </div>
           }
+          <br />
+          <Button fluid onClick={onCancel}>Cancelar</Button>
         </div>
       </Card>
     }
@@ -52,6 +54,7 @@ const Calibration = ({ inProgress, error, finished, onStart, onFinish, currentVa
         <div className='loader'>
           <h1 className='success'>Calibración exitosa</h1>
           <Button disabled={inProgress} fluid primary onClick={onFinish}>Volver a inicio</Button>
+          <Button onClick={onCancel}>Cancelar</Button>
         </div>
       </Card>
     }

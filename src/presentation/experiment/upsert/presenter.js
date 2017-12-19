@@ -18,10 +18,9 @@ export default class UpsertRoutine extends Component {
         onClose={this.props.onCancel}
         size='large'
         title={this.props.operation === 'edition' ? 'Editar experimento' : 'Crear experimento'}
-      >
+        >
 
-        <UpsertExperimentBreadcrumb
-        />
+        <UpsertExperimentBreadcrumb routine={this.props.routine} />
 
         <Modal.Content scrolling>
           <Modal.Description>
@@ -30,7 +29,7 @@ export default class UpsertRoutine extends Component {
               <Message
                 error
                 content={this.props.error.message}
-              />
+                />
             }
 
             { this.props.currentSection === 'details' &&
@@ -50,7 +49,14 @@ export default class UpsertRoutine extends Component {
               <Button negative onClick={this.props.onDestroy}>Eliminar</Button>
             }
             { this.props.currentSection === 'details' &&
-              <Button onClick={this.props.onNextSection} primary type='submit'>Siguiente</Button>
+              <Button
+                onClick={this.props.onNextSection}
+                primary
+                type='submit'
+                disabled={!this.props.routine.title || !this.props.routine.strain || !this.props.routine.medium}
+                >
+                Siguiente
+              </Button>
             }
             { this.props.currentSection === 'parameters' &&
               <Button onClick={this.props.onSubmit} primary type='submit'>Guardar</Button>

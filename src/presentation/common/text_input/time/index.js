@@ -6,8 +6,8 @@ import TextInput from '../../../common/text_input'
 
 export default class TextInputTime extends Component {
   onChange (hours, minutes) {
-    const hoursDuration = moment.duration(parseInt(hours), 'hours').asSeconds() || 0
-    const minutesDuration = moment.duration(parseInt(minutes), 'minutes').asSeconds() || 0
+    const hoursDuration = moment.duration(parseInt(hours, 10), 'hours').asSeconds() || 0
+    const minutesDuration = moment.duration(parseInt(minutes, 10), 'minutes').asSeconds() || 0
     this.props.onChange(hoursDuration + minutesDuration)
   }
   render () {

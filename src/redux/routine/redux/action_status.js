@@ -94,10 +94,10 @@ const setSearchResults = (state, { searchResults }) =>
 const addRoutinesPagination = (state, { pagination }) =>
   merge(state, {
     pagination: {
-      page: parseInt(pagination.page),
-      perPage: parseInt(pagination.perPage),
-      maxPage: parseInt(pagination.maxPage),
-      totalCount: parseInt(pagination.totalCount)
+      page: parseInt(pagination.page, 10),
+      perPage: parseInt(pagination.perPage, 10),
+      maxPage: parseInt(pagination.maxPage, 10),
+      totalCount: parseInt(pagination.totalCount, 10)
     }
   })
 

@@ -5,7 +5,7 @@ import TextInput from '../../../common/text_input'
 
 const LoopDelay = ({ routine, onChange }) => {
   const onChangeInput = minutes => {
-    const minutesDuration = moment.duration(parseInt(minutes), 'minutes').asMilliseconds() || 0
+    const minutesDuration = moment.duration(parseInt(minutes, 10), 'minutes').asMilliseconds() || 0
     onChange(minutesDuration)
   }
   const secondsDuration = moment.duration(routine.loopDelay, 'milliseconds')
