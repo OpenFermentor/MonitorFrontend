@@ -1,0 +1,12 @@
+@value border from '../../constants/border.css';
+
+
+.experimentReport .magnitudeCalculations:not(:last-child) {
+  border-bottom: border;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.experimentReport .magnitudeCalculations:last-child {
+  margin-bottom: 25px;
+}

@@ -1,5 +1,6 @@
 import { call, put, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import { sortBy, mapValues } from 'lodash'
 import {
   fetchRoutinesFailure,
   fetchRoutinesSuccess,
@@ -18,7 +19,9 @@ import {
   stopRunningRoutineFailure,
   stopRunningRoutineSuccess,
   searchFailure,
-  searchSuccess
+  searchSuccess,
+  fetchRoutineCalculationsSuccess,
+  fetchRoutineCalculationsFailure
 } from '../actions'
 
 import {
@@ -62,6 +65,21 @@ export function * performFetchRoutine (httpService, { routine }) {
     yield put(fetchSuccess(response.data.data))
   } catch (error) {
     yield put(fetchFailure(error))
+  }
+}
+
+export function * performFetchRoutineCalculations (httpService, { routine }) {
+  try {
+    const response = yield call([httpService, 'getRoutineCalculations'], routine)
+    const calculations = mapValues(response.data.data, (value, key) => {
+      if (key.toLowerCase().includes('max')) {
+        return value
+      }
+      return sortBy(value, 'x')
+    })
+    yield put(fetchRoutineCalculationsSuccess(routine, calculations))
+  } catch (error) {
+    yield put(fetchRoutineCalculationsFailure(error))
   }
 }
 

@@ -8,11 +8,13 @@ import {
   FETCH_ROUTINES_REQUEST,
   SET_SELECTED_ROUTINE,
   FETCH_REQUEST,
+  FETCH_SUCCESS,
   CREATE_ROUTINE_REQUEST,
   UPDATE_ROUTINE_REQUEST,
   DESTROY_ROUTINE_REQUEST,
   UPSERT_SUBMIT,
-  SEARCH_REQUEST
+  SEARCH_REQUEST,
+  FETCH_ROUTINE_CALCULATIONS_REQUEST
 } from '../action_types'
 import {
   performStopRoutine,
@@ -24,7 +26,8 @@ import {
   performFetchRoutine,
   performSubmitUpsert,
   performSearchRoutines,
-  performResumeRunningRoutine
+  performResumeRunningRoutine,
+  performFetchRoutineCalculations
 } from './perform'
 import performRoutineChannelConnection from './perform_routine_channel_connection'
 
@@ -33,6 +36,8 @@ export default [
   takeEvery('BOOTED', performResumeRunningRoutine, httpService),
   takeEvery(STOP_ROUTINE_REQUEST, performStopRoutine, httpService),
   takeEvery(UPSERT_SUBMIT, performSubmitUpsert),
+  takeEvery(FETCH_ROUTINE_CALCULATIONS_REQUEST, performFetchRoutineCalculations, httpService),
+  takeEvery(FETCH_SUCCESS, performFetchRoutineCalculations, httpService),
   takeEvery(START_ROUTINE_REQUEST, performStartRoutine, httpService),
   takeEvery(FETCH_ROUTINES_REQUEST, performFetchRoutines, httpService),
   takeEvery(FETCH_REQUEST, performFetchRoutine, httpService),

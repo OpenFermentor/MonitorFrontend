@@ -6,7 +6,7 @@ import LineChart from '../../common/chart/line'
 const MAGNITUDE_COLORS = {
   temp: '#DB9439',
   ph: '#8DB5B2',
-  observancy: '#C6625B',
+  product: '#C6625B',
   substratum: '#739E53',
   biomass: '#A37EA0'
 }

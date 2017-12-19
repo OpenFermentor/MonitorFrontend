@@ -14,7 +14,7 @@ const magnitudeTitle = magnitude => {
   switch (magnitude) {
     case 'temp': return 'Temperatura'
     case 'ph': return 'pH'
-    case 'observancy': return 'Observancia'
+    case 'product': return 'Producto'
     case 'substratum': return 'Sustrato'
     case 'biomass': return 'Biomasa'
 
@@ -91,10 +91,10 @@ export default class SensorsDashboardPresenter extends Component {
             />
 
           <MagnitudeCard
-            title={magnitudeTitle('observancy')}
+            title={magnitudeTitle('product')}
             valueUnit='g/L'
-            currentValue={this.props.currentValue.observancy}
-            onClick={() => this.onClickMagnitude('observancy')}
+            currentValue={this.props.currentValue.product}
+            onClick={() => this.onClickMagnitude('product')}
             />
 
           <MagnitudeCard
@@ -114,7 +114,7 @@ export default class SensorsDashboardPresenter extends Component {
 
         { this.props.timeline &&
           <SensorChart
-            magnitudes={['temp', 'ph', 'observancy', 'substratum', 'biomass']}
+            magnitudes={['temp', 'ph', 'product', 'substratum', 'biomass']}
             timeline={this.props.timeline}
             height={140}
           />

@@ -48,7 +48,11 @@ import {
   UPSERT_START_CREATION,
   UPSERT_START_EDITION,
 
-  UPSERT_SUBMIT
+  UPSERT_SUBMIT,
+
+  FETCH_ROUTINE_CALCULATIONS_REQUEST,
+  FETCH_ROUTINE_CALCULATIONS_FAILURE,
+  FETCH_ROUTINE_CALCULATIONS_SUCCESS
 } from './action_types'
 
 export const stopRunningRoutineRequest = () => ({ type: STOP_ROUTINE_REQUEST })
@@ -66,6 +70,10 @@ export const fetchRoutinesSuccess = (routines, pagination) => ({ type: FETCH_ROU
 export const fetchRequest = routine => ({ type: FETCH_REQUEST, routine })
 export const fetchFailure = error => ({ type: FETCH_FAILURE, error })
 export const fetchSuccess = routine => ({ type: FETCH_SUCCESS, routine })
+
+export const fetchRoutineCalculationsRequest = routine => ({ type: FETCH_ROUTINE_CALCULATIONS_REQUEST, routine })
+export const fetchRoutineCalculationsFailure = error => ({ type: FETCH_ROUTINE_CALCULATIONS_FAILURE, error })
+export const fetchRoutineCalculationsSuccess = (routine, calculations) => ({ type: FETCH_ROUTINE_CALCULATIONS_SUCCESS, routine, calculations })
 
 export const createRoutineRequest = routine => ({ type: CREATE_ROUTINE_REQUEST, routine })
 export const createRoutineFailure = error => ({ type: CREATE_ROUTINE_FAILURE, error })

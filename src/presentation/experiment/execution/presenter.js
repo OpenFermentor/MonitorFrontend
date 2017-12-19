@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.css'
+import Network from '../../../networking'
 
 import Screen from '../../common/screen'
 import Container from '../../common/container'
@@ -9,16 +10,24 @@ import Button from '../../common/button'
 import NavigationChart from './navigation_chart'
 import LogEntry from './log_entry'
 
-const ExperimentAnalysisPresenter = ({ routine = {}, timeline, logEntries, fetching, error }) => {
+const ExperimentExecutionPresenter = ({ routine = {}, timeline, logEntries, fetching, error }) => {
   return (
     <Screen loading={fetching || timeline.labels.lenght === 0} classes='analysis' center={false}>
 
       <div className='analysisContent'>
         <div className='data'>
+
           <Container row>
+
             <h2 className='titleHeader'>{routine.title}</h2>
-            <Button primary onClick={() => window.print()}>Imprimir</Button>
+            <Container row end>
+              <a href={Network.routineToCsvUrl(routine)}>
+                <Button primary>Exportar a csv</Button>
+              </a>
+              <Button primary onClick={() => window.print()}>Imprimir</Button>
+            </Container>
           </Container>
+
           <Container>
             <h3>Temperatura</h3>
             <SensorChart
@@ -36,9 +45,9 @@ const ExperimentAnalysisPresenter = ({ routine = {}, timeline, logEntries, fetch
           </Container>
 
           <Container>
-            <h3>Observancia</h3>
+            <h3>Producto</h3>
             <SensorChart
-              magnitudes={['observancy']}
+              magnitudes={['product']}
               timeline={timeline}
             />
           </Container>
@@ -76,4 +85,4 @@ const ExperimentAnalysisPresenter = ({ routine = {}, timeline, logEntries, fetch
   )
 }
 
-export default ExperimentAnalysisPresenter
+export default ExperimentExecutionPresenter
