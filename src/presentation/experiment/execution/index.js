@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import ExperimentAnalysisPresenter from './presenter'
+import ExperimentExecutionPresenter from './presenter'
 
 import {
   selectRoutineFetchingStatus, selectSelectedRoutine
@@ -17,14 +17,14 @@ import {
   fetchRequest
 } from '../../../redux/routine/actions'
 
-class ExperimentAnalysis extends Component {
+class ExperimentExecution extends Component {
   componentWillMount () {
     this.props.requestRoutine(this.props.match.params)
   }
 
   render () {
     return (
-      <ExperimentAnalysisPresenter
+      <ExperimentExecutionPresenter
         routine={this.props.routine}
         fetching={this.props.fetching}
         error={this.props.error}
@@ -50,4 +50,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExperimentAnalysis)
+export default connect(mapStateToProps, mapDispatchToProps)(ExperimentExecution)

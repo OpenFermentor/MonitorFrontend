@@ -32,7 +32,7 @@ const addReading = (state, { reading }) =>
     insertedAt: reading.insertedAt,
     temp: reading.temp || 0,
     ph: reading.ph || 0,
-    observancy: reading.observancy || 0,
+    product: reading.product || 0,
     biomass: reading.biomass || 0,
     substratum: reading.substratum || 0
   })
@@ -68,7 +68,7 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
       insertedAt: reading.insertedAt,
       temp: reading.temp,
       ph: reading.ph,
-      observancy: reading.observancy,
+      product: reading.product,
       biomass: reading.biomass,
       substratum: reading.substratum
     }))),

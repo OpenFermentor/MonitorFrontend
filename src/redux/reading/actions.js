@@ -11,7 +11,7 @@ import {
 
 export const addReading = reading => ({ type: ADD_READING, reading })
 
-export const createExternalReadingRequest = ({ routine, observancy, substratum, biomass }) => ({ type: CREATE_EXTERNAL_READING_REQUEST, routine, reading: { observancy, substratum, biomass } })
+export const createExternalReadingRequest = ({ routine, product, substratum, biomass }) => ({ type: CREATE_EXTERNAL_READING_REQUEST, routine, reading: { product, substratum, biomass } })
 export const createExternalReadingFailure = error => ({ type: CREATE_EXTERNAL_READING_FAILURE, error })
 export const createExternalReadingSuccess = reading => ({ type: CREATE_EXTERNAL_READING_SUCCESS, reading })
 

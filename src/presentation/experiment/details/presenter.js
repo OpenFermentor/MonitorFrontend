@@ -2,14 +2,14 @@ import React from 'react'
 import './styles.css'
 import { Grid } from 'semantic-ui-react'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 import Screen from '../../common/screen'
 import Container from '../../common/container'
 import SensorChart from '../../common/sensor_chart'
 import Button from '../../common/button'
 import ButtonLink from '../../common/button/link'
-
-import Network from '../../../networking'
+import ButtonIcon from '../../common/button/icon'
 
 import TagsList from './tags'
 
@@ -27,6 +27,9 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
               }
               { !routine.started &&
                 <Button primary onClick={onStart}>Comenzar</Button>
+              }
+              { routine.startedDate &&
+                <ButtonLink primary pathname={`/experiments/${routine.id}/report`}>Reporte</ButtonLink>
               }
             </Container>
           </Container>
@@ -61,16 +64,8 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
 
           <Container>
 
-            <Container row>
+            <Container>
               <h3>Ejecución</h3>
-              { routine.startedDate &&
-                <Container row>
-                  <ButtonLink primary pathname={`/experiments/${routine.id}/analysis`}>Analizar datos</ButtonLink>
-                  <a href={Network.routineToCsvUrl(routine)}>
-                    <Button primary>Exportar a csv</Button>
-                  </a>
-                </Container>
-              }
             </Container>
 
             <Grid>
@@ -124,9 +119,15 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
 
             </Grid>
 
+            <Container row end>
+              <Link to={{ pathname: `/experiments/${routine.id}/execution` }}>
+                <ButtonIcon primary icon='expand' />
+              </Link>
+            </Container>
+
             { routine.readings.length > 0 &&
               <SensorChart
-                magnitudes={['temp', 'ph', 'observancy', 'substratum', 'biomass']}
+                magnitudes={['temp', 'ph', 'product', 'substratum', 'biomass']}
                 timeline={timeline}
               />
             }
