@@ -4,6 +4,8 @@ import { Grid } from 'semantic-ui-react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 
+import { FUNCTIONALITY_ACCESS } from '../../router'
+
 import Screen from '../../common/screen'
 import Container from '../../common/container'
 import SensorChart from '../../common/sensor_chart'
@@ -22,10 +24,10 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
           <Container row>
             <h2 className='title'>{routine.title}</h2>
             <Container row>
-              { !routine.running &&
+              { !routine.running && FUNCTIONALITY_ACCESS.showExperimentEdition &&
                 <ButtonLink primary queryParams={{ showModal: 'true' }}>Editar</ButtonLink>
               }
-              { !routine.started &&
+              { !routine.started && FUNCTIONALITY_ACCESS.showStartExperiment &&
                 <Button primary onClick={onStart}>Comenzar</Button>
               }
               { routine.startedDate &&

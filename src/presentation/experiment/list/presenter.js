@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import './styles.css'
 
+import { FUNCTIONALITY_ACCESS } from '../../router'
+
 import Table from '../../common/table'
 import Screen from '../../common/screen'
 import Container from '../../common/container'
@@ -19,7 +21,9 @@ const ExperimentsPresenter = ({ routines, pagination, searchInProgress, error, o
         { !emptyRoutines &&
           <Search placeholder='Buscar experimento' onSearchChange={onSearch} open={false} />
         }
-        <ButtonLink primary queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
+        { FUNCTIONALITY_ACCESS.showExperimentCreation &&
+          <ButtonLink primary queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
+        }
       </Container>
 
       <Container>
