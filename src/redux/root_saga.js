@@ -6,6 +6,7 @@ import systemSagas from './system/sagas'
 import phCalibrationSagas from './calibration/ph/sagas'
 import pumpCalibrationSagas from './calibration/pump/sagas'
 import routineLogEntrySagas from './routine_log_entry/sagas'
+import sessionSagas from './session/sagas'
 
 export default function * root () {
   yield [
@@ -16,6 +17,7 @@ export default function * root () {
     ...phCalibrationSagas,
     ...pumpCalibrationSagas,
     ...systemSagas,
-    ...routineLogEntrySagas
+    ...routineLogEntrySagas,
+    ...sessionSagas
   ]
 }

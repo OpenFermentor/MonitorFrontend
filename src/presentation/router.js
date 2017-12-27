@@ -42,7 +42,8 @@ export const FUNCTIONALITY_ACCESS = {
   showStartExperiment: !isRemoteClient,
   showExperimentCreation: !isRemoteClient,
   showExperimentEdition: !isRemoteClient,
-  showExperimentFinalization: !isRemoteClient
+  showExperimentFinalization: !isRemoteClient,
+  showUserMenu: isRemoteClient
 }
 
 export default class Router extends Component {

@@ -17,6 +17,14 @@ class HttpService {
     })
   }
 
+  setSessionHeaders (accessToken) {
+    // this.instance.defaults.headers['access-token'] = accessToken
+  }
+
+  removeSessionHeaders () {
+    // this.instance.defaults.headers['access-token'] = null
+  }
+
   addDecamelizeRequestInterceptor () {
     this.instance.interceptors.request.use(config => {
       if (config.parms) {
@@ -56,6 +64,14 @@ class HttpService {
 
   routineToCsvUrl (routine) {
     return `${process.env.REACT_APP_BASE_API_URL}/routines/${routine.id}/to_csv`
+  }
+
+  signIn ({ email, password }) {
+    return this._post('sessions/login', { user: { email, password } })
+  }
+
+  signOut () {
+    return this._delete('sessions/logout')
   }
 
   startRoutine ({ id }) {

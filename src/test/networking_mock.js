@@ -1,4 +1,8 @@
 class HttpServiceMock {
+  setSessionHeaders () {}
+
+  removeSessionHeaders () {}
+
   startRoutine ({ id }) {
     return {
       data: {
@@ -78,6 +82,17 @@ class HttpServiceMock {
         data: [{ id: 1 }, { id: 2 }]
       }
     }
+  }
+
+  signIn ({ email, password }) {
+    return {
+      user: { id: 1, email },
+      token: 'a2ei3dk4'
+    }
+  }
+
+  signOut () {
+    return {}
   }
 }
 

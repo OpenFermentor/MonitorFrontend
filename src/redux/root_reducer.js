@@ -9,6 +9,7 @@ import phCalibrationReducer from './calibration/ph/redux'
 import pumpCalibrationReducer from './calibration/pump/redux'
 import systemReducer from './system/redux'
 import routineLogEntryReducer from './routine_log_entry/redux'
+import sessionReducer from './session/redux'
 
 const entities = combineReducers({
   routine: routineReducer.entity,
@@ -25,7 +26,8 @@ const actionStatus = combineReducers({
   phCalibration: phCalibrationReducer.actionStatus,
   pumpCalibration: pumpCalibrationReducer.actionStatus,
   system: systemReducer.actionStatus,
-  routineLogEntry: routineLogEntryReducer.actionStatus
+  routineLogEntry: routineLogEntryReducer.actionStatus,
+  session: sessionReducer.actionStatus
 })
 
 const rootReducer = combineReducers({
