@@ -1,32 +1,38 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import './styles.css'
-import Container from '../common/container'
-import { Grid } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-const MainNavigation = ({ routes }) => (
-  <div className='mainNavigation'>
-    <Container center noPadding>
-      <Grid>
-        <Grid.Column width={4}>
-          <h3 className='title'>OpenFermentor</h3>
-        </Grid.Column>
+import { FUNCTIONALITY_ACCESS } from '../router'
 
-        { routes.map(({ title, exact, path }, index) => (
-          <Grid.Column width={4} key={index}>
-            <NavLink
-              to={path}
-              exact={exact}
-              activeClassName='active'
-            >
-              {title}
-            </NavLink>
-          </Grid.Column>
-        ))}
+import {
+  signOutRequest
+} from '../../redux/session/actions'
 
-      </Grid>
-    </Container>
-  </div>
-)
+import {
+  selectCurrentUser
+} from '../../redux/session/selector'
 
-export default MainNavigation
+import NavigationPresenter from './presenter'
+
+class Navigation extends Component {
+  render () {
+    return (
+      <NavigationPresenter
+        routes={this.props.routes}
+        showUserMenu={FUNCTIONALITY_ACCESS.showUserMenu}
+        currentUser={this.props.currentUser}
+
+        onSignOut={this.props.signOut}
+      />
+    )
+  }
+}
+
+const mapStateToProps = state => ({
+  currentUser: selectCurrentUser(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+  signOut: () => dispatch(signOutRequest())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

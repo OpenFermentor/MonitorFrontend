@@ -20,7 +20,7 @@
   color: white;
 }
 
-.mainNavigation a {
+.mainNavigation a, .mainNavigation .dropdown > .text {
   display: block;
   color: white;
   width: 144px;
@@ -29,6 +29,10 @@
   text-align: center;
   padding-top: 18px;
 }
+
+.mainNavigation .dropdown > i {
+  color: white;
+} 
 
 .mainNavigation a.active {
   background: rgba(0, 0, 0, .2)

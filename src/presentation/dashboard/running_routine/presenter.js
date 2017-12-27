@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './styles.css'
 
+import { FUNCTIONALITY_ACCESS } from '../../router'
+
 import SensorChart from '../../common/sensor_chart'
 import Toolbar from '../../common/toolbar'
 import Screen from '../../common/screen'
@@ -53,8 +55,8 @@ export default class SensorsDashboardPresenter extends Component {
 
         <Toolbar
           title={this.props.routine.title}
-          rightActionTitle='Finalizar'
-          onClickRightAction={this.props.onRoutineStop}
+          rightActionTitle={FUNCTIONALITY_ACCESS.showExperimentFinalization ? 'Finalizar' : ''}
+          onClickRightAction={FUNCTIONALITY_ACCESS.showExperimentFinalization && this.props.onRoutineStop}
         />
 
         { this.state.expandedMagnitudeModal &&

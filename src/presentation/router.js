@@ -8,7 +8,9 @@ import SetUp from './set_up'
 import Experiment from './experiment'
 import Alerts from './alerts'
 
-const ROUTES = [{
+const isRemoteClient = process.env.REACT_APP_REMOTE_WEB_APPLICATION
+
+const LOCAL_CLIENT_ROUTES = [{
   path: '/',
   exact: true,
   component: Dashboard,
@@ -22,6 +24,27 @@ const ROUTES = [{
   component: SetUp,
   title: 'Calibración'
 }]
+
+const REMOTE_CLIENT_ROUTES = [{
+  path: '/',
+  exact: true,
+  component: Dashboard,
+  title: 'En curso'
+}, {
+  path: '/experiments',
+  component: Experiment,
+  title: 'Experimentos'
+}]
+
+const ROUTES = isRemoteClient ? REMOTE_CLIENT_ROUTES : LOCAL_CLIENT_ROUTES
+
+export const FUNCTIONALITY_ACCESS = {
+  showStartExperiment: !isRemoteClient,
+  showExperimentCreation: !isRemoteClient,
+  showExperimentEdition: !isRemoteClient,
+  showExperimentFinalization: !isRemoteClient,
+  showUserMenu: isRemoteClient
+}
 
 export default class Router extends Component {
   render () {
@@ -40,6 +63,7 @@ export default class Router extends Component {
                   component={component}
                 />
               ))}
+
             </div>
           </div>
 
