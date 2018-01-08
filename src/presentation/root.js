@@ -12,9 +12,11 @@ import {
   selectLoggedIn
 } from '../redux/session/selector'
 
+const isRemoteClient = process.env.REACT_APP_REMOTE_WEB_APPLICATION === 'true'
+
 class RootContainer extends Component {
   render () {
-    if (!this.props.loggedIn) {
+    if (isRemoteClient && !this.props.loggedIn) {
       return (
         <div>
           <SignIn />

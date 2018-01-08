@@ -8,7 +8,7 @@ import SetUp from './set_up'
 import Experiment from './experiment'
 import Alerts from './alerts'
 
-const isRemoteClient = process.env.REACT_APP_REMOTE_WEB_APPLICATION
+const isRemoteClient = process.env.REACT_APP_REMOTE_WEB_APPLICATION === 'true'
 
 const LOCAL_CLIENT_ROUTES = [{
   path: '/',
