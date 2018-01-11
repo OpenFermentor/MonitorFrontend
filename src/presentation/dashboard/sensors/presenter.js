@@ -36,11 +36,11 @@ export default class SensorsDashboardPresenter extends Component {
               }
             />
             <Message
-              positive={this.props.sensors.pump}
-              negative={!this.props.sensors.pump}
+              positive={this.props.sensors.pumps}
+              negative={!this.props.sensors.pumps}
               header='Bombas peristálticas'
               content={
-                this.props.sensors.pump ? 'Bombas operativas' : 'Bombas no operativas'
+                this.props.sensors.pumps ? 'Bombas operativas' : 'Bombas no operativas'
               }
             />
           </div>

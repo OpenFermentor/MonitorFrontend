@@ -37,7 +37,7 @@ function * receiveSensorEvents (socketService) {
 }
 
 const activeSensor = sensor =>
-  sensor === 'ON'
+  sensor === '1'
 
 const receiveStatusEventsChannel = socketService => eventChannel(emmiter => {
   socketService.receiveStatusEvents(action => emmiter(action))
