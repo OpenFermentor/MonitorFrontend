@@ -50,13 +50,26 @@ export default class SensorsDashboardPresenter extends Component {
   }
 
   render () {
+    let actions = []
+    if (FUNCTIONALITY_ACCESS.showExperimentFinalization) {
+      actions.push({
+        title: 'Finalizar',
+        onClick: this.props.onRoutineStop
+      })
+    }
+    if (FUNCTIONALITY_ACCESS.showAddExternalReading) {
+      actions.push({
+        title: 'Agregar lectura',
+        onClick: this.showAddExternalReadingModal.bind(this)
+      })
+    }
+
     return (
       <Screen>
 
         <Toolbar
           title={this.props.routine.title}
-          rightActionTitle={FUNCTIONALITY_ACCESS.showExperimentFinalization ? 'Finalizar' : ''}
-          onClickRightAction={FUNCTIONALITY_ACCESS.showExperimentFinalization && this.props.onRoutineStop}
+          actions={actions}
         />
 
         { this.state.expandedMagnitudeModal &&
@@ -65,7 +78,6 @@ export default class SensorsDashboardPresenter extends Component {
             magnitude={this.state.expandedMagnitudeModal}
             timeline={this.props.timeline}
             onClose={this.clearExpandedMagnitude.bind(this)}
-            onAddReadings={this.showAddExternalReadingModal.bind(this)}
           />
         }
 
@@ -116,7 +128,7 @@ export default class SensorsDashboardPresenter extends Component {
 
         { this.props.timeline &&
           <SensorChart
-            magnitudes={['temp', 'ph', 'product', 'substratum', 'biomass']}
+            magnitudes={['temp', 'ph']}
             timeline={this.props.timeline}
             height={140}
           />

@@ -1,5 +1,5 @@
 @value primary, accent1 from './colors.css';
-@value fontFamily: BentonSans, Helvetica, Arial, sans-serif;
+@value fontFamily: Helvetica, Arial, sans-serif;
 @value baseSize: 14px;
 
 body {

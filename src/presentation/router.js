@@ -43,6 +43,7 @@ export const FUNCTIONALITY_ACCESS = {
   showExperimentCreation: !isRemoteClient,
   showExperimentEdition: !isRemoteClient,
   showExperimentFinalization: !isRemoteClient,
+  showAddExternalReading: !isRemoteClient,
   showUserMenu: isRemoteClient
 }
 

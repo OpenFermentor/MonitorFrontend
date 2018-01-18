@@ -10,7 +10,7 @@ import Container from '../container'
 const matchedBreadcumbIndex = (location, breadcrumb) =>
   breadcrumb.find(({ path, exact }) => matchPath(location.pathname, { path, exact }))
 
-const Toolbar = ({ match, location, title, breadcrumb = [], rightActionTitle, onClickRightAction }) => {
+const Toolbar = ({ match, location, title, breadcrumb = [], actions = [] }) => {
   const matchedItem = matchedBreadcumbIndex(location, breadcrumb)
   return (
     <div className='localToolbar'>
@@ -44,9 +44,9 @@ const Toolbar = ({ match, location, title, breadcrumb = [], rightActionTitle, on
           }
         </Grid>
         <div className='actions'>
-          { rightActionTitle && onClickRightAction &&
-            <Button primary onClick={onClickRightAction}>{rightActionTitle}</Button>
-          }
+          { actions.map(({ title, onClick }, index) =>
+            <Button primary onClick={onClick}>{title}</Button>
+          )}
         </div>
       </Container>
     </div>

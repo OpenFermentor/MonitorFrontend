@@ -38,6 +38,16 @@
   padding-top: 8px;
 }
 
+.localToolbar .actions {
+  display: flex;
+  flex-direction: row;
+}
+
+.localToolbar .actions .ofButton button {
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
 @media print {
   .localToolbar {
     display: none;
