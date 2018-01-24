@@ -1,14 +1,21 @@
 @value border, borderRadius from '../../../constants/border.css';
-@value error from '../../../constants/colors.css';
+@value primary, accent1, error from '../../../constants/colors.css';
 
 .notificationAlert {
-  background: white;
   border-radius: borderRadius;
   padding: 13px;
   width: 200px;
   margin-bottom: 20px;
   width: 300px;
+  background: accent1;
+}
+
+.notificationAlert.error {
   background: error;
+}
+
+.notificationAlert.success {
+  background: primary;
 }
 
 .notificationAlert .title {

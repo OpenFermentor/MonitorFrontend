@@ -30,7 +30,7 @@ function * receiveInstructionEvents (socketService) {
   const emmitedAlert = yield call(instructionEventsEmitter, socketService)
   while (true) {
     let { message } = yield take(emmitedAlert)
-    yield put(addAlert({ message, status: 'instruction' }))
+    yield put(addAlert({ message, status: 'instruction', messageType: 'error' }))
   }
 }
 

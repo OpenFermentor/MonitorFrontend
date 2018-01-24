@@ -5,7 +5,7 @@ import Modal from '../../../common/modal'
 import Button from '../../../common/button'
 import Container from '../../../common/container'
 import TextInput from '../../../common/text_input'
-import { Form } from 'semantic-ui-react'
+import { Message, Form } from 'semantic-ui-react'
 
 const AddExternalRoutinePresenter = ({ magnitudes, error, onUpdateMagnitudes, onClose, onSubmit }) => {
   return (
@@ -45,6 +45,12 @@ const AddExternalRoutinePresenter = ({ magnitudes, error, onUpdateMagnitudes, on
             onChange={biomass => onUpdateMagnitudes({ ...magnitudes, biomass })}
           />
         </Form>
+        { error && error.type === 'String' &&
+          <Message
+            error
+            content={error.message}
+          />
+        }
       </Modal.Content>
       <Modal.Actions>
         <Container row end noPadding>

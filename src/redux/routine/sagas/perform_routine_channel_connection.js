@@ -37,7 +37,7 @@ function * receiveAlertEvents (socketService) {
   const emmitedAlert = yield call(alertEventsEmitter, socketService)
   while (true) {
     let { message, status, errors } = yield take(emmitedAlert)
-    yield put(addAlert({ message, status, errors }))
+    yield put(addAlert({ message, status, errors, messageType: 'error' }))
   }
 }
 
