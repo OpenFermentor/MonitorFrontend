@@ -24,11 +24,12 @@ const reducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-const addAlert = (state, { id, message, status, errors = [], insertedAt }) =>
+const addAlert = (state, { id, message, messageType = 'error', status, errors = [], insertedAt }) =>
   state.concat([{
     id: generateRandomId(),
     message,
     status,
+    messageType,
     errors: _.isString(errors) ? [errors] : errors,
     dismissed: false
   }])

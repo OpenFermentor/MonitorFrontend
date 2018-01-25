@@ -9,7 +9,7 @@ import {
 import * as routineSelector from '../routine/selector'
 
 const entity = state => state.entities.reading
-const actionStatus = state => state.entities.reading
+const actionStatus = state => state.actionStatus.reading
 
 export const selectFetchingStatus = createSelector(actionStatus, ({ fetching, error }) => ({ fetching, error }))
 

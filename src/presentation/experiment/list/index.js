@@ -12,6 +12,7 @@ import {
 import {
   fetchRoutinesRequest,
   setSelectedRoutine,
+  clearSelectedRoutine,
   clearSearch,
   searchRequest
 } from '../../../redux/routine/actions'
@@ -19,6 +20,7 @@ import {
 class Experiments extends Component {
   componentWillMount () {
     this.props.requestRoutines()
+    this.props.clearSelectedRoutine()
   }
 
   onSelectRoutine (routine) {
@@ -63,6 +65,7 @@ const mapDispatchToProps = dispatch => {
   return {
     requestRoutines: page => dispatch(fetchRoutinesRequest(page)),
     setSelectedRoutine: routine => dispatch(setSelectedRoutine(routine)),
+    clearSelectedRoutine: () => dispatch(clearSelectedRoutine()),
     clearSearch: () => dispatch(clearSearch()),
     searchRequest: searchTerm => dispatch(searchRequest(searchTerm))
   }

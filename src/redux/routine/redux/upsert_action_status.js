@@ -10,7 +10,10 @@ import {
   UPSERT_REMOVE_TEMPERATURE_RANGE,
   UPSERT_UPDATE_ROUTINE,
   UPSERT_START_CREATION,
-  UPSERT_START_EDITION
+  UPSERT_START_EDITION,
+  CREATE_ROUTINE_SUCCESS,
+  UPDATE_ROUTINE_SUCCESS,
+  CLEAR_SELECTED_ROUTINE
 } from '../action_types'
 
 const INITIAL_STATE = {
@@ -22,6 +25,10 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case CLEAR_SELECTED_ROUTINE: return INITIAL_STATE
+    case CREATE_ROUTINE_SUCCESS: return INITIAL_STATE
+    case UPDATE_ROUTINE_SUCCESS: return INITIAL_STATE
+
     case UPSERT_START_CREATION: return startCreation(state, action)
     case UPSERT_START_EDITION: return startEdition(state, action)
 

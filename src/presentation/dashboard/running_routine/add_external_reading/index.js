@@ -44,6 +44,8 @@ class AddExternalRoutine extends Component {
   render () {
     return (
       <AddExternalRoutinePresenter
+        fetching={this.props.fetching}
+        error={this.props.error}
         magnitudes={this.state.magnitudes}
         onClose={this.props.onClose}
         onSubmit={this.onSubmit.bind(this)}

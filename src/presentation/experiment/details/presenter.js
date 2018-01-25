@@ -122,9 +122,11 @@ const ExperimentPresenter = ({ routine, timeline, fetching, error, onAnalyzeData
             </Grid>
 
             <Container row end>
-              <Link to={{ pathname: `/experiments/${routine.id}/execution` }}>
-                <ButtonIcon primary icon='expand' />
-              </Link>
+              { routine.started &&
+                <Link to={{ pathname: `/experiments/${routine.id}/execution` }}>
+                  <ButtonIcon primary icon='expand' />
+                </Link>
+              }
             </Container>
 
             { routine.readings.length > 0 &&
