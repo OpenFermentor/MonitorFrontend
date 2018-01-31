@@ -6,7 +6,6 @@ import {
   FETCH_ROUTINE_READINGS_SUCCESS,
   CREATE_EXTERNAL_READING_SUCCESS
 } from '../action_types'
-import * as routineActionTypes from '../../routine/action_types'
 import {
   addByIdEntries,
   addByIdEntry,
@@ -54,7 +53,6 @@ const reducer = combineReducers({
 
 const routineReducer = (state = { byId: {}, allIds: [] }, action) => {
   switch (action.type) {
-    case routineActionTypes.FETCH_ROUTINES_SUCCESS: return INITIAL_STATE_BY_ID
     case FETCH_ROUTINE_READINGS_SUCCESS: return replaceRoutineReadings(state, action)
     default: return state
   }
