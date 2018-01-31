@@ -48,7 +48,7 @@ const replaceRoutines = (state, { routines }) =>
   replaceByIdEntries(state, routines.reverse().map(routine => ({
     ...routine,
     calculations: {},
-    readings: [],
+    readings: (state[routine.id] || {}).readings || [],
     logEntries: []
   })))
 
