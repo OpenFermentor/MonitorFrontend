@@ -18,7 +18,7 @@ const CalibrationPresenter = ({ fetching, error, onPushAcidPump, onTestAcidDrop,
 
       <MessageFetching
         icon='angle double right'
-        title='Empujar ácido'
+        title='Bombear ácido'
         fetching={fetching}
         error={error}
         fetchingMessage='Procesando...'
@@ -40,7 +40,7 @@ const CalibrationPresenter = ({ fetching, error, onPushAcidPump, onTestAcidDrop,
 
       <MessageFetching
         icon='angle double right'
-        title='Empujar base'
+        title='Bombear base'
         fetching={fetching}
         error={error}
         fetchingMessage='Procesando...'

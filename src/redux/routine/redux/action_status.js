@@ -3,6 +3,8 @@ import {
   merge
 } from '../../helper'
 
+import upsertActionStatusReducer from './upsert_action_status'
+
 import reduceReducers from 'reduce-reducers'
 import {
   START_ROUTINE_SUCCESS,
@@ -11,10 +13,11 @@ import {
   SET_SELECTED_ROUTINE,
   CLEAR_SELECTED_ROUTINE,
 
-  CLEAR_SEARCH_TERM,
-  SET_SEARCH_TERM,
   FETCH_SUCCESS,
-  FETCH_ROUTINES_REQUEST
+  FETCH_ROUTINES_REQUEST,
+  FETCH_ROUTINES_SUCCESS,
+  SEARCH_SUCCESS,
+  CLEAR_SEARCH
 } from '../action_types'
 
 const requestReducer = buildActionStatusReducer({
@@ -26,23 +29,28 @@ const requestReducer = buildActionStatusReducer({
   create: true,
   update: true,
   remove: true,
-  extraActions: ['ROUTINES.START_ROUTINE', 'ROUTINES.STOP_ROUTINE', 'ROUTINES.SET_SELECTED_ROUTINE']
+  extraActions: [
+    'ROUTINES.START_ROUTINE',
+    'ROUTINES.STOP_ROUTINE',
+    'ROUTINES.SEARCH',
+    'ROUTINES.SET_SELECTED_ROUTINE',
+    'ROUTINES.FETCH_ROUTINE_CALCULATIONS'
+  ]
 })
 
 const INITIAL_STATE = {
   runningRoutine: null,
   searchTerm: null,
+  searchResults: null,
   selectedRoutine: null,
   dataRangeStart: null,
-  dataRangeEnd: null
+  dataRangeEnd: null,
+  pagination: null
 }
 
-const appStateReducer = (state = INITIAL_STATE, action) => {
+const actionStatusReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'RESET': return merge(state, INITIAL_STATE)
-
-    case CLEAR_SEARCH_TERM: return clearSearchTerm(state, action)
-    case SET_SEARCH_TERM: return setSearchTerm(state, action)
 
     case START_ROUTINE_SUCCESS: return setRunningRoutine(state, action)
     case STOP_ROUTINE_SUCCESS: return clearRunningRoutine(state, action)
@@ -53,6 +61,10 @@ const appStateReducer = (state = INITIAL_STATE, action) => {
     case CLEAR_SELECTED_ROUTINE: return clearSelectedRoutine(state, action)
 
     case FETCH_ROUTINES_REQUEST: return clearSelectedRoutine(state, action)
+    case FETCH_ROUTINES_SUCCESS: return addRoutinesPagination(state, action)
+
+    case SEARCH_SUCCESS: return setSearchResults(state, action)
+    case CLEAR_SEARCH: return clearSearchResults(state, action)
 
     default: return state
   }
@@ -73,10 +85,29 @@ const clearSelectedRoutine = state =>
 const setSelectedRoutine = (state, { routine }) =>
   merge(state, { selectedRoutine: routine.id })
 
-const clearSearchTerm = state =>
-merge(state, { searchTerm: null })
+const clearSearchResults = state =>
+merge(state, { searchResults: null })
 
-const setSearchTerm = (state, { searchTerm }) =>
-  merge(state, { searchTerm })
+const setSearchResults = (state, { searchResults }) =>
+  merge(state, { searchResults })
 
-export default reduceReducers(requestReducer, appStateReducer)
+const addRoutinesPagination = (state, { pagination }) =>
+  merge(state, {
+    pagination: {
+      page: parseInt(pagination.page, 10),
+      perPage: parseInt(pagination.perPage, 10),
+      maxPage: parseInt(pagination.maxPage, 10),
+      totalCount: parseInt(pagination.totalCount, 10)
+    }
+  })
+
+const upsertReducer = (state, action) => {
+  if (!state) {
+    return { upsert: upsertActionStatusReducer(undefined, action) }
+  }
+  return merge(state, {
+    upsert: upsertActionStatusReducer(state.upsert, action)
+  })
+}
+
+export default reduceReducers(requestReducer, actionStatusReducer, upsertReducer)

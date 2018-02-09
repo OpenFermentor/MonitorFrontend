@@ -9,7 +9,7 @@ import {
 import * as routineSelector from '../routine/selector'
 
 const entity = state => state.entities.reading
-const actionStatus = state => state.entities.reading
+const actionStatus = state => state.actionStatus.reading
 
 export const selectFetchingStatus = createSelector(actionStatus, ({ fetching, error }) => ({ fetching, error }))
 
@@ -76,6 +76,9 @@ const getTimeline = readings => {
     insertedAt: readings.map(({ insertedAt }) => insertedAt),
     labels: normalizedReadings.map(({ insertedAt }) => insertedAt),
     temp: normalizedReadings.map(({ temp }) => temp),
-    ph: normalizedReadings.map(({ ph }) => ph)
+    ph: normalizedReadings.map(({ ph }) => ph),
+    product: normalizedReadings.map(({ product }) => product),
+    biomass: normalizedReadings.map(({ biomass }) => biomass),
+    substratum: normalizedReadings.map(({ substratum }) => substratum)
   }
 }

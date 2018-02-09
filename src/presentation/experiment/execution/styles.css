@@ -1,0 +1,52 @@
+@value border from '../../constants/border.css';
+
+.screen.analysis {
+  margin-top: 0px;
+  height: calc(100% - 47px);
+  display: flex;
+  flex-direction: column;
+}
+
+.analysisContent {
+  width: 80%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: row;
+  padding-top: 102px;
+  height: 100%;
+  flex: 1 1 100%;
+}
+
+.analysisContent .data {
+  flex: 1;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.analysisContent .data h2.titleHeader {
+  margin-bottom: 0px;
+  padding-top: 8px;
+}
+
+.analysisContent .events {
+  flex: 0.3;
+  max-height: 100vh;
+  overflow-y: auto;
+  border-left: border;
+  padding: 0px 20px 20px;
+}
+
+@media print {
+  .mainContent {
+    overflow: visible;
+  }
+  .analysisContent .data {
+    max-height: none;
+    overflow-y: visible;
+  }
+  .analysisContent .events {
+    display: none;
+  }
+}

@@ -1,12 +1,11 @@
-# MonitorFrontend
-This repo contains the code related to the local backend that is in charge of running and monitoring the routine run on the fermentor.
-This server will run locally inside the terminal that will be directly connected to the micro-controller.
+# Web-Monitor
+This repo contains the code related to the frontend of the [Local-Monitor](https://openfermentor.github.io/Local-Monitor/) and [Cloud-Backend](https://github.com/OpenFermentor/Cloud-Backend/).
 
-This repo contains the code related to the frontend of the [MonitorBackend](https://openfermentor.github.io/MonitorBackend/)
-
-
-# Instalation
-To run the MonitorBackend follow these steps:
+## Instalation
+To run the Web-Monitor follow these steps:
   1. Clone the repo.
   2. Installs the dependencies using the yarn package manager `yarn`
-  4. Run the server: `yarn start`
+  3. Run the server: `yarn start`
+
+## Contributing
+please refer to our [contributing guide](https://github.com/OpenFermentor/Guidelines/blob/master/contributing_guide.md) for more information.

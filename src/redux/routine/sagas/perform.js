@@ -1,11 +1,15 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
+import { sortBy, mapValues } from 'lodash'
 import {
   fetchRoutinesFailure,
   fetchRoutinesSuccess,
   fetchFailure,
   fetchSuccess,
+  createRoutineRequest,
   createRoutineFailure,
   createRoutineSuccess,
+  updateRoutineRequest,
   updateRoutineFailure,
   updateRoutineSuccess,
   destroyRoutineFailure,
@@ -13,15 +17,45 @@ import {
   startRoutineFailure,
   startRoutineSuccess,
   stopRunningRoutineFailure,
-  stopRunningRoutineSuccess
+  stopRunningRoutineSuccess,
+  searchFailure,
+  searchSuccess,
+  fetchRoutineCalculationsSuccess,
+  fetchRoutineCalculationsFailure
 } from '../actions'
 
-export function * performFetchRoutines (httpService) {
+import {
+  selectUpsertActionStatus
+} from '../selector'
+
+export function * performFetchRoutines (httpService, { page }) {
   try {
-    const response = yield call([httpService, 'getRoutines'])
-    yield put(fetchRoutinesSuccess(response.data.data))
+    const response = yield call([httpService, 'getRoutines'], page)
+    yield put(fetchRoutinesSuccess(response.data.data, response.data.paginate))
   } catch (error) {
     yield put(fetchRoutinesFailure(error))
+  }
+}
+
+export function * performSearchRoutines (httpService, { searchTerm }) {
+  yield call(delay, 500)
+  try {
+    const response = yield call([httpService, 'searchRoutines'], searchTerm)
+    yield put(searchSuccess(response.data.data))
+  } catch (error) {
+    yield put(searchFailure(error))
+  }
+}
+
+export function * performResumeRunningRoutine (httpService) {
+  try {
+    const response = yield call([httpService, 'getRunningRoutine'])
+    if (response.status === 200) {
+      yield put(fetchSuccess(response.data.data))
+      yield put(startRoutineSuccess(response.data.data))
+    }
+  } catch (error) {
+    yield put(fetchFailure(error))
   }
 }
 
@@ -34,7 +68,31 @@ export function * performFetchRoutine (httpService, { routine }) {
   }
 }
 
-export function * performCreateRoutine (httpService, { type, ...routine }) {
+export function * performFetchRoutineCalculations (httpService, { routine }) {
+  try {
+    const response = yield call([httpService, 'getRoutineCalculations'], routine)
+    const calculations = mapValues(response.data.data, (value, key) => {
+      if (key.toLowerCase().includes('max')) {
+        return value
+      }
+      return sortBy(value, 'x')
+    })
+    yield put(fetchRoutineCalculationsSuccess(routine, calculations))
+  } catch (error) {
+    yield put(fetchRoutineCalculationsFailure(error))
+  }
+}
+
+export function * performSubmitUpsert () {
+  const { operation, routine, tempRanges } = yield select(selectUpsertActionStatus)
+  if (operation === 'creation') {
+    yield put(createRoutineRequest({ ...routine, tempRanges }))
+  } else {
+    yield put(updateRoutineRequest({ ...routine, tempRanges }))
+  }
+}
+
+export function * performCreateRoutine (httpService, { type, routine }) {
   try {
     const response = yield call([httpService, 'createRoutine'], routine)
     yield put(createRoutineSuccess(response.data.data))

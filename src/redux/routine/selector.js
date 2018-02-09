@@ -6,7 +6,8 @@ const entity = state => state.entities.routine
 const actionStatus = state => state.actionStatus.routine
 
 export const selectRoutineFetchingStatus = createSelector(actionStatus, ({ fetching, error }) => ({ fetching, error }))
-export const selectSearchInProgress = createSelector(actionStatus, ({ searchTerm }) => !!searchTerm)
+export const selectRoutinePagination = createSelector(actionStatus, ({ pagination }) => pagination)
+export const selectSearchInProgress = createSelector(actionStatus, ({ searchResults }) => !!searchResults)
 
 export const selectIsRunningRoutine = createSelector(actionStatus, ({ runningRoutine }) => !!runningRoutine)
 
@@ -42,14 +43,21 @@ export const selectRunningRoutineLastValue = createSelector(
 export const selectRoutines = createSelector(
   entity,
   actionStatus,
-  ({ byId, allIds }, { searchTerm }) =>
-    allIds.map(id => byId[id]).filter(({ title }) =>
-      !searchTerm || title.toLowerCase().search(searchTerm) > -1
-    )
+  ({ byId, allIds }, { searchResults }) =>
+    searchResults || allIds.map(id => byId[id])
 )
 
 export const selectSelectedRoutine = createSelector(
   entity,
   actionStatus,
-  ({ byId }, { selectedRoutine }) => byId[selectedRoutine]
+  ({ byId }, { selectedRoutine, runningRoutine }) => {
+    if (selectedRoutine) {
+      return ({
+        ...byId[selectedRoutine],
+        running: runningRoutine === selectedRoutine
+      })
+    }
+  }
 )
+
+export const selectUpsertActionStatus = state => actionStatus(state).upsert

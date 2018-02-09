@@ -18,6 +18,7 @@ const ExpandedMagnitudeModal = ({ title, magnitude, timeline, onClose }) => {
           timeline={timeline}
           height={140}
         />
+
       </Modal.Content>
     </Modal>
   )

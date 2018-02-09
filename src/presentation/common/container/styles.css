@@ -19,7 +19,11 @@
 .container.row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between
+  justify-content: space-between;
+}
+
+.container.row.center {
+  justify-content: center;
 }
 
 .container.end {

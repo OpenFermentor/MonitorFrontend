@@ -6,8 +6,11 @@ import MainNavigation from './navigation'
 import Dashboard from './dashboard'
 import SetUp from './set_up'
 import Experiment from './experiment'
+import Alerts from './alerts'
 
-const ROUTES = [{
+const isRemoteClient = process.env.REACT_APP_REMOTE_WEB_APPLICATION === 'true'
+
+const LOCAL_CLIENT_ROUTES = [{
   path: '/',
   exact: true,
   component: Dashboard,
@@ -22,21 +25,50 @@ const ROUTES = [{
   title: 'Calibración'
 }]
 
+const REMOTE_CLIENT_ROUTES = [{
+  path: '/',
+  exact: true,
+  component: Dashboard,
+  title: 'En curso'
+}, {
+  path: '/experiments',
+  component: Experiment,
+  title: 'Experimentos'
+}]
+
+const ROUTES = isRemoteClient ? REMOTE_CLIENT_ROUTES : LOCAL_CLIENT_ROUTES
+
+export const FUNCTIONALITY_ACCESS = {
+  showStartExperiment: !isRemoteClient,
+  showExperimentCreation: !isRemoteClient,
+  showExperimentEdition: !isRemoteClient,
+  showExperimentFinalization: !isRemoteClient,
+  showAddExternalReading: !isRemoteClient,
+  showUserMenu: isRemoteClient
+}
+
 export default class Router extends Component {
   render () {
     return (
       <BrowserRouter>
-        <div>
-          <MainNavigation routes={ROUTES} />
+        <div className='base'>
+          <div className='mainWrapper'>
+            <MainNavigation routes={ROUTES} />
 
-          { ROUTES.map(({ path, component, exact }, index) => (
-            <Route
-              key={index}
-              path={path}
-              exact={exact}
-              component={component}
-            />
-          ))}
+            <div className='mainContent'>
+              { ROUTES.map(({ path, component, exact }, index) => (
+                <Route
+                  key={index}
+                  path={path}
+                  exact={exact}
+                  component={component}
+                />
+              ))}
+
+            </div>
+          </div>
+
+          <Alerts />
 
         </div>
       </BrowserRouter>

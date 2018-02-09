@@ -2,14 +2,17 @@ import React from 'react'
 import moment from 'moment'
 import './styles.css'
 
+import { FUNCTIONALITY_ACCESS } from '../../router'
+
 import Table from '../../common/table'
 import Screen from '../../common/screen'
 import Container from '../../common/container'
 import Search from '../../common/search'
 import Message from '../../common/message'
 import ButtonLink from '../../common/button/link'
+import Pagination from '../../common/pagination'
 
-const ExperimentsPresenter = ({ routines, searchInProgress, error, onSelectRoutine, onSearch, onCancel }) => {
+const ExperimentsPresenter = ({ routines, pagination, searchInProgress, error, onSelectRoutine, onNavigateToPage, onSearch, onCancel }) => {
   const emptyRoutines = routines.length === 0 && !searchInProgress
   return (
     <Screen>
@@ -18,7 +21,9 @@ const ExperimentsPresenter = ({ routines, searchInProgress, error, onSelectRouti
         { !emptyRoutines &&
           <Search placeholder='Buscar experimento' onSearchChange={onSearch} open={false} />
         }
-        <ButtonLink primary queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
+        { FUNCTIONALITY_ACCESS.showExperimentCreation &&
+          <ButtonLink primary queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
+        }
       </Container>
 
       <Container>
@@ -37,7 +42,7 @@ const ExperimentsPresenter = ({ routines, searchInProgress, error, onSelectRouti
                 <Table.Row key={routine.id} onClick={() => onSelectRoutine(routine)}>
                   <Table.Cell>{routine.title}</Table.Cell>
                   <Table.Cell>{routine.strain}</Table.Cell>
-                  <Table.Cell>{(routine.startedAt && (moment(routine.startedAt).format('DD/MM/YYYY HH:mm'))) || '-'}</Table.Cell>
+                  <Table.Cell>{(routine.startedDate && (moment(routine.startedDate).format('DD/MM/YYYY HH:mm'))) || '-'}</Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
@@ -64,6 +69,10 @@ const ExperimentsPresenter = ({ routines, searchInProgress, error, onSelectRouti
             title='Sin resultados'
             dimmed
           />
+        }
+
+        { routines.length > 0 &&
+          <Pagination {...pagination} navigateToPage={onNavigateToPage} />
         }
 
       </Container>

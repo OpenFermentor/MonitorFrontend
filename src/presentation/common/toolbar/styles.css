@@ -1,14 +1,15 @@
 @value border from '../../constants/border.css';
 @value accent1, accent2 from '../../constants/colors.css';
 
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .localToolbar {
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin-top: 54px;
+  flex: 0 0 47px;
+  width: 100%;
   border-bottom: border;
   height: 47px;
   background: white;
@@ -35,4 +36,20 @@
   font-weight: 500;
   color: accent1;
   padding-top: 8px;
+}
+
+.localToolbar .actions {
+  display: flex;
+  flex-direction: row;
+}
+
+.localToolbar .actions .ofButton button {
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+@media print {
+  .localToolbar {
+    display: none;
+  }
 }

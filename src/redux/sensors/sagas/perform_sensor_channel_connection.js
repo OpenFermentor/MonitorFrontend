@@ -2,7 +2,7 @@ import { call, take, put, fork } from 'redux-saga/effects'
 import { eventChannel, END } from 'redux-saga'
 import {
   sensorsError,
-  sensorsOperative
+  sensorsStatusUpdate
 } from '../actions'
 
 export default function * performSensorChannelConnection (socketService) {
@@ -22,7 +22,7 @@ export default function * performSensorChannelConnection (socketService) {
 const joinSensorChannel = socket => eventChannel(emmiter => {
   socket.joinSensorTopic({
     onSuccess: () => { emmiter({ joined: true }) },
-    onError: () => emmiter(END),
+    onFailure: () => emmiter(END),
     onTimeout: () => emmiter(END)
   })
   return () => socket.leaveSensorTopic()
@@ -31,10 +31,13 @@ const joinSensorChannel = socket => eventChannel(emmiter => {
 function * receiveSensorEvents (socketService) {
   const eventSensor = yield call(receiveStatusEventsChannel, socketService)
   while (true) {
-    yield take(eventSensor)
-    yield put(sensorsOperative())
+    const { ph, pumps, temp } = yield take(eventSensor)
+    yield put(sensorsStatusUpdate({ ph: activeSensor(ph), pumps: activeSensor(pumps), temp: activeSensor(temp) }))
   }
 }
+
+const activeSensor = sensor =>
+  sensor === '1'
 
 const receiveStatusEventsChannel = socketService => eventChannel(emmiter => {
   socketService.receiveStatusEvents(action => emmiter(action))

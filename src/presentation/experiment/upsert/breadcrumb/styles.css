@@ -1,0 +1,45 @@
+@value border from '../../../constants/border.css';
+@value primary, accent1, accent2 from '../../../constants/colors.css';
+
+.upsertExperimentBreadcrumb {
+  border-bottom: border;
+  height: 47px;
+  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.upsertExperimentBreadcrumb .container {
+  width: 100%;
+  margin-left: 20px;
+}
+
+.upsertExperimentBreadcrumb .grid {
+  width: 100%;
+}
+
+.upsertExperimentBreadcrumb a {
+  color: accent1;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.upsertExperimentBreadcrumb a.dimmed {
+  color: accent2;
+}
+
+.upsertExperimentBreadcrumb a.active {
+  color: primary;
+}
+
+.upsertExperimentBreadcrumb a.disabled {
+  cursor: not-allowed;
+}
+
+.upsertExperimentBreadcrumb h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: accent1;
+  padding-top: 8px;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { Message } from 'semantic-ui-react'
 
-import Alerts from '../alerts'
-import Message from '../../common/message'
+import InfoMessage from '../../common/message'
 import Screen from '../../common/screen'
 
 export default class SensorsDashboardPresenter extends Component {
@@ -9,25 +9,45 @@ export default class SensorsDashboardPresenter extends Component {
     return (
       <Screen>
 
-        <Alerts />
-
-        { this.props.status.error &&
-          <Message
+        { this.props.error &&
+          <InfoMessage
             centerVertical
             title='Se produjo un error en los sensores'
-            subtitle={this.props.status.error}
+            subtitle={this.props.error}
           />
         }
 
-        { this.props.status.operative &&
-          <Message
-            centerVertical
-            title='Sensores en funcionamiento'
-          />
+        { this.props.statusLoaded &&
+          <div>
+            <Message
+              positive={this.props.sensors.temp}
+              negative={!this.props.sensors.temp}
+              header='Temperatura'
+              content={
+                this.props.sensors.temp ? 'Sensor operativo' : 'Sesor no operativo'
+              }
+            />
+            <Message
+              positive={this.props.sensors.ph}
+              negative={!this.props.sensors.ph}
+              header='pH'
+              content={
+                this.props.sensors.ph ? 'Sensor operativo' : 'Sesor no operativo'
+              }
+            />
+            <Message
+              positive={this.props.sensors.pumps}
+              negative={!this.props.sensors.pumps}
+              header='Bombas peristálticas'
+              content={
+                this.props.sensors.pumps ? 'Bombas operativas' : 'Bombas no operativas'
+              }
+            />
+          </div>
         }
 
-        { !this.props.status.operative && !this.props.status.error &&
-          <Message
+        { !this.props.statusLoaded &&
+          <InfoMessage
             centerVertical
             dimmed
             title='Cargando estado de sensores...'

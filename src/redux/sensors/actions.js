@@ -1,7 +1,7 @@
 import {
   SENSORS_ERROR,
-  SENSORS_OPERATIVE
+  STATUS_UPDATE
 } from './action_types'
 
 export const sensorsError = error => ({ type: SENSORS_ERROR, error })
-export const sensorsOperative = () => ({ type: SENSORS_OPERATIVE })
+export const sensorsStatusUpdate = sensors => ({ type: STATUS_UPDATE, sensors })

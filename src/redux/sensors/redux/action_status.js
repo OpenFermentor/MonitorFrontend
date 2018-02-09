@@ -1,6 +1,6 @@
 import {
   SENSORS_ERROR,
-  SENSORS_OPERATIVE
+  STATUS_UPDATE
 } from '../action_types'
 
 import {
@@ -8,22 +8,23 @@ import {
 } from '../../helper'
 
 const INITIAL_STATE = {
-  operative: false,
+  sensors: {},
+  statusLoaded: false,
   error: null
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SENSORS_ERROR: return sensorsError(state, action)
-    case SENSORS_OPERATIVE: return sensorsOperative(state, action)
+    case STATUS_UPDATE: return sensorsStatusUpdate(state, action)
     default: return state
   }
 }
 
 const sensorsError = (state, { error }) =>
-  merge(state, { error, operative: false })
+  merge(state, { error, statusLoaded: true })
 
-const sensorsOperative = state =>
-  merge(state, { error: null, operative: true })
+const sensorsStatusUpdate = (state, { sensors }) =>
+  merge(state, { error: null, sensors, statusLoaded: true })
 
 export default reducer

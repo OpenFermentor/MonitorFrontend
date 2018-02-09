@@ -27,7 +27,7 @@ export default function * performRoutineChannelConnection (socketService) {
 const joinRoutineChannel = socket => eventChannel(emmiter => {
   socket.joinRoutineTopic({
     onSuccess: () => { console.log('JOINED'); emmiter({ joined: true }) },
-    onError: () => emmiter(END),
+    onFailure: () => emmiter(END),
     onTimeout: () => emmiter(END)
   })
   return () => socket.leaveRoutineTopic()
@@ -36,8 +36,8 @@ const joinRoutineChannel = socket => eventChannel(emmiter => {
 function * receiveAlertEvents (socketService) {
   const emmitedAlert = yield call(alertEventsEmitter, socketService)
   while (true) {
-    let { message, errors } = yield take(emmitedAlert)
-    yield put(addAlert({ message, errors }))
+    let { message, status, errors } = yield take(emmitedAlert)
+    yield put(addAlert({ message, status, errors, messageType: 'error' }))
   }
 }
 
@@ -49,8 +49,8 @@ const alertEventsEmitter = socketService => eventChannel(emmiter => {
 function * receiveUpdateEvents (socketService) {
   const emmitedUpdate = yield call(updateEventsEmitter, socketService)
   while (true) {
-    let { routine_id, id, temp, ph, inserted_at = moment().format() } = yield take(emmitedUpdate)
-    yield put(addReading({ routineId: routine_id, id, temp, ph, insertedAt: inserted_at }))
+    let { routine_id, inserted_at = moment().format(), ...data } = yield take(emmitedUpdate)
+    yield put(addReading({ ...data, routineId: routine_id, insertedAt: inserted_at }))
   }
 }
 

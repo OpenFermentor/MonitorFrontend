@@ -5,29 +5,38 @@ import Toolbar from '../common/toolbar'
 
 import Experiments from './list'
 import Experiment from './details'
-import ExperimentAnalysis from './analysis'
+import ExperimentExecution from './execution'
+import ExperimentReport from './report'
 import ExperimentCreation from './upsert'
 
 const ROUTES = match => [{
   path: match.url,
   exact: true,
+  itemIndex: 0,
   component: Experiments,
   title: 'Experimentos'
 }, {
   path: match.url + '/:id',
   exact: true,
+  itemIndex: 1,
   component: Experiment,
   title: 'Experimento'
 }, {
-  path: match.url + '/:id/analysis',
-  component: ExperimentAnalysis,
-  title: 'Análisis'
+  path: match.url + '/:id/execution',
+  component: ExperimentExecution,
+  itemIndex: 2,
+  title: 'Ejecución'
+}, {
+  path: match.url + '/:id/report',
+  component: ExperimentReport,
+  itemIndex: 2,
+  title: 'Reporte'
 }]
 
 const ExperimentNavigation = ({ match }) => {
   const routes = ROUTES(match)
   return (
-    <div>
+    <div className='contentWrapper'>
       <Toolbar
         breadcrumb={routes}
       />
