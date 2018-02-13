@@ -4,16 +4,18 @@ import './styles.css'
 
 import Anchor from './anchor'
 
+const SPACING_FOR_ANCHOR_END_POSITION = 40
+const HANDLER_WIDTH = 24
+
 export default class DraggableHandler extends Component {
   constructor (props) {
     super(props)
     this.state = {
       containerX: 0,
-      width: 150,
+      width: props.initialWidth,
       translateY: 0
     }
   }
-
   onLeftAnchorDrag (x) {
     this.setState({ width: this.state.width - x, translateY: this.state.translateY + x })
   }
@@ -33,11 +35,12 @@ export default class DraggableHandler extends Component {
   }
 
   render () {
+    const { containerX, width, translateY } = this.state
     return (
       <Draggable
         bounds={{
-          left: this.state.translateY * -1,
-          right: this.props.endPosition - this.state.width - this.state.translateY
+          left: translateY * -1,
+          right: this.props.endPosition - width - translateY
         }}
         axis='x'
         handle='.draggableHandlerDraggableSurface'
@@ -48,22 +51,23 @@ export default class DraggableHandler extends Component {
           <div
             className='draggableHandlerDraggableSurface'
             style={{
-              width: this.state.width,
-              transform: `translate(${this.state.translateY}px, 0)`
+              width: width,
+              transform: `translate(${translateY}px, 0)`
             }}
           />
           <Anchor
             left
-            startPosition={this.state.containerX * -1}
+            startPosition={containerX * -1}
+            endPosition={translateY + width - SPACING_FOR_ANCHOR_END_POSITION}
             defaultPosition={-12}
             onDrag={this.onLeftAnchorDrag.bind(this)}
             onDragEnd={this.onDrag.bind(this)}
           />
           <Anchor
             right
-            locked={this.props.endPosition - this.state.containerX === this.state.width + this.state.translateY}
-            endPosition={this.props.endPosition - this.state.containerX}
-            defaultPosition={140}
+            startPosition={SPACING_FOR_ANCHOR_END_POSITION + translateY}
+            endPosition={this.props.endPosition - containerX}
+            defaultPosition={this.state.width - (HANDLER_WIDTH / 2)}
             onDrag={this.onRightAnchorDrag.bind(this)}
             onDragEnd={this.onDrag.bind(this)}
           />

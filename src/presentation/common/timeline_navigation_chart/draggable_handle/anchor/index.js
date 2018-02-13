@@ -19,7 +19,6 @@ export default class DraggableHandler extends Component {
         handle='.dragabbleHandlerAnchor .handler'
         defaultPosition={{x: this.props.defaultPosition, y: 0}}
         position={null}
-        onStart={this.handleStart}
         onDrag={this.onDrag.bind(this)}
         onStop={this.onDragEnd.bind(this)}>
         <div className='dragabbleHandlerAnchor'>
