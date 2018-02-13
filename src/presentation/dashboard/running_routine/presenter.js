@@ -65,76 +65,76 @@ export default class SensorsDashboardPresenter extends Component {
     }
 
     return (
-      <Screen>
-
+      <div className='dashboardWrapper'>
         <Toolbar
           title={this.props.routine.title}
           actions={actions}
         />
+        <Screen>
+          { this.state.expandedMagnitudeModal &&
+            <ExpandedMagnitudeModal
+              title={magnitudeTitle(this.state.expandedMagnitudeModal)}
+              magnitude={this.state.expandedMagnitudeModal}
+              timeline={this.props.timeline}
+              onClose={this.clearExpandedMagnitude.bind(this)}
+            />
+          }
 
-        { this.state.expandedMagnitudeModal &&
-          <ExpandedMagnitudeModal
-            title={magnitudeTitle(this.state.expandedMagnitudeModal)}
-            magnitude={this.state.expandedMagnitudeModal}
-            timeline={this.props.timeline}
-            onClose={this.clearExpandedMagnitude.bind(this)}
-          />
-        }
+          { this.state.addExternalReadingModal &&
+            <AddExternalReadingModal
+              onClose={this.hideExternalReadingModal.bind(this)}
+            />
+          }
 
-        { this.state.addExternalReadingModal &&
-          <AddExternalReadingModal
-            onClose={this.hideExternalReadingModal.bind(this)}
-          />
-        }
-
-        <Container row>
-          <MagnitudeCard
-            title={magnitudeTitle('temp')}
-            valueUnit='ºC'
-            targetValue={this.props.routine.targetTemp}
-            currentValue={this.props.currentValue.temp}
-            onClick={() => this.onClickMagnitude('temp')}
-          />
-
-          <MagnitudeCard
-            title={magnitudeTitle('ph')}
-            valueUnit='pH'
-            targetValue={this.props.routine.targetPh}
-            currentValue={this.props.currentValue.ph}
-            onClick={() => this.onClickMagnitude('ph')}
+          <Container row>
+            <MagnitudeCard
+              title={magnitudeTitle('temp')}
+              valueUnit='ºC'
+              targetValue={this.props.routine.targetTemp}
+              currentValue={this.props.currentValue.temp}
+              onClick={() => this.onClickMagnitude('temp')}
             />
 
-          <MagnitudeCard
-            title={magnitudeTitle('product')}
-            valueUnit='g/L'
-            currentValue={this.props.currentValue.product}
-            onClick={() => this.onClickMagnitude('product')}
+            <MagnitudeCard
+              title={magnitudeTitle('ph')}
+              valueUnit='pH'
+              targetValue={this.props.routine.targetPh}
+              currentValue={this.props.currentValue.ph}
+              onClick={() => this.onClickMagnitude('ph')}
+              />
+
+            <MagnitudeCard
+              title={magnitudeTitle('product')}
+              valueUnit='g/L'
+              currentValue={this.props.currentValue.product}
+              onClick={() => this.onClickMagnitude('product')}
+              />
+
+            <MagnitudeCard
+              title={magnitudeTitle('substratum')}
+              valueUnit='g/L'
+              currentValue={this.props.currentValue.substratum}
+              onClick={() => this.onClickMagnitude('substratum')}
+              />
+
+            <MagnitudeCard
+              title={magnitudeTitle('biomass')}
+              valueUnit='g/L'
+              currentValue={this.props.currentValue.biomass}
+              onClick={() => this.onClickMagnitude('biomass')}
+              />
+          </Container>
+
+          { this.props.timeline &&
+            <SensorChart
+              magnitudes={['temp', 'ph']}
+              timeline={this.props.timeline}
+              height={140}
             />
+          }
 
-          <MagnitudeCard
-            title={magnitudeTitle('substratum')}
-            valueUnit='g/L'
-            currentValue={this.props.currentValue.substratum}
-            onClick={() => this.onClickMagnitude('substratum')}
-            />
-
-          <MagnitudeCard
-            title={magnitudeTitle('biomass')}
-            valueUnit='g/L'
-            currentValue={this.props.currentValue.biomass}
-            onClick={() => this.onClickMagnitude('biomass')}
-            />
-        </Container>
-
-        { this.props.timeline &&
-          <SensorChart
-            magnitudes={['temp', 'ph']}
-            timeline={this.props.timeline}
-            height={140}
-          />
-        }
-
-      </Screen>
+        </Screen>
+      </div>
     )
   }
 }

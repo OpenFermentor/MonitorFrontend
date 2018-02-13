@@ -23,6 +23,7 @@
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  margin: 0;
 }
 
 .upsertExperimentBreadcrumb a.dimmed {
