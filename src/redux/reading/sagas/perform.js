@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects'
+import moment from 'moment'
 
 import {
   fetchRoutineReadingsFailure,
@@ -11,7 +12,10 @@ import { addAlert } from '../../alert/actions'
 export function * performFetchRoutineReadings (httpService, { routine }) {
   try {
     const response = yield call([httpService, 'getRoutineReadings'], routine)
-    yield put(fetchRoutineReadingsSuccess(routine, response.data.data))
+    const readings = response.data.data.sort((firstReading, secondReading) =>
+      moment(firstReading.insertedAt) - moment(secondReading.insertedAt)
+    )
+    yield put(fetchRoutineReadingsSuccess(routine, readings))
   } catch (error) {
     yield put(fetchRoutineReadingsFailure(error))
   }

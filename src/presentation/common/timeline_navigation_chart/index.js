@@ -16,6 +16,7 @@ export default class TimelineNavigationChart extends Component {
   componentDidMount () {
     this.setState({ elementWidth: this.container.offsetWidth })
   }
+
   onRangeChange ({ start, end }) {
     this.props.onRangeChange({
       start: start / (this.container.offsetWidth + CHART_PADDING),
@@ -28,10 +29,13 @@ export default class TimelineNavigationChart extends Component {
       <div className='timelineNavigationChart'>
         <div className='wrapper' ref={ref => { this.container = ref }}>
           <div className='handler'>
-            <DraggableHandler
-              endPosition={this.state.elementWidth}
-              onRangeChange={this.onRangeChange.bind(this)}
-            />
+            { this.container &&
+              <DraggableHandler
+                initialWidth={this.container.offsetWidth + CHART_PADDING}
+                endPosition={this.state.elementWidth}
+                onRangeChange={this.onRangeChange.bind(this)}
+              />
+            }
           </div>
           <LineChart
             height={20}
