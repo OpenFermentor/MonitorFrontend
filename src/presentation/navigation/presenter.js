@@ -12,8 +12,8 @@ const MainNavigation = ({ routes, currentUser, showUserMenu, onSignOut }) => (
           <h3 className='title'>OpenFermentor</h3>
         </Grid.Column>
 
-        { routes.map(({ title, exact, path }, index) => (
-          <Grid.Column width={4} key={index}>
+        { routes.map(({ title, exact, path }) => (
+          <Grid.Column width={4} key={title}>
             <NavLink
               to={path}
               exact={exact}

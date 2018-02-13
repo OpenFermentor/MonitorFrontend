@@ -21,10 +21,15 @@
   width: 100%;
 }
 
+.localToolbar .column {
+  padding-left: 0 !important;
+}
+
 .localToolbar a {
   font-size: 16px;
   font-weight: 500;
   color: accent2;
+  margin: 0;
 }
 
 .localToolbar a.active {
@@ -41,6 +46,8 @@
 .localToolbar .actions {
   display: flex;
   flex-direction: row;
+  height: 0;
+  margin-top: -16px;
 }
 
 .localToolbar .actions .ofButton button {

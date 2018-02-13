@@ -40,4 +40,4 @@ const mapDispatchToProps = dispatch => ({
   requestRoutineStop: () => dispatch(stopRunningRoutineRequest())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RunningRoutineDashboard))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RunningRoutineDashboard))

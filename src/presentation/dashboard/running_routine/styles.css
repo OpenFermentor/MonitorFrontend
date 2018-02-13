@@ -16,3 +16,7 @@
 .dashboard .sensorChartRow > * {
   flex: 1
 }
+
+.dashboardWrapper .localToolbar .grid {
+  margin-left: 2px;
+}

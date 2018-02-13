@@ -43,7 +43,7 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
               type='number'
               required
               value={tempRange.temp}
-              width={6}
+              width={7}
               min={0}
               onChange={temp => onSetTemperatureRange({ ...tempRange, temp: parseInt(temp, 10) })}
             />
@@ -57,7 +57,7 @@ const UpsertExperimentParameters = ({ routine, tempRanges, error, onAddTempRange
               />
             </Grid.Column>
 
-            <Grid.Column width={2}>
+            <Grid.Column width={1}>
               <ButtonIcon
                 className='inlineSecondField'
                 icon='close'
