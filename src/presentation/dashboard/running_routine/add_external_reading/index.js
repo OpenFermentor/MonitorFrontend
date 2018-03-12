@@ -5,7 +5,7 @@ import {
   createExternalReadingRequest
 } from '../../../../redux/reading/actions'
 import {
-  selectSelectedRoutine
+  selectRunningRoutine
 } from '../../../../redux/routine/selector'
 import {
   selectFetchingStatus
@@ -57,7 +57,7 @@ class AddExternalRoutine extends Component {
 
 const mapStateToProps = state => ({
   ...selectFetchingStatus(state),
-  routine: selectSelectedRoutine(state)
+  routine: selectRunningRoutine(state)
 })
 
 const mapDispatchToProps = dispatch => ({

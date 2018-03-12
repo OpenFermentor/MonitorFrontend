@@ -8,6 +8,19 @@ import Screen from '../../common/screen'
 import Container from '../../common/container'
 import Calculation from './calculation'
 
+const BIOMASS_CALCULATIONS = [
+  'biomassPerformance',
+  'biomassVolumetricPerformance',
+  'specificBiomassVelocity'
+]
+
+const PRODUCT_CALCULATIONS = [
+  'productPerformance',
+  'biomassVolumetricPerformance',
+  'specificBiomassVelocity'
+]
+
+
 const ExperimentReportPresenter = ({ routine = {}, fetching, error }) => {
   return (
     <Screen loading={fetching}>
@@ -29,40 +42,54 @@ const ExperimentReportPresenter = ({ routine = {}, fetching, error }) => {
             <Container>
               <h2>Biomasa</h2>
             </Container>
-            <Calculation
-              routine={routine}
-              calculation='biomassPerformance'
-            />
-            <Calculation
-              routine={routine}
-              calculation='biomassVolumetricPerformance'
-              max='maxBiomassVolumetricPerformance'
-            />
-            <Calculation
-              routine={routine}
-              calculation='specificBiomassVelocity'
-              max='maxBiomassVelocity'
-            />
+            { hasCalculations(routine, BIOMASS_CALCULATIONS) ? (
+              <div>
+                <Calculation
+                  routine={routine}
+                  calculation='biomassPerformance'
+                />
+                <Calculation
+                  routine={routine}
+                  calculation='biomassVolumetricPerformance'
+                  max='maxBiomassVolumetricPerformance'
+                />
+                <Calculation
+                  routine={routine}
+                  calculation='specificBiomassVelocity'
+                  max='maxBiomassVelocity'
+                />
+              </div>
+              ) : (
+                <p>No hay cálculos de Biomasa disponibles</p>
+              )
+            }
           </div>
 
           <div className='magnitudeCalculations'>
             <Container>
               <h2>Producto</h2>
             </Container>
-            <Calculation
-              routine={routine}
-              calculation='productPerformance'
-            />
-            <Calculation
-              routine={routine}
-              calculation='productVolumetricPerformance'
-              max='maxProductVolumetricPerformance'
-            />
-            <Calculation
-              routine={routine}
-              calculation='specificProductVelocity'
-              max='maxProductVelocity'
-            />
+            { hasCalculations(routine, PRODUCT_CALCULATIONS) ? (
+              <div>
+                <Calculation
+                  routine={routine}
+                  calculation='productPerformance'
+                />
+                <Calculation
+                  routine={routine}
+                  calculation='productVolumetricPerformance'
+                  max='maxProductVolumetricPerformance'
+                />
+                <Calculation
+                  routine={routine}
+                  calculation='specificProductVelocity'
+                  max='maxProductVelocity'
+                />
+              </div>
+              ) : (
+                <p>No hay cálculos de Producto disponibles</p>
+              )
+            }
           </div>
 
           <div className='magnitudeCalculations'>
@@ -81,5 +108,8 @@ const ExperimentReportPresenter = ({ routine = {}, fetching, error }) => {
     </Screen>
   )
 }
+
+const hasCalculations = (routine, calculationsCategory) =>
+  !!calculationsCategory.find(calculation => !isEmpty(routine.calculations[calculation]))
 
 export default ExperimentReportPresenter

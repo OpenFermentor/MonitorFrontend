@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import moment from 'moment';
 import { omitBy } from 'lodash'
 import reduceReducers from 'reduce-reducers'
 import {
@@ -29,12 +30,18 @@ const addReading = (state, { reading }) =>
     id: reading.id,
     routineId: reading.routineId,
     insertedAt: reading.insertedAt,
-    temp: reading.temp || 0,
-    ph: reading.ph || 0,
-    product: reading.product || 0,
-    biomass: reading.biomass || 0,
-    substratum: reading.substratum || 0
+    temp: reading.temp || findLastMagnitudeValue(state, 'temp', reading.routineId),
+    ph: reading.ph || findLastMagnitudeValue(state, 'ph', reading.routineId),
+    product: reading.product || findLastMagnitudeValue(state, 'product', reading.routineId),
+    biomass: reading.biomass || findLastMagnitudeValue(state, 'biomass', reading.routineId),
+    substratum: reading.substratum || findLastMagnitudeValue(state, 'substratum', reading.routineId)
   })
+
+const findLastMagnitudeValue = (state, magnitude, routineId) =>
+  (Object.values(state)
+    .filter(r => r.routineId === routineId)
+    .sort(r => moment(r.insertedAt))
+    .find(reading => reading[magnitude]) || { [magnitude]: null })[magnitude]
 
 const INITIAL_STATE_ALL_IDS = []
 
@@ -64,11 +71,11 @@ const replaceRoutineReadings = (state, { routine, readings }) =>
       id: reading.id,
       routineId: reading.routineId,
       insertedAt: reading.insertedAt,
-      temp: reading.temp,
-      ph: reading.ph,
-      product: reading.product,
-      biomass: reading.biomass,
-      substratum: reading.substratum
+      temp: reading.temp || findLastMagnitudeValue(state.byId, 'temp', reading.routineId),
+      ph: reading.ph || findLastMagnitudeValue(state.byId, 'ph', reading.routineId),
+      product: reading.product || findLastMagnitudeValue(state.byId, 'product', reading.routineId),
+      biomass: reading.biomass || findLastMagnitudeValue(state.byId, 'biomass', reading.routineId),
+      substratum: reading.substratum || findLastMagnitudeValue(state.byId, 'substratum', reading.routineId)
     }))),
     allIds: addEntriesIds(state.allIds.filter(id => state.byId[id].routineId !== routine.id), readings)
   })

@@ -24,8 +24,11 @@ const reducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-const addAlert = (state, { id, message, messageType = 'error', status, errors = [], insertedAt }) =>
-  state.concat([{
+const addAlert = (state, { id, message, messageType = 'error', status, errors = [], insertedAt }) => {
+  if (existsActiveAlertWithMessage(state, message)) {
+    return state
+  }
+  return state.concat([{
     id: generateRandomId(),
     message,
     status,
@@ -33,6 +36,10 @@ const addAlert = (state, { id, message, messageType = 'error', status, errors = 
     errors: _.isString(errors) ? [errors] : errors,
     dismissed: false
   }])
+}
+
+const existsActiveAlertWithMessage = (state, message) => 
+  state.find(alert => alert.message === message && !alert.dismissed)
 
 const dismissAlert = (state, { alert }) =>
   state.map(existingAlert => {
