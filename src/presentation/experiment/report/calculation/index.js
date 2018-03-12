@@ -1,4 +1,5 @@
 import React from 'react'
+import { isEmpty } from 'lodash'
 import './styles.css'
 
 import Chart from './chart'
@@ -35,6 +36,9 @@ const getMagnitudeName = calculationName =>
   Object.keys(MAGNITUDE_COLORS).find(m => calculationName.toLowerCase().includes(m))
 
 const Calculation = ({ routine, calculation, max }) => {
+  if (isEmpty(routine.calculations[calculation])) {
+    return null
+  }
   return (
     <Container className='calculation'>
       <Container noPadding row>

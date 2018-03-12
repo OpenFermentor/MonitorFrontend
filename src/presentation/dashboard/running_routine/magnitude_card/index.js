@@ -4,19 +4,17 @@ import './styles.css'
 import Container from '../../../common/container'
 
 const MagnitudeCard = ({ title, currentValue, targetValue, valueUnit, onClick }) => {
-  if (!currentValue) {
-    return null
-  }
+  const displayValue = currentValue === null || currentValue === undefined ? 'N/A' : `${currentValue} ${valueUnit}`
   return (
     <div className='magnitudeChart' onClick={onClick}>
       <div className='header'>
         <Container row noPadding>
           <h4>{title}</h4>
-          <p>{targetValue} {valueUnit}</p>
+          { !!targetValue &&
+            <p>{targetValue} {valueUnit}</p>
+          }
         </Container>
-        { currentValue &&
-          <h1>{currentValue} {valueUnit}</h1>
-        }
+        <h1>{displayValue}</h1>
       </div>
     </div>
   )

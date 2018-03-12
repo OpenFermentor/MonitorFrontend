@@ -1,5 +1,13 @@
 @value secondary from '../../constants/colors.css';
 
+.ui.page.modals.dimmer.transition.visible.active {
+  display: flex !important;
+}
+
+.ui.large.modal.transition.visible.active {
+  margin-top: 0 !important;
+}
+
 .modal .header {
   background: secondary !important;
 }
