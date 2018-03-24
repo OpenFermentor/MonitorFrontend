@@ -22,7 +22,7 @@ const Toolbar = ({ match, location, title, breadcrumb = [], actions = [] }) => {
             </Grid.Column>
           }
           { breadcrumb &&
-            breadcrumb.map(({ path, title, itemIndex }) => {
+            breadcrumb.map(({ url, path, title, itemIndex }) => {
               if (itemIndex > matchedItem.itemIndex) {
                 return null
               }
@@ -32,7 +32,7 @@ const Toolbar = ({ match, location, title, breadcrumb = [], actions = [] }) => {
               return (
                 <Grid.Column width={3} key={itemIndex}>
                   <NavLink
-                    to={path}
+                    to={url || path}
                     isActive={() => itemIndex === matchedItem.itemIndex}
                     activeClassName='active'
                   >

@@ -60,4 +60,7 @@ export const selectSelectedRoutine = createSelector(
   }
 )
 
-export const selectUpsertActionStatus = state => actionStatus(state).upsert
+export const selectUpsertActionStatus = createSelector(
+  actionStatus,
+  ({ upsert  }) => upsert 
+)

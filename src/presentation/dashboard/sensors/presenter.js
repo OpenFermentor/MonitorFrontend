@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Message } from 'semantic-ui-react'
+import './styles.css'
 
 import InfoMessage from '../../common/message'
 import Screen from '../../common/screen'
@@ -18,7 +19,7 @@ export default class SensorsDashboardPresenter extends Component {
         }
 
         { this.props.statusLoaded &&
-          <div>
+          <div className="sensorStatusContent">
             <Message
               positive={this.props.sensors.temp}
               negative={!this.props.sensors.temp}
