@@ -39,6 +39,7 @@ class Experiments extends Component {
   render () {
     return (
       <ExperimentsPresenter
+        fetching={this.props.fetching}
         routines={this.props.routines}
         searchInProgress={this.props.searchInProgress}
         pagination={this.props.pagination}

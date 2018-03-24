@@ -45,7 +45,7 @@ const reducer = (state = INITIAL_STATE, action) => {
 }
 
 const startCreation = () =>
-  merge(INITIAL_STATE, { operation: 'creation' })
+  merge(INITIAL_STATE, { operation: 'creation', routine: {} })
 
 const startEdition = (state, { routine }) =>
   merge(INITIAL_STATE, {

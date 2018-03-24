@@ -10,15 +10,15 @@ const buildActionStatusReducer = ({ namespace, prefix, pluralPrefix, index, get,
     return merge(state, { fetching: null, error: null })
   }
 
-  if (baseActionTypes.map(action => `${action}_REQUEST`).includes(action.type)) {
+  if (baseActionTypes.map(actionType => `${actionType}_REQUEST`).includes(action.type)) {
     return merge(state, { fetching: true, error: null })
   }
 
-  if (baseActionTypes.map(action => `${action}_FAILURE`).includes(action.type)) {
+  if (baseActionTypes.map(actionType => `${actionType}_FAILURE`).includes(action.type)) {
     return merge(state, { fetching: false, error: action.error })
   }
 
-  if (baseActionTypes.map(action => `${action}_SUCCESS`).includes(action.type)) {
+  if (baseActionTypes.map(actionType => `${actionType}_SUCCESS`).includes(action.type)) {
     return merge(state, { fetching: false, error: null })
   }
 
@@ -33,7 +33,7 @@ const buildBaseActionTypes = ({ namespace, prefix, pluralPrefix, index, get, upd
   }
 
   if (get) {
-    actionTypes.push(`${namespace}FETCH_${prefix}`)
+    actionTypes.push(`${namespace}FETCH`)
   }
 
   if (update) {

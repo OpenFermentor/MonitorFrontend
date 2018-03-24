@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 
@@ -17,6 +18,15 @@ import {
   upsertStartCreation,
   upsertStartEdition
 } from '../../../redux/routine/actions'
+
+const ModalHandler = ({ location }) => {
+  const params = queryString.parse(location.search)
+  const shouldOpenModal = params.showModal === 'true'
+  if (!shouldOpenModal) {
+    return null;
+  }
+  return <ConnectedUpsertExperiment />
+}
 
 class UpsertExperiment extends Component {
   constructor (props) {
@@ -38,7 +48,7 @@ class UpsertExperiment extends Component {
     if (!this.props.selectedRoutine && newProps.selectedRoutine) {
       this.props.startEdition(newProps.selectedRoutine)
     }
-    if (!this.shouldOpenModal() || !this.state.submitting || newProps.fetching) {
+    if (!this.state.submitting || newProps.fetching) {
       return
     }
     if (newProps.error) {
@@ -60,15 +70,7 @@ class UpsertExperiment extends Component {
     this.props.requestDestroy(this.props.routine)
   }
 
-  shouldOpenModal () {
-    const params = queryString.parse(this.props.location.search)
-    return params.showModal === 'true'
-  }
-
   render () {
-    if (!this.shouldOpenModal()) {
-      return null
-    }
     return (
       <UpsertExperimentPresenter
         fetching={this.props.fetching}
@@ -100,4 +102,6 @@ const mapDispatchToProps = dispatch => ({
   startEdition: routine => dispatch(upsertStartEdition(routine))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpsertExperiment)
+const ConnectedUpsertExperiment = withRouter(connect(mapStateToProps, mapDispatchToProps)(UpsertExperiment));
+
+export default ModalHandler;
