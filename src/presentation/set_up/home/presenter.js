@@ -29,11 +29,11 @@ const SetUpHomePresenter = ({ fetching, error, submitted, location, history, onR
 
       <MessageFetching
         icon='refresh'
-        title='Reiniciar sistema'
+        title='Reconectar sensores'
         fetching={fetching}
         error={error}
-        fetchingMessage='Reiniciando...'
-        submittedMessage='Sistema Reiniciado'
+        fetchingMessage='Reconectando...'
+        submittedMessage='Sensores conectados'
         onClick={onReconnectSensors}
       />
 
