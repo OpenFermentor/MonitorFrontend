@@ -14,7 +14,7 @@ const LOCAL_CLIENT_ROUTES = [{
   path: '/',
   exact: true,
   component: Dashboard,
-  title: 'En curso'
+  title: 'Monitor'
 }, {
   path: '/experiments',
   component: Experiment,
@@ -29,7 +29,7 @@ const REMOTE_CLIENT_ROUTES = [{
   path: '/',
   exact: true,
   component: Dashboard,
-  title: 'En curso'
+  title: 'Monitor'
 }, {
   path: '/experiments',
   component: Experiment,

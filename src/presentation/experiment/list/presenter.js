@@ -1,33 +1,51 @@
-import React from 'react'
-import moment from 'moment'
-import './styles.css'
+import React from "react";
+import moment from "moment";
+import "./styles.css";
+import { Loader } from "semantic-ui-react";
 
-import { FUNCTIONALITY_ACCESS } from '../../router'
+import { FUNCTIONALITY_ACCESS } from "../../router";
 
-import Table from '../../common/table'
-import Screen from '../../common/screen'
-import Container from '../../common/container'
-import Search from '../../common/search'
-import Message from '../../common/message'
-import ButtonLink from '../../common/button/link'
-import Pagination from '../../common/pagination'
+import Table from "../../common/table";
+import Screen from "../../common/screen";
+import Container from "../../common/container";
+import Search from "../../common/search";
+import Message from "../../common/message";
+import ButtonLink from "../../common/button/link";
+import Pagination from "../../common/pagination";
 
-const ExperimentsPresenter = ({ fetching, routines, pagination, searchInProgress, error, onSelectRoutine, onNavigateToPage, onSearch, onCancel }) => {
-  const emptyRoutines = routines.length === 0 && !searchInProgress
+const ExperimentsPresenter = ({
+  fetching,
+  routines,
+  pagination,
+  searchInProgress,
+  error,
+  onSelectRoutine,
+  onNavigateToPage,
+  onSearch,
+  onCancel
+}) => {
+  const emptyRoutines = routines.length === 0 && !searchInProgress;
   return (
-    <Screen loading={fetching}>
-
+    <Screen>
       <Container row>
-        { !emptyRoutines &&
-          <Search placeholder='Buscar experimento' onSearchChange={onSearch} open={false} />
-        }
-        { FUNCTIONALITY_ACCESS.showExperimentCreation &&
-          <ButtonLink primary queryParams={{ showModal: 'true' }}>Crear experimento</ButtonLink>
-        }
+        {!emptyRoutines && (
+          <Search
+            placeholder="Buscar experimento"
+            onSearchChange={onSearch}
+            open={false}
+          />
+        )}
+        {FUNCTIONALITY_ACCESS.showExperimentCreation && (
+          <ButtonLink primary queryParams={{ showModal: "true" }}>
+            Crear experimento
+          </ButtonLink>
+        )}
       </Container>
 
+      {fetching && <Loader active inline="centered" />}
+
       <Container>
-        { routines.length > 0 &&
+        {routines.length > 0 && (
           <Table selectable>
             <Table.Header>
               <Table.Row>
@@ -38,47 +56,39 @@ const ExperimentsPresenter = ({ fetching, routines, pagination, searchInProgress
             </Table.Header>
 
             <Table.Body>
-              { routines.map(routine => (
-                <Table.Row key={routine.id} onClick={() => onSelectRoutine(routine)}>
+              {routines.map(routine => (
+                <Table.Row
+                  key={routine.id}
+                  onClick={() => onSelectRoutine(routine)}
+                >
                   <Table.Cell>{routine.title}</Table.Cell>
                   <Table.Cell>{routine.strain}</Table.Cell>
-                  <Table.Cell>{(routine.startedDate && (moment(routine.startedDate).format('DD/MM/YYYY HH:mm'))) || '-'}</Table.Cell>
+                  <Table.Cell>
+                    {(routine.startedDate &&
+                      moment(routine.startedDate).format("DD/MM/YYYY HH:mm")) ||
+                      "-"}
+                  </Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
           </Table>
-        }
+        )}
       </Container>
 
       <Container>
-        { error &&
-          <Message
-            error
-            title={error.message}
-          />
-        }
+        {error && <Message error title={error.message} />}
 
-        { emptyRoutines &&
-          <Message
-            title='No hay experimentos'
-          />
-        }
+        {emptyRoutines && <Message title="No hay experimentos" />}
 
-        { routines.length === 0 && searchInProgress &&
-          <Message
-            title='Sin resultados'
-            dimmed
-          />
-        }
+        {routines.length === 0 &&
+          searchInProgress && <Message title="Sin resultados" dimmed />}
 
-        { routines.length > 0 &&
+        {routines.length > 0 && (
           <Pagination {...pagination} navigateToPage={onNavigateToPage} />
-        }
-
+        )}
       </Container>
-
     </Screen>
-  )
-}
+  );
+};
 
-export default ExperimentsPresenter
+export default ExperimentsPresenter;

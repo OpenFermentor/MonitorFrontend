@@ -8,6 +8,7 @@ const actionStatus = state => state.actionStatus.routine
 export const selectRoutineFetchingStatus = createSelector(actionStatus, ({ fetching, error }) => ({ fetching, error }))
 export const selectRoutinePagination = createSelector(actionStatus, ({ pagination }) => pagination)
 export const selectSearchInProgress = createSelector(actionStatus, ({ searchResults }) => !!searchResults)
+export const selectSearchTerm = createSelector(actionStatus, ({ searchTerm }) => searchTerm)
 
 export const selectIsRunningRoutine = createSelector(actionStatus, ({ runningRoutine }) => !!runningRoutine)
 
