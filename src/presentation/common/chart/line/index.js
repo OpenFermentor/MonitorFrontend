@@ -1,5 +1,5 @@
-import React from 'react'
-import { Line } from 'react-chartjs'
+import React from "react";
+import { Line } from "react-chartjs-2";
 
 const LineChart = ({ height, labels, datasets, showYAxis = true }) => {
   const lineData = {
@@ -7,10 +7,10 @@ const LineChart = ({ height, labels, datasets, showYAxis = true }) => {
     datasets: datasets.map(({ data, label, stroke }) => ({
       label,
       data,
-      fillColor: 'transparent',
-      strokeColor: stroke
+      backgroundColor: "transparent",
+      borderColor: stroke
     }))
-  }
+  };
   return (
     <div>
       <Line
@@ -18,11 +18,14 @@ const LineChart = ({ height, labels, datasets, showYAxis = true }) => {
         data={lineData}
         options={{
           responsive: true,
-          scaleShowLabels: showYAxis
+          scaleShowLabels: showYAxis,
+          legend: {
+            display: false
+          }
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default LineChart
+export default LineChart;
