@@ -12,13 +12,8 @@ const MAGNITUDE_COLORS = {
 };
 
 class SensorChart extends Component {
-  shouldComponentUpdate() {
-    return true;
-  }
-
   render() {
     const { timeline, magnitudes, height } = this.props;
-    // console.log(timeline);
     return (
       <Container>
         <div className="sensorChart">
@@ -29,7 +24,8 @@ class SensorChart extends Component {
                 height={height}
                 labels={timeline.labels}
                 datasets={magnitudes.map(magnitude => ({
-                  data: timeline[magnitude], //.map(m => m.toFixed(2)),
+                  label: magnitude,
+                  data: timeline[magnitude].map(m => m.toFixed(2)),
                   stroke: MAGNITUDE_COLORS[magnitude]
                 }))}
               />

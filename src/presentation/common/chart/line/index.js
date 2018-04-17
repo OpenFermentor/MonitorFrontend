@@ -2,15 +2,6 @@ import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 
 class LineChart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redraw: true
-    };
-  }
-  componentDidMount() {
-    setTimeout(() => this.setState({ redraw: false }), 5000);
-  }
   render() {
     const { datasets, labels, height, showYAxis } = this.props;
     const lineData = {
@@ -33,7 +24,6 @@ class LineChart extends Component {
             display: false
           }
         }}
-        redraw={this.state.redraw}
       />
     );
   }
