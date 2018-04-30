@@ -16,7 +16,6 @@
     "moment": "^2.18.1",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
-    "react-chartjs": "^1.2.0",
     "react-chartjs-2": "^2.7.0",
     "react-dom": "^15.6.1",
     "react-draggable": "^2.2.6",
